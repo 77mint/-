@@ -2,16 +2,17 @@
 const APP_VERSION='1.0.4';
 const SB_ENV='mintds-d8gybgoqke953154b';
 const SDK_URLS=[
-'https://static.cloudbase.net/cloudbase-js-sdk/2.7.1/cloudbase.full.js',
-'https://unpkg.com/@cloudbase/js-sdk@2.17.5/dist/index.umd.js',
-'https://cdn.jsdelivr.net/npm/@cloudbase/js-sdk@2.17.5/dist/index.umd.js',
-'https://web.sdk.qcloud.com/cloudbase/js-sdk/1.7.2/cloudbase.full.js'
+'https://static.cloudbase.net/cloudbase-js-sdk/latest/cloudbase.full.js',
+'https://static.cloudbase.net/cloudbase-js-sdk/1.9.0/cloudbase.full.js',
+'https://cdn.jsdelivr.net/npm/@cloudbase/js-sdk@1.9.0/dist/index.umd.js',
+'https://unpkg.com/@cloudbase/js-sdk@1.9.0/dist/index.umd.js'
 ];
 function getCloud(){return window.cloudbase||window.tcb||null}
-function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=()=>res();s.onerror=()=>rej(new Error('load fail'));document.head.appendChild(s)})}
-async function ensureSDK(){if(getCloud())return getCloud();for(const u of SDK_URLS){try{await loadScript(u);if(getCloud())return getCloud()}catch(e){}}throw new Error('所有SDK地址都加载失败')}
+function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=()=>res();s.onerror=()=>rej(new Error('fail'));document.head.appendChild(s)})}
+let sdkErr='';
+async function ensureSDK(){if(getCloud())return getCloud();for(const u of SDK_URLS){try{await loadScript(u);if(getCloud())return getCloud()}catch(e){sdkErr=u.slice(0,40)}}throw new Error('SDK加载失败 '+sdkErr)}
 let tcb=null,db=null,auth=null;
-async function doAnon(a){if(typeof a.signInAnonymously==='function')return a.signInAnonymously();if(typeof a.anonymousAuthProvider==='function')return a.anonymousAuthProvider().signIn();throw new Error('no-anon')}
+async function doAnon(a){if(typeof a.signInAnonymously==='function')return a.signInAnonymously();if(typeof a.anonymousAuthProvider==='function')return a.anonymousAuthProvider().signIn();throw new Error('无匿名登录方法')}
 const cloudInit=(async()=>{const C=await ensureSDK();tcb=C.init({env:SB_ENV});auth=tcb.auth({persistence:'local'});await doAnon(auth);db=tcb.database()})();
 cloudInit.catch(e=>console.log('云连接失败',e&&e.message));
 async function hashPwd(p){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
@@ -50,7 +51,7 @@ const name=$('authName').value.trim(),pwd=$('authPwd').value;hideErr();
 if(!name||name.length<2)return showErr('用户名至少2个字');
 if(!pwd||pwd.length<4)return showErr('密码至少4位');
 const oldLabel=isLogin?'登录':'创建账号';$('authBtn').textContent='请稍候...';
-try{await cloudInit}catch(e){$('authBtn').textContent=oldLabel;return showErr('连不上服务器('+(e&&e.message||'')+')，请重试')}
+try{await cloudInit}catch(e){$('authBtn').textContent=oldLabel;return showErr((e&&e.message)||'连不上服务器')}
 try{
 const h=await hashPwd(pwd);
 if(isLogin){
@@ -178,3 +179,4 @@ document.querySelectorAll('.tab-bar .tab').forEach(t=>{t.addEventListener('click
 rSb();
 }
 })();
+
