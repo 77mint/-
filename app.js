@@ -1,8 +1,12 @@
 (function(){
 const APP_VERSION='1.0.4';
-const SB_URL='https://yddyksldvetwwbkkbedc.supabase.co';
-const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlkZHlrc2xkdmV0d3dia2tiZWRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyMDA3MTMsImV4cCI6MjEwNjc3NjcxM30.2HVK1EFSi0QfD16xxfppAXAzXwtUKfCVqlleNcRPxZY';
-let sb=null;try{sb=window.supabase.createClient(SB_URL,SB_KEY)}catch(e){}
+const SB_ENV='mintds-d8gybgoqke953154b';
+let tcb=null,db=null,auth=null;
+async function doAnon(a){if(typeof a.signInAnonymously==='function')return a.signInAnonymously();if(typeof a.anonymousAuthProvider==='function')return a.anonymousAuthProvider().signIn();throw new Error('no-anon');}
+const cloudInit=(async()=>{if(typeof cloudbase==='undefined')throw new Error('SDK未加载');tcb=cloudbase.init({env:SB_ENV});auth=tcb.auth({persistence:'local'});await doAnon(auth);db=tcb.database()})();
+cloudInit.catch(e=>console.log('云连接失败',e&&e.message));
+async function hashPwd(p){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
+let sb=null;
 var TB=document.querySelector('.tab-bar');
 const $=id=>document.getElementById(id);
 const In=n=>n?n.slice(0,2).toUpperCase():'??';
@@ -17,17 +21,15 @@ function applyDark(){document.body.classList.toggle('dark',darkMode)}
 applyDark();
 function chkDot(){const d=$('updateDot');if(d){const v=LS.get('appVersion');d.style.display=(!v||v!==APP_VERSION)?'inline-block':'none'}}
 
-async function uploadImg(file){
-if(!sb)return null;
-try{const ext=file.name.split('.').pop()||'jpg';const name=Date.now()+'_'+Math.random().toString(36).slice(2,6)+'.'+ext;const{error}=await sb.storage.from('images').upload(name,file,{cacheControl:'3600',upsert:false});if(error)return null;const{data}=sb.storage.from('images').getPublicUrl(name);return data.publicUrl}catch(e){return null}}
-async function uploadFiles(files){const urls=[];for(const f of files){const u=await uploadImg(f);if(u)urls.push(u)}return urls}
+async function uploadImg(file){return null}
+async function uploadFiles(files){return []}
 
 let isLogin=false;
 function showAuth(){$('authPage').classList.remove('hidden');$('app').classList.remove('show');TB.style.display='none'}
 function showApp(){$('authPage').classList.add('hidden');$('app').classList.add('show');TB.style.display='flex'}
 function showErr(m){$('authErr').textContent=m;$('authErr').style.display='block'}
 function hideErr(){$('authErr').style.display='none'}
-async function checkSession(){if(sb){try{const{data}=await sb.auth.getSession();if(data.session){const{data:p}=await sb.from('profiles').select('*').eq('id',data.session.user.id).single();if(p){U={name:p.name,avatar:p.avatar,id:p.id.slice(0,6),sbId:p.id};LS.set('user',U);showApp();initApp();return}}}catch(e){}}if(U){showApp();initApp()}else showAuth()}
+async function checkSession(){if(U){showApp();initApp()}else showAuth()}
 checkSession();
 
 $('authSwitch').addEventListener('click',()=>{isLogin=!isLogin;hideErr();if(isLogin){$('authSub').textContent='欢迎回来';$('authBtn').textContent='登录';$('authSwitch').innerHTML='没有账号？<b>创建</b>';$('authAvatar').style.display='none'}else{$('authSub').textContent='创建你的账号';$('authBtn').textContent='创建账号';$('authSwitch').innerHTML='已有账号？<b>登录</b>';$('authAvatar').style.display='flex'}});
@@ -38,10 +40,28 @@ $('authBtn').addEventListener('click',async()=>{
 const name=$('authName').value.trim(),pwd=$('authPwd').value;hideErr();
 if(!name||name.length<2)return showErr('用户名至少2个字');
 if(!pwd||pwd.length<4)return showErr('密码至少4位');
-if(sb){const email=name.toLowerCase().replace(/[^a-z0-9]/g,'')+'@mintds.app';if(isLogin){const{data,error}=await sb.auth.signInWithPassword({email,password:pwd});if(error)return showErr('用户名或密码错误');const{data:p}=await sb.from('profiles').select('*').eq('id',data.user.id).single();U={name:p?p.name:name,avatar:p?p.avatar:null,id:data.user.id.slice(0,6),sbId:data.user.id}}else{const{data:ex}=await sb.from('profiles').select('name').eq('name',name);if(ex&&ex.length)return showErr('用户名已被使用');const{data,error}=await sb.auth.signUp({email,password:pwd,options:{data:{name}}});if(error)return showErr(error.message);if(data.user){await sb.from('profiles').upsert({id:data.user.id,name,avatar:authAv});U={name,avatar:authAv,id:data.user.id.slice(0,6),sbId:data.user.id}}}}
-else{const users=LS.get('allUsers')||[];if(isLogin){const u=users.find(x=>x.name===name&&x.pwd===pwd);if(!u)return showErr('用户名或密码错误');U=u}else{if(users.find(x=>x.name===name))return showErr('用户名已被使用');U={name,avatar:authAv,id:String(100000+Math.floor(Math.random()*900000)),pwd};users.push(U);LS.set('allUsers',users)}}
-LS.set('user',U);LS.set('appVersion',APP_VERSION);showApp();initApp()});
-$('btnLogout').addEventListener('click',async()=>{if(sb)try{await sb.auth.signOut()}catch(e){};LS.set('user',null);location.reload()});
+const oldLabel=isLogin?'登录':'创建账号';$('authBtn').textContent='请稍候...';
+try{await cloudInit}catch(e){$('authBtn').textContent=oldLabel;return showErr('连不上服务器('+(e&&e.message||'')+')，请重试')}
+try{
+const h=await hashPwd(pwd);
+if(isLogin){
+const r=await db.collection('users').where({name}).get();
+if(!r.data||!r.data.length){$('authBtn').textContent=oldLabel;return showErr('用户名或密码错误')}
+const u=r.data[0];
+if(u.pwd!==h){$('authBtn').textContent=oldLabel;return showErr('用户名或密码错误')}
+U={name:u.name,avatar:u.avatar||null,id:u._id,role:u.role||'user'};
+}else{
+const ex=await db.collection('users').where({name}).get();
+if(ex.data&&ex.data.length){$('authBtn').textContent=oldLabel;return showErr('用户名已被使用')}
+const first=await db.collection('users').limit(1).get();
+const isSuper=!(first.data&&first.data.length);
+const add=await db.collection('users').add({name,pwd:h,avatar:authAv||null,role:isSuper?'super':'user',createdAt:Date.now()});
+U={name,avatar:authAv||null,id:add.id,role:isSuper?'super':'user'};
+}
+LS.set('user',U);LS.set('appVersion',APP_VERSION);showApp();initApp();
+}catch(e){$('authBtn').textContent=oldLabel;showErr('出错了: '+(e&&e.message||e))}
+});
+$('btnLogout').addEventListener('click',async()=>{LS.set('user',null);location.reload()});
 
 function rF(f,cb){const r=new FileReader();r.onload=e=>cb(e.target.result);r.readAsDataURL(f)}
 function RB(rd){if(!rd||!rd.length)return '';return rd.map(r=>'<span class="role-badge" style="background:'+r.color+'20;color:'+r.color+'">'+r.name+'</span>').join('')}
@@ -76,7 +96,7 @@ $('psAvatar').addEventListener('click',()=>$('psFileInput').click());
 $('psFileInput').addEventListener('change',function(){if(this.files[0])rF(this.files[0],u=>{pAv=u;$('psAvatarImg').src=u;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'})});
 $('btnCancelProfile').addEventListener('click',()=>$('modalProfile').classList.remove('show'));
 $('modalProfile').addEventListener('click',e=>{if(e.target===$('modalProfile'))$('modalProfile').classList.remove('show')});
-$('btnSaveProfile').addEventListener('click',async()=>{const n=$('psNameInput').value.trim();if(!n)return;U.name=n;if(pAv)U.avatar=pAv;LS.set('user',U);if(sb&&U.sbId)try{await sb.from('profiles').update({name:n,avatar:pAv||U.avatar}).eq('id',U.sbId)}catch(e){};saveAll();$('modalProfile').classList.remove('show')});
+$('btnSaveProfile').addEventListener('click',async()=>{const n=$('psNameInput').value.trim();if(!n)return;U.name=n;if(pAv)U.avatar=pAv;LS.set('user',U);if(db&&U.id)try{await db.collection('users').doc(U.id).update({name:n,avatar:pAv||U.avatar})}catch(e){};saveAll();$('modalProfile').classList.remove('show')});
 
 $('chActionCancel').addEventListener('click',()=>$('chActionOverlay').classList.remove('show'));
 $('chActionOverlay').addEventListener('click',e=>{if(e.target===$('chActionOverlay'))$('chActionOverlay').classList.remove('show')});
@@ -124,7 +144,7 @@ const emos=['😀','😂','🥰','😎','🤔','👍','❤️','🔥','✨','�
 const ep=$('emojiPicker');emos.forEach(e=>{const s=document.createElement('span');s.textContent=e;s.addEventListener('click',()=>{$('npContentInput').value+=e;$('npContentInput').focus()});ep.appendChild(s)});
 $('btnNpEmoji').addEventListener('click',()=>ep.classList.toggle('show'));
 $('btnNpSpoiler').addEventListener('click',()=>{const ta=$('npContentInput'),s=ta.selectionStart,e=ta.selectionEnd,v=ta.value;if(s!==e)ta.value=v.slice(0,s)+'||'+v.slice(s,e)+'||'+v.slice(e);else{ta.value=v.slice(0,s)+'||||'+v.slice(s);ta.selectionStart=ta.selectionEnd=s+2}ta.focus()});
-$('btnSubmitPost').addEventListener('click',async()=>{const t=$('npTitleInput').value.trim(),c=$('npContentInput').value.trim();if(!t||!c)return;let imgUrls=[];if(npFiles.length&&sb){imgUrls=await uploadFiles(npFiles)}const ch=gC();if(!ch.posts)ch.posts=[];ch.posts.push({id:Uid(),user:U.name,avatar:U.avatar,title:t,content:c,time:Nm(),replies:[],roles:[],images:imgUrls});$('newPostPage').classList.remove('show');if(ch.type==='persona')rPe();else rPo();saveAll()});
+$('btnSubmitPost').addEventListener('click',async()=>{const t=$('npTitleInput').value.trim(),c=$('npContentInput').value.trim();if(!t||!c)return;let imgUrls=npI.slice();const ch=gC();if(!ch.posts)ch.posts=[];ch.posts.push({id:Uid(),user:U.name,avatar:U.avatar,title:t,content:c,time:Nm(),replies:[],roles:[],images:imgUrls});$('newPostPage').classList.remove('show');if(ch.type==='persona')rPe();else rPo();saveAll()});
 
 let sAv=null;
 $('btnAddServer').addEventListener('click',()=>{$('modalCreate').classList.add('show');$('inputServerName').value='';$('inputServerId').value='';sAv=null;$('serverAvatarPreview').style.display='none';$('serverAvatarPicker').querySelector('svg').style.display='';$('idHint').style.display='none'});
