@@ -65,7 +65,7 @@ function loadScript(src){return new Promise((res,rej)=>{const s=document.createE
 let sdkErr='';
 async function ensureSDK(){if(getCloud())return getCloud();for(const u of SDK_URLS){try{await loadScript(u);if(getCloud())return getCloud()}catch(e){sdkErr=u.split('/')[2]}}throw new Error('SDK加载失败:'+(sdkErr||'未知'))}
 let tcb=null,db=null;
-const cloudInit=(async()=>{const C=await ensureSDK();tcb=C.init({env:SB_ENV,region:SB_REGION,clientId:SB_CLIENTID});db=tcb.database()})();
+const cloudInit=(async()=>{const C=await ensureSDK();tcb=C.init({env:SB_ENV,region:SB_REGION,accessKey:SB_CLIENTID});db=tcb.database()})();
 cloudInit.catch(e=>console.log('云连接失败',e&&e.message));
 async function hashPwd(p){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
 function errText(e){if(!e)return '未知';if(typeof e==='string')return e;return e.message||e.code||e.errMsg||JSON.stringify(e)}
