@@ -74,6 +74,9 @@ html,body{width:100%;height:100%;overflow-x:hidden;overscroll-behavior-x:none;fo
 .post-card .pc-time{font-size:10px;color:#bbb;margin-left:auto;flex-shrink:0}
 .post-card .pc-title{font-size:14px;font-weight:700;margin-bottom:4px}
 .post-card .pc-preview{font-size:11px;color:#777;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post-card .pc-images{display:flex;gap:6px;margin-top:8px;border-radius:8px;overflow:hidden}
+.post-card .pc-images img{width:50%;height:100px;object-fit:cover;border-radius:8px;background:#eee}
+.post-card .pc-images img:only-child{width:100%;height:140px}
 .post-card .pc-footer{display:flex;align-items:center;gap:12px;margin-top:10px;font-size:10px;color:#bbb}
 .post-card .pc-footer span{display:flex;align-items:center;gap:3px}
 .post-card .pc-footer svg{width:13px;height:13px;stroke:#bbb;stroke-width:1.8;fill:none}
@@ -140,8 +143,6 @@ html,body{width:100%;height:100%;overflow-x:hidden;overscroll-behavior-x:none;fo
 .reply-bar input{flex:1;height:32px;border:1.5px solid #eee;border-radius:18px;padding:0 12px;font-size:12px;outline:none;background:#fafafa}
 .reply-bar button{width:32px;height:32px;border:none;background:#222;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
 .reply-bar button svg{width:15px;height:15px;stroke:#fff;stroke-width:2;fill:none}
-
-/* ===== CHAT PAGE ===== */
 .page-chat{display:none;flex:1;flex-direction:column;overflow:hidden;background:#f5f5f5}
 .page-chat.show{display:flex}
 .chat-list-view{display:flex;flex-direction:column;height:100%}
@@ -172,8 +173,7 @@ html,body{width:100%;height:100%;overflow-x:hidden;overscroll-behavior-x:none;fo
 .friend-item .fi-name{font-size:12px;font-weight:600;display:flex;align-items:center;gap:4px}
 .friend-item .fi-msg{font-size:10px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .friend-item .fi-time{font-size:10px;color:#ccc;flex-shrink:0}
-
-/* DM chat view */
+/* DM capsule chat */
 .dm-view{display:none;flex-direction:column;height:100%}
 .dm-view.show{display:flex}
 .dm-header{height:44px;min-height:44px;display:flex;align-items:center;padding:0 14px;background:#fff;border-bottom:1px solid #eee;gap:8px}
@@ -181,41 +181,57 @@ html,body{width:100%;height:100%;overflow-x:hidden;overscroll-behavior-x:none;fo
 .dm-header .dm-name{font-size:13px;font-weight:600;flex:1}
 .dm-header .dm-dots{width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%}
 .dm-header .dm-dots:active{background:#f0f0f0}
-.dm-msgs{flex:1;overflow-y:auto;padding:12px 14px 8px;display:flex;flex-direction:column;gap:6px}
-.dm-msgs::-webkit-scrollbar{width:3px}
-.dm-msgs::-webkit-scrollbar-thumb{background:#eee;border-radius:3px}
-.dm-msg{display:flex;align-items:flex-end;gap:6px;max-width:80%}
-.dm-msg.me{align-self:flex-end;flex-direction:row-reverse}
-.dm-msg.them{align-self:flex-start}
-.dm-msg .dm-avatar{width:24px;height:24px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;color:#aaa;overflow:hidden;flex-shrink:0}
-.dm-msg .dm-avatar img{width:100%;height:100%;object-fit:cover}
-.dm-msg .dm-bubble{padding:8px 12px;border-radius:16px;font-size:12px;line-height:1.5;color:#1a1a1a;word-break:break-word}
-.dm-msg.me .dm-bubble{background:#d4eaf7;border-bottom-right-radius:4px}
-.dm-msg.them .dm-bubble{background:#fff;border-bottom-left-radius:4px}
-.dm-msg .dm-time{font-size:9px;color:#ccc;margin-top:2px;flex-shrink:0}
+.dm-msgs{flex:1;overflow-y:auto;padding:10px 14px 8px;display:flex;flex-direction:column;gap:2px}
+.dm-time-div{text-align:center;font-size:9px;color:#ccc;padding:8px 0 4px;font-weight:500}
+.dm-row{display:flex;align-items:flex-end;gap:6px;max-width:75%;margin-bottom:2px}
+.dm-row.me{align-self:flex-end;flex-direction:row-reverse}
+.dm-row.them{align-self:flex-start}
+.dm-row .dm-av{width:22px;flex-shrink:0}
+.dm-row .dm-av-img{width:22px;height:22px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:600;color:#aaa;overflow:hidden}
+.dm-row .dm-av-img img{width:100%;height:100%;object-fit:cover}
+.dm-row .dm-av-spacer{width:22px;height:1px}
+.dm-row .dm-quote-ref{font-size:9px;color:#aaa;padding:0 6px 1px}
+.dm-row.me .dm-quote-ref{text-align:right}
+.dm-row .dm-capsule{padding:6px 14px;border-radius:18px;font-size:11px;line-height:1.5;color:#1a1a1a;word-break:break-word;box-shadow:0 .5px 2px rgba(0,0,0,.06)}
+.dm-row.me .dm-capsule{background:#daedf8}
+.dm-row.them .dm-capsule{background:#fff}
+.dm-row .dm-grp-info{display:flex;align-items:center;gap:4px;margin-top:1px;padding:0 6px}
+.dm-row.me .dm-grp-info{justify-content:flex-end}
+.dm-row .dm-grp-info span{font-size:9px;color:#ccc}
+.dm-quote-bar{display:none;align-items:center;gap:6px;padding:5px 12px;background:#f5f5f5;border-left:3px solid #d0d0d0;margin:0 10px;border-radius:0 6px 6px 0;font-size:10px;color:#999}
+.dm-quote-bar.show{display:flex}
+.dm-quote-bar .dqb-text{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.dm-quote-bar .dqb-close{cursor:pointer;padding:2px}
+.dm-quote-bar .dqb-close svg{width:14px;height:14px;stroke:#bbb;stroke-width:2;fill:none}
 .dm-input{display:flex;align-items:center;padding:7px 10px;border-top:1px solid #eee;background:#fff;gap:7px;min-height:44px}
-.dm-input input{flex:1;height:32px;border:1.5px solid #eee;border-radius:18px;padding:0 12px;font-size:12px;outline:none;background:#fafafa}
+.dm-input input{flex:1;height:30px;border:1.5px solid #eee;border-radius:16px;padding:0 12px;font-size:11px;outline:none;background:#fafafa}
 .dm-input input:focus{border-color:#ccc}
-.dm-input button{width:32px;height:32px;border:none;background:#222;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
-.dm-input button svg{width:15px;height:15px;stroke:#fff;stroke-width:2;fill:none}
-
-/* profile page */
+.dm-input button{width:30px;height:30px;border:none;background:#222;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.dm-input button svg{width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none}
+/* user profile */
 .user-profile{display:none;flex-direction:column;height:100%;background:#fff}
 .user-profile.show{display:flex}
 .up-header{height:44px;min-height:44px;display:flex;align-items:center;padding:0 14px;border-bottom:1px solid #eee;gap:8px}
 .up-header svg{width:18px;height:18px;stroke:#999;stroke-width:1.8;fill:none;cursor:pointer;flex-shrink:0}
 .up-header .title{font-size:13px;font-weight:600}
-.up-body{flex:1;overflow-y:auto;padding:24px 16px 40px;display:flex;flex-direction:column;align-items:center;gap:8px}
-.up-avatar{width:72px;height:72px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#bbb;overflow:hidden}
-.up-avatar img{width:100%;height:100%;object-fit:cover}
-.up-name{font-size:18px;font-weight:700;margin-top:4px}
-.up-bio{font-size:12px;color:#999;text-align:center;line-height:1.5;margin-top:2px}
-.up-roles{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:6px}
-.up-actions{display:flex;gap:10px;margin-top:16px}
-.up-actions button{height:34px;padding:0 20px;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer}
+.up-body{flex:1;overflow-y:auto}
+.up-banner{width:100%;height:130px;background:linear-gradient(135deg,#e8edf2,#d1dce6);position:relative}
+.up-avatar-wrap{position:absolute;bottom:-24px;left:16px}
+.up-av{width:52px;height:52px;border-radius:50%;background:#eee;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#bbb;overflow:hidden}
+.up-av img{width:100%;height:100%;object-fit:cover}
+.up-info{padding:32px 16px 10px}
+.up-name{font-size:16px;font-weight:700}
+.up-bio{font-size:11px;color:#999;line-height:1.5;margin-top:2px}
+.up-roles{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.up-actions{display:flex;gap:8px;margin-top:10px;padding-bottom:12px;border-bottom:1px solid #eee}
+.up-actions button{height:30px;padding:0 16px;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer}
 .up-actions .up-msg{background:#222;color:#fff}
-.up-actions .up-add{background:#f0f0f0;color:#555}
-
+.up-posts-title{font-size:10px;font-weight:600;color:#999;padding:10px 16px 6px;text-transform:uppercase;letter-spacing:.5px}
+.up-post-item{padding:10px 16px;border-bottom:1px solid #f0f0f0;cursor:pointer}
+.up-post-item:active{background:#fafafa}
+.up-post-item .upi-title{font-size:12px;font-weight:600;margin-bottom:2px}
+.up-post-item .upi-preview{font-size:10px;color:#999}
+.up-post-item .upi-time{font-size:9px;color:#ccc;margin-top:2px}
 .new-post-page{display:none;position:fixed;inset:0;background:#fff;z-index:300;flex-direction:column}
 .new-post-page.show{display:flex}
 .np-header{height:44px;min-height:44px;display:flex;align-items:center;padding:0 14px;border-bottom:1px solid #eee;gap:8px}
@@ -296,15 +312,6 @@ html,body{width:100%;height:100%;overflow-x:hidden;overscroll-behavior-x:none;fo
 .modal-avatar img{width:100%;height:100%;object-fit:cover}
 .modal-avatar svg{width:20px;height:20px;stroke:#bbb;stroke-width:1.5;fill:none}
 .modal .id-hint{font-size:10px;color:#e74c3c;margin-top:-8px;margin-bottom:8px;display:none}
-.search-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:200;align-items:flex-end;justify-content:center}
-.search-overlay.show{display:flex}
-.search-sheet{background:#fff;width:100%;max-width:420px;border-radius:14px 14px 0 0;padding:20px 18px 28px;animation:slideUp .25s ease}
-.search-sheet h3{font-size:15px;font-weight:700;margin-bottom:14px;text-align:center}
-.search-sheet input{width:100%;height:38px;border:1.5px solid #eee;border-radius:9px;padding:0 12px;font-size:13px;outline:none;background:#fafafa;margin-bottom:10px}
-.search-sheet .ss-hint{text-align:center;color:#ddd;font-size:11px;padding:10px 0}
-.search-sheet .ss-result{padding:10px 0;border-top:1px solid #eee;cursor:pointer;font-size:13px;font-weight:600}
-.search-sheet .ss-result:active{color:#888}
-.search-sheet .ss-result span{font-size:10px;color:#999;font-weight:400;margin-left:6px}
 .profile-sheet{background:#fff;width:100%;max-width:420px;border-radius:14px 14px 0 0;padding:20px 18px 28px;animation:slideUp .25s ease}
 .profile-sheet h3{font-size:15px;font-weight:700;margin-bottom:14px;text-align:center}
 .ps-avatar{width:64px;height:64px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0 auto 14px;cursor:pointer;position:relative}
@@ -323,6 +330,20 @@ html,body{width:100%;height:100%;overflow-x:hidden;overscroll-behavior-x:none;fo
 .ps-role-chip.on{border-color:currentColor}
 .ps-role-chip.off{opacity:.35}
 .ps-role-chip svg{width:11px;height:11px;stroke:currentColor;stroke-width:2.2;fill:none}
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:200;align-items:flex-end;justify-content:center}
+.search-overlay.show{display:flex}
+.search-sheet{background:#fff;width:100%;max-width:420px;border-radius:14px 14px 0 0;padding:20px 18px 28px;animation:slideUp .25s ease}
+.search-sheet h3{font-size:15px;font-weight:700;margin-bottom:14px;text-align:center}
+.search-sheet input{width:100%;height:38px;border:1.5px solid #eee;border-radius:9px;padding:0 12px;font-size:13px;outline:none;background:#fafafa;margin-bottom:10px}
+.search-sheet .ss-hint{text-align:center;color:#ddd;font-size:11px;padding:10px 0}
+.search-sheet .ss-result{padding:10px 0;border-top:1px solid #eee;cursor:pointer;font-size:13px;font-weight:600}
+.search-sheet .ss-result span{font-size:10px;color:#999;font-weight:400;margin-left:6px}
+.add-role-row{display:flex;gap:6px;align-items:center}
+.add-role-row input[type=text]{flex:1;height:30px;border:1.5px solid #eee;border-radius:7px;padding:0 8px;font-size:11px;outline:none;background:#fafafa}
+.add-role-row input[type=color]{width:30px;height:30px;border:none;border-radius:7px;cursor:pointer;padding:0;background:none}
+.add-role-row button{height:30px;padding:0 12px;border:none;border-radius:7px;background:#222;color:#fff;font-size:11px;font-weight:600;cursor:pointer;flex-shrink:0}
+.role-tag{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer}
+.role-tag svg{width:12px;height:12px;stroke:currentColor;stroke-width:2;fill:none}
 @supports(padding-bottom:env(safe-area-inset-bottom)){.tab-bar{bottom:calc(10px + env(safe-area-inset-bottom))}}
 </style>
 </head>
@@ -333,27 +354,10 @@ html,body{width:100%;height:100%;overflow-x:hidden;overscroll-behavior-x:none;fo
     <div class="welcome" id="welcomeView"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><p>选择左侧社区开始浏览<br>或点击 <b>+</b> 创建新社区</p></div>
     <div class="channel-page" id="channelPage"><div class="cp-header"><div class="cp-name" id="cpName"></div><div class="cp-id" id="cpId"></div><div class="cp-sub">社区</div></div><div class="cp-toolbar"><div class="cp-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="cpSearchInput" placeholder="搜索频道" autocomplete="off"></div><div class="cp-btn" id="btnAddChannel"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="cp-btn" id="btnInvite"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="17" y1="14" x2="23" y2="14"/></svg></div></div><div class="cp-list" id="cpList"></div><div class="cp-empty" id="cpEmpty">还没有频道</div></div>
     <div class="channel-view" id="channelView"><div class="cv-header"><svg id="btnBackToChannels" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="title" id="cvTitle"></div><div class="subtitle" id="cvSubtitle"></div></div><div class="forum-area" id="forumArea"></div><div class="persona-area" id="personaArea" style="display:none"></div><div class="announce-area" id="announceArea" style="display:none"></div><div class="announce-input" id="announceInput" style="display:none"><input type="text" id="annInput" placeholder="发布通告..." autocomplete="off"><button id="btnAnnPost"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><div class="fab-group" id="fabGroup" style="display:none"><div class="fab-top" id="fabTop"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></div><button class="fab-post" id="fabPost"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div><div class="post-detail" id="postDetail"><div class="pd-header"><svg id="btnBackToList" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="title">详情</div></div><div class="pd-body" id="pdBody"></div><div class="reply-quote" id="replyQuote"><span class="rq-name" id="rqName"></span><span id="rqText"></span><div class="rq-close" id="rqClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div><div class="reply-bar"><input type="text" id="replyInput" placeholder="回复…" autocomplete="off"><button id="btnReply"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div></div></div>
-    <!-- Chat -->
     <div class="page-chat" id="pageChat">
-      <div class="chat-list-view" id="chatListView">
-        <div class="cl-scroll">
-          <div class="chat-top"><div class="ct-title">Chat</div><div class="ct-dots" id="chatDots"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="#999" stroke="none"/></svg></div></div>
-          <div class="chat-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search" autocomplete="off"></div>
-          <div class="chat-section-title"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>Friend Requests</div>
-          <div class="friend-req"><div class="fr-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="17" y1="14" x2="23" y2="14"/></svg></div><div class="fr-info"><div class="fr-title">Pending</div><div class="fr-sub">查看好友请求</div></div><div class="fr-badge">0</div></div>
-          <div class="chat-section-title" style="margin-top:4px"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Friends</div>
-          <div id="friendList"></div>
-        </div>
-      </div>
-      <div class="dm-view" id="dmView">
-        <div class="dm-header"><svg id="btnBackToFriends" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="dm-name" id="dmName"></div><div class="dm-dots" id="dmDots"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="#999" stroke="none"/></svg></div></div>
-        <div class="dm-msgs" id="dmMsgs"></div>
-        <div class="dm-input"><input type="text" id="dmInput" placeholder="发消息..." autocomplete="off"><button id="btnDmSend"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div>
-      </div>
-      <div class="user-profile" id="userProfile">
-        <div class="up-header"><svg id="btnBackToDm" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="title">个人主页</div></div>
-        <div class="up-body" id="upBody"></div>
-      </div>
+      <div class="chat-list-view" id="chatListView"><div class="cl-scroll"><div class="chat-top"><div class="ct-title">Chat</div><div class="ct-dots" id="chatDots"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="#999" stroke="none"/></svg></div></div><div class="chat-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search" autocomplete="off"></div><div class="chat-section-title"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>Friend Requests</div><div class="friend-req"><div class="fr-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="17" y1="14" x2="23" y2="14"/></svg></div><div class="fr-info"><div class="fr-title">Pending</div><div class="fr-sub">查看好友请求</div></div><div class="fr-badge">0</div></div><div class="chat-section-title" style="margin-top:4px"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Friends</div><div id="friendList"></div></div></div>
+      <div class="dm-view" id="dmView"><div class="dm-header"><svg id="btnBackToFriends" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="dm-name" id="dmName"></div><div class="dm-dots" id="dmDots"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="#999" stroke="none"/></svg></div></div><div class="dm-msgs" id="dmMsgs"></div><div class="dm-quote-bar" id="dmQuoteBar"><span class="dqb-text" id="dqbText"></span><div class="dqb-close" id="dqbClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div><div class="dm-input"><input type="text" id="dmInput" placeholder="发消息..." autocomplete="off"><button id="btnDmSend"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div></div>
+      <div class="user-profile" id="userProfile"><div class="up-header"><svg id="btnBackToDm" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="title">个人主页</div></div><div class="up-body" id="upBody"></div></div>
     </div>
     <div class="page-vault" id="pageVault"><div class="vault-top">仓库</div><div class="vault-tabs"><div class="vt active" data-vt="all">全部</div><div class="vt" data-vt="post">帖子</div><div class="vt" data-vt="persona">角色</div></div><div class="vault-list" id="vaultList"></div><div class="vault-empty" id="vaultEmpty">还没有收藏</div></div>
     <div class="profile-menu-overlay" id="pmOverlay"></div>
@@ -362,135 +366,121 @@ html,body{width:100%;height:100%;overflow-x:hidden;overscroll-behavior-x:none;fo
   </div>
 </div>
 <div class="tab-bar"><div class="tab active" data-tab="home"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>主页</span></div><div class="tab" data-tab="chat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>私信</span></div><div class="tab" data-tab="vault"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>仓库</span></div><div class="tab" data-tab="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>设置</span></div></div>
-<!-- modals -->
-<div class="modal-overlay" id="modalCreate"><div class="modal"><h3>创建社区</h3><div class="modal-avatar" id="serverAvatarPicker"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><img id="serverAvatarPreview" style="display:none" alt=""></div><input type="file" id="serverAvatarFile" accept="image/*" style="display:none"><input type="text" id="inputServerName" placeholder="社区名称" maxlength="20" autocomplete="off"><input type="text" id="inputServerId" placeholder="社区ID（唯一标识，如 mint01）" maxlength="16" autocomplete="off"><div class="id-hint" id="idHint">该ID已被使用</div><div class="modal-btns"><button class="cancel" id="btnCancelCreate">取消</button><button class="confirm" id="btnConfirmCreate">创建</button></div></div></div>
+<div class="modal-overlay" id="modalCreate"><div class="modal"><h3>创建社区</h3><div class="modal-avatar" id="serverAvatarPicker"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><img id="serverAvatarPreview" style="display:none" alt=""></div><input type="file" id="serverAvatarFile" accept="image/*" style="display:none"><input type="text" id="inputServerName" placeholder="社区名称" maxlength="20" autocomplete="off"><input type="text" id="inputServerId" placeholder="社区ID（唯一，如 mint01）" maxlength="16" autocomplete="off"><div class="id-hint" id="idHint">该ID已被使用</div><div class="modal-btns"><button class="cancel" id="btnCancelCreate">取消</button><button class="confirm" id="btnConfirmCreate">创建</button></div></div></div>
 <div class="modal-overlay" id="modalChannel"><div class="modal"><h3>创建频道</h3><input type="text" id="inputChName" placeholder="频道名称" maxlength="20" autocomplete="off"><select id="inputChType"><option value="announce">通告</option><option value="forum">论坛</option><option value="persona">角色</option></select><div class="modal-btns"><button class="cancel" id="btnCancelCh">取消</button><button class="confirm" id="btnConfirmCh">创建</button></div></div></div>
 <div class="new-post-page" id="newPostPage"><div class="np-header"><svg id="btnCloseNewPost" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span class="np-title">新帖子</span></div><div class="np-author" id="npAuthor"></div><div class="np-body"><input class="np-title-input" id="npTitleInput" placeholder="标题" maxlength="50" autocomplete="off"><textarea class="np-content-input" id="npContentInput" placeholder="输入消息......"></textarea></div><div class="np-images-preview" id="npImagesPreview"></div><div class="emoji-picker" id="emojiPicker"></div><div class="np-toolbar"><button id="btnNpImage"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></button><button id="btnNpFile"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button><button id="btnNpEmoji"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-linecap="round" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-linecap="round" stroke-width="2.5"/></svg></button><button id="btnNpSpoiler"><svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg></button><button class="np-submit-btn" id="btnSubmitPost"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><input type="file" id="npImageFile" accept="image/*" multiple style="display:none"><input type="file" id="npFileFile" style="display:none"></div>
 <div class="modal-overlay" id="modalProfile"><div class="profile-sheet"><h3>编辑资料</h3><div class="ps-avatar" id="psAvatar"><div class="ph" id="psPlaceholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>更换头像</span></div><img id="psAvatarImg" style="display:none" alt=""><div class="cam"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div></div><input type="file" id="psFileInput" accept="image/*" style="display:none"><input class="ps-name-input" type="text" id="psNameInput" placeholder="昵称" maxlength="16" autocomplete="off"><div class="ps-roles-section" id="psRolesSection"><div class="ps-roles-title">身份组</div><div class="ps-role-list" id="psRoleList"></div></div><div class="modal-btns"><button class="cancel" id="btnCancelProfile">取消</button><button class="confirm" id="btnSaveProfile">保存</button></div></div></div>
 <div class="search-overlay" id="searchOverlay"><div class="search-sheet"><h3>搜索社区</h3><input type="text" id="searchServerInput" placeholder="输入社区ID" autocomplete="off"><div id="searchResults"></div><div class="ss-hint" id="ssHint">输入社区ID加入</div></div></div>
 <script>
 (function(){
-  const servers=[];let activeSid=null,activeChId=null,viewingPid=null,currentTab='home',npImages=[],savedItems=[],replyTo=null;
-  let userProfile={name:'用户',id:'ID: '+(100000+Math.floor(Math.random()*900000)),avatar:null},wornRoles={};
-  const npc={name:'沐白',avatar:null,bio:'山有木兮木有枝',roles:[{name:'好友',color:'#22b8cf'}],id:'_npc1',unread:2,lastMsg:'在吗？想聊聊','time':'12:30',msgs:[{who:'them',text:'你好呀',time:'12:28'},{who:'them',text:'在吗？想聊聊',time:'12:30'}]};
-  const $=id=>document.getElementById(id);
-  const I=n=>n.slice(0,2).toUpperCase(),N=()=>{const d=new Date();return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')},U=()=>'_'+Math.random().toString(36).slice(2,9);
-  function readFile(f,cb){const r=new FileReader();r.onload=e=>cb(e.target.result);r.readAsDataURL(f)}
-  function getAllWornRoles(){let o=[];servers.forEach(s=>{if(!s.roles)return;(wornRoles[s.id]||[]).forEach(rid=>{const r=s.roles.find(x=>x.id===rid);if(r)o.push(r)})});return o}
-  function RB(rd){if(!rd||!rd.length)return '';return rd.map(r=>'<span class="role-badge" style="background:'+r.color+'20;color:'+r.color+'">'+r.name+'</span>').join('')}
-  function SP(t){return t.replace(/\|\|(.+?)\|\|/g,'<span class="spoiler">$1</span>')}
-  document.addEventListener('click',e=>{if(e.target.classList.contains('spoiler')){e.target.classList.toggle('revealed');e.stopPropagation()}});
-  function isSaved(s,p){return savedItems.some(x=>x.sid===s&&x.pid===p)}
-  function toggleSave(s,p,t){if(isSaved(s,p))savedItems=savedItems.filter(x=>!(x.sid===s&&x.pid===p));else savedItems.push({sid:s,pid:p,type:t})}
-  function getS(){return servers.find(x=>x.id===activeSid)}
-  function getCh(){const s=getS();return s?s.channels.find(c=>c.id===activeChId):null}
-
-  // profile menu
-  let pmO=false;function closePM(){pmO=false;$('profileMenu').classList.remove('show');$('pmOverlay').classList.remove('show')}
-  $('chatDots').addEventListener('click',()=>{pmO=!pmO;$('profileMenu').classList.toggle('show',pmO);$('pmOverlay').classList.toggle('show',pmO)});
-  $('pmOverlay').addEventListener('click',closePM);
-  $('pmEditProfile').addEventListener('click',()=>{closePM();openPM()});
-  let pAv=null,tW={};
-  function openPM(){$('modalProfile').classList.add('show');$('psNameInput').value=userProfile.name;pAv=null;if(userProfile.avatar){$('psAvatarImg').src=userProfile.avatar;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'}else{$('psAvatarImg').style.display='none';$('psPlaceholder').style.display='flex'}tW=JSON.parse(JSON.stringify(wornRoles));rpR()}
-  function rpR(){const l=$('psRoleList');l.innerHTML='';let h=false;servers.forEach(s=>{if(!s.roles||!s.roles.length)return;h=true;const w=tW[s.id]||[];const lb=document.createElement('div');lb.style.cssText='width:100%;font-size:10px;color:#aaa;margin-top:'+(l.children.length?'6px':'0');lb.textContent=s.name;l.appendChild(lb);s.roles.forEach(r=>{const c=document.createElement('div');c.className='ps-role-chip '+(w.includes(r.id)?'on':'off');c.style.color=r.color;c.style.background=r.color+'15';c.innerHTML=r.name+(w.includes(r.id)?' <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>':'');c.addEventListener('click',()=>{if(!tW[s.id])tW[s.id]=[];if(tW[s.id].includes(r.id))tW[s.id]=tW[s.id].filter(x=>x!==r.id);else tW[s.id].push(r.id);rpR()});l.appendChild(c)})});$('psRolesSection').style.display=h?'block':'none'}
-  $('psAvatar').addEventListener('click',()=>$('psFileInput').click());
-  $('psFileInput').addEventListener('change',function(){if(this.files[0])readFile(this.files[0],u=>{pAv=u;$('psAvatarImg').src=u;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'})});
-  $('btnCancelProfile').addEventListener('click',()=>$('modalProfile').classList.remove('show'));
-  $('modalProfile').addEventListener('click',e=>{if(e.target===$('modalProfile'))$('modalProfile').classList.remove('show')});
-  $('btnSaveProfile').addEventListener('click',()=>{const n=$('psNameInput').value.trim();if(!n)return;userProfile.name=n;if(pAv)userProfile.avatar=pAv;wornRoles=JSON.parse(JSON.stringify(tW));$('modalProfile').classList.remove('show')});
-
-  // friends
-  function renderFriends(){
-    const fl=$('friendList');fl.innerHTML='';
-    const el=document.createElement('div');el.className='friend-item';
-    el.innerHTML=`<div class="fi-avatar-wrap"><div class="fi-avatar">${I(npc.name)}</div>${npc.unread?'<div class="fi-unread">'+npc.unread+'</div>':''}</div><div class="fi-info"><div class="fi-name">${npc.name} ${RB(npc.roles)}</div><div class="fi-msg">${npc.lastMsg}</div></div><div class="fi-time">${npc.time}</div>`;
-    el.addEventListener('click',()=>openDm());fl.appendChild(el);
-  }
-  renderFriends();
-
-  // DM chat
-  function openDm(){
-    npc.unread=0;renderFriends();
-    $('chatListView').style.display='none';$('dmView').classList.add('show');$('dmName').textContent=npc.name;renderDmMsgs();
-  }
-  function renderDmMsgs(){
-    const c=$('dmMsgs');c.innerHTML='';
-    npc.msgs.forEach(m=>{
-      const d=document.createElement('div');d.className='dm-msg '+(m.who==='me'?'me':'them');
-      const av=m.who==='me'?(userProfile.avatar?'<img src="'+userProfile.avatar+'">':I(userProfile.name)):I(npc.name);
-      d.innerHTML=`<div class="dm-avatar">${av}</div><div><div class="dm-bubble">${m.text}</div><div class="dm-time">${m.time}</div></div>`;
-      c.appendChild(d);
-    });
-    c.scrollTop=c.scrollHeight;
-  }
-  $('btnBackToFriends').addEventListener('click',()=>{$('dmView').classList.remove('show');$('chatListView').style.display='flex'});
-  $('btnDmSend').addEventListener('click',sendDm);
-  $('dmInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendDm()});
-  function sendDm(){const t=$('dmInput').value.trim();if(!t)return;npc.msgs.push({who:'me',text:t,time:N()});npc.lastMsg=t;npc.time=N();$('dmInput').value='';renderDmMsgs();renderFriends();
-    // NPC auto reply
-    setTimeout(()=>{const replies=['嗯嗯','好的~','哈哈哈','然后呢？','有道理','我也觉得！'];npc.msgs.push({who:'them',text:replies[Math.floor(Math.random()*replies.length)],time:N()});npc.lastMsg=npc.msgs[npc.msgs.length-1].text;npc.time=N();renderDmMsgs()},800+Math.random()*1200);
-  }
-  // user profile
-  $('dmDots').addEventListener('click',()=>{$('dmView').classList.remove('show');$('userProfile').classList.add('show');$('upBody').innerHTML=`<div class="up-avatar">${I(npc.name)}</div><div class="up-name">${npc.name}</div><div class="up-bio">${npc.bio}</div><div class="up-roles">${RB(npc.roles)}</div><div class="up-actions"><button class="up-msg" id="upMsg">发消息</button></div>`;$('upMsg').addEventListener('click',()=>{$('userProfile').classList.remove('show');$('dmView').classList.add('show')})});
-  $('btnBackToDm').addEventListener('click',()=>{$('userProfile').classList.remove('show');$('dmView').classList.add('show')});
-
-  // sidebar
-  function renderSidebar(){const sb=$('sidebar');sb.querySelectorAll('.server-icon:not(.add)').forEach(e=>e.remove());const div=sb.querySelector('.server-divider');servers.forEach(s=>{const el=document.createElement('div');el.className='server-icon'+(s.id===activeSid?' active':'');el.title=s.name;if(s.avatar)el.innerHTML='<img src="'+s.avatar+'">';else el.innerHTML='<span class="si-text">'+I(s.name)+'</span>';el.addEventListener('click',()=>selectServer(s.id));div.after(el)})}
-  $('sidebarSearch').addEventListener('click',()=>{$('searchOverlay').classList.add('show');$('searchServerInput').value='';$('searchResults').innerHTML='';$('ssHint').style.display='block'});
-  $('searchOverlay').addEventListener('click',e=>{if(e.target===$('searchOverlay'))$('searchOverlay').classList.remove('show')});
-  $('searchServerInput').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();const r=$('searchResults');r.innerHTML='';if(!q){$('ssHint').style.display='block';return}$('ssHint').style.display='none';servers.filter(s=>s.sid.toLowerCase().includes(q)||s.name.toLowerCase().includes(q)).forEach(s=>{const d=document.createElement('div');d.className='ss-result';d.innerHTML=s.name+'<span>#'+s.sid+'</span>';d.addEventListener('click',()=>{$('searchOverlay').classList.remove('show');selectServer(s.id)});r.appendChild(d)})});
-
-  function selectServer(id){activeSid=id;activeChId=null;viewingPid=null;renderSidebar();hideAll();$('channelPage').classList.add('show');const s=getS();$('cpName').textContent=s.name;$('cpId').textContent='#'+s.sid;renderChList();setActiveTab('home')}
-  function renderChList(){const s=getS();if(!s)return;const l=$('cpList');l.innerHTML='';$('cpEmpty').style.display=s.channels.length?'none':'block';const icons={announce:'<svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>',forum:'<svg viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>',persona:'<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'};s.channels.forEach(ch=>{const el=document.createElement('div');el.className='ch-item';el.innerHTML=`<div class="chi-icon">${icons[ch.type]}</div><div class="chi-name">${ch.name}</div>`;el.addEventListener('click',()=>openCh(ch.id));l.appendChild(el)})}
-  function openCh(chid){activeChId=chid;viewingPid=null;replyTo=null;const ch=getCh();if(!ch)return;$('channelPage').classList.remove('show');$('channelView').classList.add('show');$('cvTitle').textContent='# '+ch.name;$('cvSubtitle').textContent={announce:'通告',forum:'论坛',persona:'角色'}[ch.type];$('forumArea').style.display='none';$('personaArea').style.display='none';$('announceArea').style.display='none';$('announceInput').style.display='none';$('postDetail').classList.remove('show');$('fabGroup').style.display='none';$('replyQuote').classList.remove('show');
-    if(ch.type==='announce'){$('announceArea').style.display='flex';if(getS().owner==='me')$('announceInput').style.display='flex';renderAnn()}
-    else if(ch.type==='persona'){$('personaArea').style.display='flex';$('fabGroup').style.display='flex';renderPer()}
-    else{$('forumArea').style.display='flex';$('fabGroup').style.display='flex';renderPosts()}}
-  $('btnBackToChannels').addEventListener('click',()=>{$('channelView').classList.remove('show');$('channelPage').classList.add('show')});
-  function renderAnn(){const ch=getCh(),a=$('announceArea');a.innerHTML='';if(!ch.posts||!ch.posts.length){a.innerHTML='<div class="empty-hint">暂无通告</div>';return}[...ch.posts].reverse().forEach(p=>{const d=document.createElement('div');d.className='ann-item';d.innerHTML=`<div class="ann-time">${p.time}</div><div class="ann-title">${p.title}</div><div class="ann-content">${p.content}</div>`;a.appendChild(d)})}
-  $('btnAnnPost').addEventListener('click',()=>{const v=$('annInput').value.trim();if(!v)return;const ch=getCh();if(!ch.posts)ch.posts=[];ch.posts.push({id:U(),title:v,content:'',time:N()});$('annInput').value='';renderAnn()});
-  function renderPosts(){const ch=getCh(),a=$('forumArea');a.innerHTML='';if(!ch.posts||!ch.posts.length){a.innerHTML='<div class="empty-hint">还没有帖子</div>';return}[...ch.posts].reverse().forEach(p=>{const c=document.createElement('div');c.className='post-card';const av=p.avatar?'<img src="'+p.avatar+'">':I(p.user);const rh=RB(p.roles);let ih='';if(p.images&&p.images.length)ih='<div class="pc-images">'+p.images.slice(0,2).map(i=>'<img src="'+i+'">').join('')+'</div>';const sv=isSaved(activeSid,p.id);c.innerHTML=`<div class="pc-bookmark ${sv?'saved':''}" data-pid="${p.id}"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div><div class="pc-head"><div class="pc-avatar">${av}</div><div class="pc-meta"><div class="pc-user">${p.user}</div>${rh?'<div class="pc-roles">'+rh+'</div>':''}</div><span class="pc-time">${p.time}</span></div><div class="pc-title">${SP(p.title)}</div><div class="pc-preview">${SP(p.content)}</div>${ih}<div class="pc-footer"><span><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${p.replies?p.replies.length:0}</span></div>`;c.querySelector('.pc-bookmark').addEventListener('click',e=>{e.stopPropagation();toggleSave(activeSid,p.id,'post');renderPosts()});c.addEventListener('click',e=>{if(e.target.closest('.pc-bookmark')||e.target.classList.contains('spoiler'))return;openPost(p.id)});a.appendChild(c)})}
-  function renderPer(){const ch=getCh(),a=$('personaArea');a.innerHTML='';if(!ch.posts||!ch.posts.length){a.innerHTML='<div class="empty-hint" style="width:100%">还没有角色</div>';return}ch.posts.forEach(p=>{const c=document.createElement('div');c.className='persona-card';const hi=p.images&&p.images.length;const sv=isSaved(activeSid,p.id);c.innerHTML=`<div class="psc-img">${hi?'<img src="'+p.images[0]+'">':'<div style="display:flex;align-items:center;justify-content:center;height:100%"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>'}<div class="psc-author">@${p.user}</div><div class="psc-bookmark ${sv?'saved':''}"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div></div><div class="psc-body"><div class="psc-name">${p.title}</div><div class="psc-desc">${p.content}</div><div class="psc-stats"><span><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>0</span><span><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${p.replies?p.replies.length:0}</span></div></div>`;c.querySelector('.psc-bookmark').addEventListener('click',e=>{e.stopPropagation();toggleSave(activeSid,p.id,'persona');renderPer()});c.addEventListener('click',e=>{if(e.target.closest('.psc-bookmark'))return;openPost(p.id)});a.appendChild(c)})}
-  function openPost(pid){const ch=getCh(),p=ch.posts.find(x=>x.id===pid);if(!p)return;viewingPid=pid;replyTo=null;$('replyQuote').classList.remove('show');$('forumArea').style.display='none';$('personaArea').style.display='none';$('announceArea').style.display='none';$('fabGroup').style.display='none';$('postDetail').classList.add('show');const av=p.avatar?'<img src="'+p.avatar+'">':I(p.user);const rh=RB(p.roles);let ih='';if(p.images&&p.images.length)ih='<div class="op-imgs">'+p.images.map(i=>'<img src="'+i+'" style="max-height:200px">').join('')+'</div>';let h=`<div class="pd-op"><div class="op-head"><div class="op-avatar">${av}</div><div class="op-info"><div class="op-name">${p.user} ${rh}</div><div class="op-time">${p.time}</div></div></div><div class="op-title">${SP(p.title)}</div><div class="op-content">${SP(p.content)}</div>${ih}</div>`;if(p.replies&&p.replies.length){h+='<div class="pd-replies-title">回复 ('+p.replies.length+')</div>';p.replies.forEach((r,i)=>{const ra=r.avatar?'<img src="'+r.avatar+'">':I(r.user);const isL=i===p.replies.length-1;h+=`<div class="reply-item" data-rid="${r.id}"><div class="ri-line"><div class="ri-avatar">${ra}</div>${!isL?'<div class="ri-thread"></div>':''}</div><div class="ri-body"><div class="ri-name-row"><span class="ri-name">${r.user}</span>${RB(r.roles)}<span class="ri-time">${r.time}</span></div>${r.qn?'<div style="font-size:10px;color:#bbb;margin-bottom:2px;padding-left:8px;border-left:2px solid #eee">回复 <b>'+r.qn+'</b>: '+r.qt.slice(0,30)+'</div>':''}<div class="ri-text">${SP(r.text)}</div></div></div>`})}else h+='<div class="empty-hint" style="padding:16px 0">暂无回复</div>';$('pdBody').innerHTML=h;$('pdBody').scrollTop=0;$('pdBody').querySelectorAll('.reply-item').forEach(el=>{el.addEventListener('click',()=>{const rid=el.dataset.rid;const r=getCh().posts.find(x=>x.id===viewingPid).replies.find(x=>x.id===rid);if(!r)return;replyTo={name:r.user,text:r.text};$('rqName').textContent=r.user;$('rqText').textContent=r.text.slice(0,40);$('replyQuote').classList.add('show');$('replyInput').focus()})})}
-  $('rqClose').addEventListener('click',()=>{replyTo=null;$('replyQuote').classList.remove('show')});
-  $('btnBackToList').addEventListener('click',()=>{viewingPid=null;$('postDetail').classList.remove('show');const ch=getCh();$('fabGroup').style.display='flex';if(ch.type==='persona'){$('personaArea').style.display='flex';renderPer()}else if(ch.type==='forum'){$('forumArea').style.display='flex';renderPosts()}else{$('announceArea').style.display='flex';renderAnn()}});
-  function sendReply(){const t=$('replyInput').value.trim();if(!t||!viewingPid)return;const p=getCh().posts.find(x=>x.id===viewingPid);if(!p.replies)p.replies=[];const r={id:U(),user:userProfile.name,avatar:userProfile.avatar,text:t,time:N(),roles:getAllWornRoles().map(r=>({name:r.name,color:r.color}))};if(replyTo){r.qn=replyTo.name;r.qt=replyTo.text}p.replies.push(r);$('replyInput').value='';replyTo=null;$('replyQuote').classList.remove('show');openPost(viewingPid);$('pdBody').scrollTop=$('pdBody').scrollHeight}
-  $('btnReply').addEventListener('click',sendReply);$('replyInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendReply()});
-  $('fabTop').addEventListener('click',()=>{const ch=getCh();if(ch.type==='persona')$('personaArea').scrollTo({top:0,behavior:'smooth'});else $('forumArea').scrollTo({top:0,behavior:'smooth'})});
-  $('fabPost').addEventListener('click',()=>{npImages=[];rnI();$('npTitleInput').value='';$('npContentInput').value='';$('emojiPicker').classList.remove('show');const av=userProfile.avatar?'<img src="'+userProfile.avatar+'">':I(userProfile.name);const ch=getCh();const isP=ch&&ch.type==='persona';$('npTitleInput').placeholder=isP?'角色名':'标题';$('npContentInput').placeholder=isP?'角色简介 / 标签...':'输入消息......';$('npAuthor').innerHTML=`<div class="npa-avatar">${av}</div><div class="npa-info"><div class="npa-name">${userProfile.name}</div><div class="npa-hint">发布至 # ${ch?ch.name:''}</div></div>`;$('newPostPage').classList.add('show')});
-  $('btnCloseNewPost').addEventListener('click',()=>$('newPostPage').classList.remove('show'));
-  $('btnNpImage').addEventListener('click',()=>$('npImageFile').click());
-  $('npImageFile').addEventListener('change',function(){[...this.files].forEach(f=>{if(npImages.length<4)readFile(f,u=>{npImages.push(u);rnI()})});this.value=''});
-  function rnI(){const c=$('npImagesPreview');c.innerHTML='';npImages.forEach((img,i)=>{const w=document.createElement('div');w.className='np-img-wrap';w.innerHTML='<img src="'+img+'"><div class="np-img-del"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>';w.querySelector('.np-img-del').addEventListener('click',()=>{npImages.splice(i,1);rnI()});c.appendChild(w)})}
-  $('btnNpFile').addEventListener('click',()=>$('npFileFile').click());
-  $('npFileFile').addEventListener('change',function(){if(this.files[0])$('npContentInput').value+=($('npContentInput').value?'\n':'')+'[附件: '+this.files[0].name+']';this.value=''});
-  const emojis=['😀','😂','🥰','😎','🤔','👍','❤️','🔥','✨','🎉','😭','🥺','💀','👀','🙏','💕','😊','🤣','😍','🥳'];
-  const ep=$('emojiPicker');emojis.forEach(e=>{const s=document.createElement('span');s.textContent=e;s.addEventListener('click',()=>{$('npContentInput').value+=e;$('npContentInput').focus()});ep.appendChild(s)});
-  $('btnNpEmoji').addEventListener('click',()=>ep.classList.toggle('show'));
-  $('btnNpSpoiler').addEventListener('click',()=>{const ta=$('npContentInput'),s=ta.selectionStart,e=ta.selectionEnd,v=ta.value;if(s!==e){ta.value=v.slice(0,s)+'||'+v.slice(s,e)+'||'+v.slice(e)}else{ta.value=v.slice(0,s)+'||||'+v.slice(s);ta.selectionStart=ta.selectionEnd=s+2}ta.focus()});
-  $('btnSubmitPost').addEventListener('click',()=>{const t=$('npTitleInput').value.trim(),c=$('npContentInput').value.trim();if(!t||!c)return;const ch=getCh();if(!ch.posts)ch.posts=[];ch.posts.push({id:U(),user:userProfile.name,avatar:userProfile.avatar,title:t,content:c,time:N(),replies:[],roles:getAllWornRoles().map(r=>({name:r.name,color:r.color})),images:[...npImages]});$('newPostPage').classList.remove('show');if(ch.type==='persona')renderPer();else renderPosts()});
-  // create server with custom ID
-  let sAv=null;
-  $('btnAddServer').addEventListener('click',()=>{$('modalCreate').classList.add('show');$('inputServerName').value='';$('inputServerId').value='';sAv=null;$('serverAvatarPreview').style.display='none';$('serverAvatarPicker').querySelector('svg').style.display='';$('idHint').style.display='none'});
-  $('serverAvatarPicker').addEventListener('click',()=>$('serverAvatarFile').click());
-  $('serverAvatarFile').addEventListener('change',function(){if(this.files[0])readFile(this.files[0],u=>{sAv=u;$('serverAvatarPreview').src=u;$('serverAvatarPreview').style.display='block';$('serverAvatarPicker').querySelector('svg').style.display='none'})});
-  $('btnCancelCreate').addEventListener('click',()=>$('modalCreate').classList.remove('show'));
-  $('modalCreate').addEventListener('click',e=>{if(e.target===$('modalCreate'))$('modalCreate').classList.remove('show')});
-  $('btnConfirmCreate').addEventListener('click',()=>{const n=$('inputServerName').value.trim();const sid=$('inputServerId').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');if(!n||!sid)return;if(servers.some(s=>s.sid===sid)){$('idHint').style.display='block';return}servers.push({id:U(),sid,name:n,avatar:sAv,channels:[],roles:[],owner:'me'});$('modalCreate').classList.remove('show');renderSidebar();selectServer(servers[servers.length-1].id)});
-  $('btnAddChannel').addEventListener('click',()=>{$('modalChannel').classList.add('show');$('inputChName').value='';$('inputChType').value='forum'});
-  $('btnCancelCh').addEventListener('click',()=>$('modalChannel').classList.remove('show'));
-  $('modalChannel').addEventListener('click',e=>{if(e.target===$('modalChannel'))$('modalChannel').classList.remove('show')});
-  $('btnConfirmCh').addEventListener('click',()=>{const n=$('inputChName').value.trim();if(!n)return;getS().channels.push({id:U(),name:n,type:$('inputChType').value,posts:[]});$('modalChannel').classList.remove('show');renderChList()});
-  $('btnInvite').addEventListener('click',()=>{const s=getS();const txt=s.name+' #'+s.sid;navigator.clipboard&&navigator.clipboard.writeText(txt).then(()=>alert('已复制: '+txt))});
-  // vault
-  let vf='all';document.querySelectorAll('.vault-tabs .vt').forEach(t=>{t.addEventListener('click',()=>{vf=t.dataset.vt;document.querySelectorAll('.vault-tabs .vt').forEach(x=>x.classList.toggle('active',x===t));renderVault()})});
-  function renderVault(){const l=$('vaultList');l.innerHTML='';const items=savedItems.filter(x=>vf==='all'||x.type===vf);$('vaultEmpty').style.display=items.length?'none':'block'}
-  function renderRoles(){const g=$('roleSettingsGroup'),b=$('roleSettingsBody');const owned=servers.filter(s=>s.owner==='me');if(!owned.length){g.style.display='none';return}g.style.display='block';b.innerHTML='';owned.forEach(s=>{const w=document.createElement('div');w.style.marginBottom='16px';w.innerHTML='<div style="font-size:12px;font-weight:600;margin-bottom:6px">'+s.name+'</div>';const l=document.createElement('div');l.style.cssText='display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px';if(!s.roles)s.roles=[];if(!s.roles.length)l.innerHTML='<span style="font-size:11px;color:#ccc">暂无</span>';else s.roles.forEach(r=>{const t=document.createElement('div');t.className='role-tag';t.style.background=r.color+'20';t.style.color=r.color;t.innerHTML=r.name+' <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';t.addEventListener('click',()=>{s.roles=s.roles.filter(x=>x.id!==r.id);renderRoles()});l.appendChild(t)});w.appendChild(l);const row=document.createElement('div');row.className='add-role-row';const ni=document.createElement('input');ni.type='text';ni.placeholder='名称';ni.maxLength=12;const ci=document.createElement('input');ci.type='color';ci.value=['#ff6b6b','#845ef7','#22b8cf','#ff922b','#51cf66'][s.roles.length%5];const bt=document.createElement('button');bt.textContent='添加';bt.addEventListener('click',()=>{const n=ni.value.trim();if(!n)return;s.roles.push({id:U(),name:n,color:ci.value});ni.value='';renderRoles()});row.appendChild(ni);row.appendChild(ci);row.appendChild(bt);w.appendChild(row);b.appendChild(w)})}
-  function hideAll(){$('welcomeView').style.display='none';$('channelPage').classList.remove('show');$('channelView').classList.remove('show');$('pageChat').classList.remove('show');$('dmView').classList.remove('show');$('userProfile').classList.remove('show');$('chatListView').style.display='flex';$('pageVault').classList.remove('show');$('pageSettings').classList.remove('show');closePM()}
-  function setActiveTab(tab){currentTab=tab;document.querySelectorAll('.tab-bar .tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));hideAll();if(tab==='home'){$('sidebar').classList.remove('hidden');if(activeSid){if(activeChId)$('channelView').classList.add('show');else $('channelPage').classList.add('show')}else $('welcomeView').style.display='flex'}else{$('sidebar').classList.add('hidden');if(tab==='chat')$('pageChat').classList.add('show');else if(tab==='vault'){$('pageVault').classList.add('show');renderVault()}else{$('pageSettings').classList.add('show');renderRoles()}}}
-  document.querySelectorAll('.tab-bar .tab').forEach(t=>{t.addEventListener('click',()=>setActiveTab(t.dataset.tab))});
-  document.querySelectorAll('.toggle').forEach(t=>{t.addEventListener('click',()=>t.classList.toggle('on'))});
-  renderSidebar();
+const S=[];let aS=null,aCh=null,vP=null,cT='home',npI=[],saved=[],rTo=null,dmQ=null;
+let U={name:'用户',id:'ID: '+(100000+Math.floor(Math.random()*900000)),avatar:null},wR={};
+const npc={name:'沐白',avatar:null,bio:'山有木兮木有枝',roles:[{name:'好友',color:'#22b8cf'}],id:'_npc1',unread:2,lastMsg:'在吗？想聊聊',time:'12:30',posts:[{title:'今天的天空很好看',content:'分享一下心情',time:'10:15'},{title:'读了一本好书',content:'推荐给大家',time:'昨天'}],msgs:[{w:'them',text:'你好呀',time:'12:28'},{w:'them',text:'在吗？想聊聊',time:'12:30'}]};
+const $=id=>document.getElementById(id),In=n=>n.slice(0,2).toUpperCase(),Nm=()=>{const d=new Date();return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')},Uid=()=>'_'+Math.random().toString(36).slice(2,9);
+function rF(f,cb){const r=new FileReader();r.onload=e=>cb(e.target.result);r.readAsDataURL(f)}
+function gWR(){let o=[];S.forEach(s=>{if(!s.roles)return;(wR[s.id]||[]).forEach(rid=>{const r=s.roles.find(x=>x.id===rid);if(r)o.push(r)})});return o}
+function RB(rd){if(!rd||!rd.length)return '';return rd.map(r=>'<span class="role-badge" style="background:'+r.color+'20;color:'+r.color+'">'+r.name+'</span>').join('')}
+function SP(t){return t.replace(/\|\|(.+?)\|\|/g,'<span class="spoiler">$1</span>')}
+document.addEventListener('click',e=>{if(e.target.classList.contains('spoiler')){e.target.classList.toggle('revealed');e.stopPropagation()}});
+function isSv(s,p){return saved.some(x=>x.s===s&&x.p===p)}
+function tgSv(s,p,t){if(isSv(s,p))saved=saved.filter(x=>!(x.s===s&&x.p===p));else saved.push({s,p,type:t})}
+function gS(){return S.find(x=>x.id===aS)}
+function gC(){const s=gS();return s?s.channels.find(c=>c.id===aCh):null}
+// profile menu
+let pmO=false;function cPM(){pmO=false;$('profileMenu').classList.remove('show');$('pmOverlay').classList.remove('show')}
+$('chatDots').addEventListener('click',()=>{pmO=!pmO;$('profileMenu').classList.toggle('show',pmO);$('pmOverlay').classList.toggle('show',pmO)});
+$('pmOverlay').addEventListener('click',cPM);$('pmEditProfile').addEventListener('click',()=>{cPM();oPM()});
+let pAv=null,tW={};
+function oPM(){$('modalProfile').classList.add('show');$('psNameInput').value=U.name;pAv=null;if(U.avatar){$('psAvatarImg').src=U.avatar;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'}else{$('psAvatarImg').style.display='none';$('psPlaceholder').style.display='flex'}tW=JSON.parse(JSON.stringify(wR));rpR()}
+function rpR(){const l=$('psRoleList');l.innerHTML='';let h=false;S.forEach(s=>{if(!s.roles||!s.roles.length)return;h=true;const w=tW[s.id]||[];const lb=document.createElement('div');lb.style.cssText='width:100%;font-size:10px;color:#aaa;margin-top:'+(l.children.length?'6px':'0');lb.textContent=s.name;l.appendChild(lb);s.roles.forEach(r=>{const c=document.createElement('div');c.className='ps-role-chip '+(w.includes(r.id)?'on':'off');c.style.color=r.color;c.style.background=r.color+'15';c.innerHTML=r.name+(w.includes(r.id)?' <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>':'');c.addEventListener('click',()=>{if(!tW[s.id])tW[s.id]=[];if(tW[s.id].includes(r.id))tW[s.id]=tW[s.id].filter(x=>x!==r.id);else tW[s.id].push(r.id);rpR()});l.appendChild(c)})});$('psRolesSection').style.display=h?'block':'none'}
+$('psAvatar').addEventListener('click',()=>$('psFileInput').click());
+$('psFileInput').addEventListener('change',function(){if(this.files[0])rF(this.files[0],u=>{pAv=u;$('psAvatarImg').src=u;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'})});
+$('btnCancelProfile').addEventListener('click',()=>$('modalProfile').classList.remove('show'));
+$('modalProfile').addEventListener('click',e=>{if(e.target===$('modalProfile'))$('modalProfile').classList.remove('show')});
+$('btnSaveProfile').addEventListener('click',()=>{const n=$('psNameInput').value.trim();if(!n)return;U.name=n;if(pAv)U.avatar=pAv;wR=JSON.parse(JSON.stringify(tW));$('modalProfile').classList.remove('show')});
+// friends
+function rFr(){const fl=$('friendList');fl.innerHTML='';const el=document.createElement('div');el.className='friend-item';el.innerHTML=`<div class="fi-avatar-wrap"><div class="fi-avatar">${In(npc.name)}</div>${npc.unread?'<div class="fi-unread">'+npc.unread+'</div>':''}</div><div class="fi-info"><div class="fi-name">${npc.name} ${RB(npc.roles)}</div><div class="fi-msg">${npc.lastMsg}</div></div><div class="fi-time">${npc.time}</div>`;el.addEventListener('click',()=>oDm());fl.appendChild(el)}
+rFr();
+// DM
+function oDm(){npc.unread=0;rFr();$('chatListView').style.display='none';$('dmView').classList.add('show');$('dmName').textContent=npc.name;rDm()}
+function rDm(){const c=$('dmMsgs');c.innerHTML='';let lw=null,lt='';
+npc.msgs.forEach((m,i)=>{
+  if(m.time!==lt){const td=document.createElement('div');td.className='dm-time-div';td.textContent=m.time;c.appendChild(td);lt=m.time}
+  const isF=m.w!==lw;lw=m.w;
+  const nxt=npc.msgs[i+1];const isL=!nxt||nxt.w!==m.w||nxt.time!==m.time;
+  const row=document.createElement('div');row.className='dm-row '+m.w;
+  let av='';
+  if(m.w==='them'){av=isF?'<div class="dm-av"><div class="dm-av-img">'+In(npc.name)+'</div></div>':'<div class="dm-av"><div class="dm-av-spacer"></div></div>'}
+  let qh='';if(m.q)qh='<div class="dm-quote-ref">↩ '+m.q.slice(0,30)+'</div>';
+  let info='';if(isL){const sn=m.w==='me'?U.name:npc.name;info='<div class="dm-grp-info"><span>'+sn+'</span><span>'+m.time+'</span></div>'}
+  row.innerHTML=av+'<div>'+qh+'<div class="dm-capsule">'+m.text+'</div>'+info+'</div>';
+  if(m.w==='them'){let sx=0;row.addEventListener('touchstart',e=>{sx=e.touches[0].clientX});row.addEventListener('touchend',e=>{if(sx-e.changedTouches[0].clientX>50){dmQ=m.text;$('dqbText').textContent='回复: '+m.text.slice(0,30);$('dmQuoteBar').classList.add('show');$('dmInput').focus()}})}
+  c.appendChild(row)});c.scrollTop=c.scrollHeight}
+$('dqbClose').addEventListener('click',()=>{dmQ=null;$('dmQuoteBar').classList.remove('show')});
+$('btnBackToFriends').addEventListener('click',()=>{$('dmView').classList.remove('show');$('chatListView').style.display='flex'});
+$('btnDmSend').addEventListener('click',sDm);$('dmInput').addEventListener('keydown',e=>{if(e.key==='Enter')sDm()});
+function sDm(){const t=$('dmInput').value.trim();if(!t)return;const m={w:'me',text:t,time:Nm()};if(dmQ){m.q=dmQ;dmQ=null;$('dmQuoteBar').classList.remove('show')}npc.msgs.push(m);npc.lastMsg=t;npc.time=Nm();$('dmInput').value='';rDm();rFr();
+setTimeout(()=>{const rp=['嗯嗯','好的~','哈哈哈','然后呢？','有道理','我也觉得！','真的吗','太好了'];npc.msgs.push({w:'them',text:rp[Math.floor(Math.random()*rp.length)],time:Nm()});npc.lastMsg=npc.msgs[npc.msgs.length-1].text;npc.time=Nm();rDm();rFr()},800+Math.random()*1200)}
+// user profile
+$('dmDots').addEventListener('click',()=>{$('dmView').classList.remove('show');$('userProfile').classList.add('show');$('upBody').innerHTML=`<div class="up-banner"><div class="up-avatar-wrap"><div class="up-av">${In(npc.name)}</div></div></div><div class="up-info"><div class="up-name">${npc.name}</div><div class="up-bio">${npc.bio}</div><div class="up-roles">${RB(npc.roles)}</div><div class="up-actions"><button class="up-msg" id="upMsg">发消息</button></div></div><div class="up-posts-title">帖子</div>`+npc.posts.map(p=>'<div class="up-post-item"><div class="upi-title">'+p.title+'</div><div class="upi-preview">'+p.content+'</div><div class="upi-time">'+p.time+'</div></div>').join('');$('upMsg').addEventListener('click',()=>{$('userProfile').classList.remove('show');$('dmView').classList.add('show')})});
+$('btnBackToDm').addEventListener('click',()=>{$('userProfile').classList.remove('show');$('dmView').classList.add('show')});
+// sidebar
+function rSb(){const sb=$('sidebar');sb.querySelectorAll('.server-icon:not(.add)').forEach(e=>e.remove());const dv=sb.querySelector('.server-divider');S.forEach(s=>{const el=document.createElement('div');el.className='server-icon'+(s.id===aS?' active':'');el.title=s.name;if(s.avatar)el.innerHTML='<img src="'+s.avatar+'">';else el.innerHTML='<span class="si-text">'+In(s.name)+'</span>';el.addEventListener('click',()=>selS(s.id));dv.after(el)})}
+$('sidebarSearch').addEventListener('click',()=>{$('searchOverlay').classList.add('show');$('searchServerInput').value='';$('searchResults').innerHTML='';$('ssHint').style.display='block'});
+$('searchOverlay').addEventListener('click',e=>{if(e.target===$('searchOverlay'))$('searchOverlay').classList.remove('show')});
+$('searchServerInput').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();const r=$('searchResults');r.innerHTML='';if(!q){$('ssHint').style.display='block';return}$('ssHint').style.display='none';S.filter(s=>s.sid.toLowerCase().includes(q)||s.name.toLowerCase().includes(q)).forEach(s=>{const d=document.createElement('div');d.className='ss-result';d.innerHTML=s.name+'<span>#'+s.sid+'</span>';d.addEventListener('click',()=>{$('searchOverlay').classList.remove('show');selS(s.id)});r.appendChild(d)})});
+function selS(id){aS=id;aCh=null;vP=null;rSb();hA();$('channelPage').classList.add('show');const s=gS();$('cpName').textContent=s.name;$('cpId').textContent='#'+s.sid;rCL();sT('home')}
+function rCL(){const s=gS();if(!s)return;const l=$('cpList');l.innerHTML='';$('cpEmpty').style.display=s.channels.length?'none':'block';const ic={announce:'<svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>',forum:'<svg viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>',persona:'<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'};s.channels.forEach(ch=>{const el=document.createElement('div');el.className='ch-item';el.innerHTML=`<div class="chi-icon">${ic[ch.type]}</div><div class="chi-name">${ch.name}</div>`;el.addEventListener('click',()=>oCh(ch.id));l.appendChild(el)})}
+function oCh(id){aCh=id;vP=null;rTo=null;const ch=gC();if(!ch)return;$('channelPage').classList.remove('show');$('channelView').classList.add('show');$('cvTitle').textContent='# '+ch.name;$('cvSubtitle').textContent={announce:'通告',forum:'论坛',persona:'角色'}[ch.type];$('forumArea').style.display='none';$('personaArea').style.display='none';$('announceArea').style.display='none';$('announceInput').style.display='none';$('postDetail').classList.remove('show');$('fabGroup').style.display='none';$('replyQuote').classList.remove('show');
+if(ch.type==='announce'){$('announceArea').style.display='flex';if(gS().owner==='me')$('announceInput').style.display='flex';rAn()}
+else if(ch.type==='persona'){$('personaArea').style.display='flex';$('fabGroup').style.display='flex';rPe()}
+else{$('forumArea').style.display='flex';$('fabGroup').style.display='flex';rPo()}}
+$('btnBackToChannels').addEventListener('click',()=>{$('channelView').classList.remove('show');$('channelPage').classList.add('show')});
+function rAn(){const ch=gC(),a=$('announceArea');a.innerHTML='';if(!ch.posts||!ch.posts.length){a.innerHTML='<div class="empty-hint">暂无通告</div>';return}[...ch.posts].reverse().forEach(p=>{const d=document.createElement('div');d.className='ann-item';d.innerHTML=`<div class="ann-time">${p.time}</div><div class="ann-title">${p.title}</div>${p.content?'<div class="ann-content">'+p.content+'</div>':''}`;a.appendChild(d)})}
+$('btnAnnPost').addEventListener('click',()=>{const v=$('annInput').value.trim();if(!v)return;const ch=gC();if(!ch.posts)ch.posts=[];ch.posts.push({id:Uid(),title:v,content:'',time:Nm()});$('annInput').value='';rAn()});
+function rPo(){const ch=gC(),a=$('forumArea');a.innerHTML='';if(!ch.posts||!ch.posts.length){a.innerHTML='<div class="empty-hint">还没有帖子</div>';return}[...ch.posts].reverse().forEach(p=>{const c=document.createElement('div');c.className='post-card';const av=p.avatar?'<img src="'+p.avatar+'">':In(p.user);const rh=RB(p.roles);let ih='';if(p.images&&p.images.length)ih='<div class="pc-images">'+p.images.slice(0,2).map(i=>'<img src="'+i+'">').join('')+'</div>';const sv=isSv(aS,p.id);c.innerHTML=`<div class="pc-bookmark ${sv?'saved':''}" data-pid="${p.id}"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div><div class="pc-head"><div class="pc-avatar">${av}</div><div class="pc-meta"><div class="pc-user">${p.user}</div>${rh?'<div class="pc-roles">'+rh+'</div>':''}</div><span class="pc-time">${p.time}</span></div><div class="pc-title">${SP(p.title)}</div><div class="pc-preview">${SP(p.content)}</div>${ih}<div class="pc-footer"><span><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${p.replies?p.replies.length:0}</span></div>`;c.querySelector('.pc-bookmark').addEventListener('click',e=>{e.stopPropagation();tgSv(aS,p.id,'post');rPo()});c.addEventListener('click',e=>{if(e.target.closest('.pc-bookmark')||e.target.classList.contains('spoiler'))return;oP(p.id)});a.appendChild(c)})}
+function rPe(){const ch=gC(),a=$('personaArea');a.innerHTML='';if(!ch.posts||!ch.posts.length){a.innerHTML='<div class="empty-hint" style="width:100%">还没有角色</div>';return}ch.posts.forEach(p=>{const c=document.createElement('div');c.className='persona-card';const hi=p.images&&p.images.length;const sv=isSv(aS,p.id);c.innerHTML=`<div class="psc-img">${hi?'<img src="'+p.images[0]+'">':'<div style="display:flex;align-items:center;justify-content:center;height:100%"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>'}<div class="psc-author">@${p.user}</div><div class="psc-bookmark ${sv?'saved':''}"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div></div><div class="psc-body"><div class="psc-name">${p.title}</div><div class="psc-desc">${p.content}</div><div class="psc-stats"><span><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>0</span><span><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${p.replies?p.replies.length:0}</span></div></div>`;c.querySelector('.psc-bookmark').addEventListener('click',e=>{e.stopPropagation();tgSv(aS,p.id,'persona');rPe()});c.addEventListener('click',e=>{if(e.target.closest('.psc-bookmark'))return;oP(p.id)});a.appendChild(c)})}
+function oP(pid){const ch=gC(),p=ch.posts.find(x=>x.id===pid);if(!p)return;vP=pid;rTo=null;$('replyQuote').classList.remove('show');$('forumArea').style.display='none';$('personaArea').style.display='none';$('announceArea').style.display='none';$('fabGroup').style.display='none';$('postDetail').classList.add('show');const av=p.avatar?'<img src="'+p.avatar+'">':In(p.user);const rh=RB(p.roles);let ih='';if(p.images&&p.images.length)ih='<div class="op-imgs">'+p.images.map(i=>'<img src="'+i+'" style="max-height:200px">').join('')+'</div>';let h=`<div class="pd-op"><div class="op-head"><div class="op-avatar">${av}</div><div class="op-info"><div class="op-name">${p.user} ${rh}</div><div class="op-time">${p.time}</div></div></div><div class="op-title">${SP(p.title)}</div><div class="op-content">${SP(p.content)}</div>${ih}</div>`;if(p.replies&&p.replies.length){h+='<div class="pd-replies-title">回复 ('+p.replies.length+')</div>';p.replies.forEach((r,i)=>{const ra=r.avatar?'<img src="'+r.avatar+'">':In(r.user);const il=i===p.replies.length-1;h+=`<div class="reply-item" data-rid="${r.id}"><div class="ri-line"><div class="ri-avatar">${ra}</div>${!il?'<div class="ri-thread"></div>':''}</div><div class="ri-body"><div class="ri-name-row"><span class="ri-name">${r.user}</span>${RB(r.roles)}<span class="ri-time">${r.time}</span></div>${r.qn?'<div style="font-size:10px;color:#bbb;margin-bottom:2px;padding-left:8px;border-left:2px solid #eee">回复 <b>'+r.qn+'</b>: '+r.qt.slice(0,30)+'</div>':''}<div class="ri-text">${SP(r.text)}</div></div></div>`})}else h+='<div class="empty-hint" style="padding:16px 0">暂无回复</div>';$('pdBody').innerHTML=h;$('pdBody').scrollTop=0;$('pdBody').querySelectorAll('.reply-item').forEach(el=>{el.addEventListener('click',()=>{const rid=el.dataset.rid;const r=gC().posts.find(x=>x.id===vP).replies.find(x=>x.id===rid);if(!r)return;rTo={name:r.user,text:r.text};$('rqName').textContent=r.user;$('rqText').textContent=r.text.slice(0,40);$('replyQuote').classList.add('show');$('replyInput').focus()})})}
+$('rqClose').addEventListener('click',()=>{rTo=null;$('replyQuote').classList.remove('show')});
+$('btnBackToList').addEventListener('click',()=>{vP=null;$('postDetail').classList.remove('show');const ch=gC();$('fabGroup').style.display='flex';if(ch.type==='persona'){$('personaArea').style.display='flex';rPe()}else if(ch.type==='forum'){$('forumArea').style.display='flex';rPo()}else{$('announceArea').style.display='flex';rAn()}});
+function sRp(){const t=$('replyInput').value.trim();if(!t||!vP)return;const p=gC().posts.find(x=>x.id===vP);if(!p.replies)p.replies=[];const r={id:Uid(),user:U.name,avatar:U.avatar,text:t,time:Nm(),roles:gWR().map(r=>({name:r.name,color:r.color}))};if(rTo){r.qn=rTo.name;r.qt=rTo.text}p.replies.push(r);$('replyInput').value='';rTo=null;$('replyQuote').classList.remove('show');oP(vP);$('pdBody').scrollTop=$('pdBody').scrollHeight}
+$('btnReply').addEventListener('click',sRp);$('replyInput').addEventListener('keydown',e=>{if(e.key==='Enter')sRp()});
+$('fabTop').addEventListener('click',()=>{const ch=gC();if(ch.type==='persona')$('personaArea').scrollTo({top:0,behavior:'smooth'});else $('forumArea').scrollTo({top:0,behavior:'smooth'})});
+$('fabPost').addEventListener('click',()=>{npI=[];rnI();$('npTitleInput').value='';$('npContentInput').value='';$('emojiPicker').classList.remove('show');const av=U.avatar?'<img src="'+U.avatar+'">':In(U.name);const ch=gC();const isP=ch&&ch.type==='persona';$('npTitleInput').placeholder=isP?'角色名':'标题';$('npContentInput').placeholder=isP?'角色简介 / 标签...':'输入消息......';$('npAuthor').innerHTML=`<div class="npa-avatar">${av}</div><div class="npa-info"><div class="npa-name">${U.name}</div><div class="npa-hint">发布至 # ${ch?ch.name:''}</div></div>`;$('newPostPage').classList.add('show')});
+$('btnCloseNewPost').addEventListener('click',()=>$('newPostPage').classList.remove('show'));
+$('btnNpImage').addEventListener('click',()=>$('npImageFile').click());
+$('npImageFile').addEventListener('change',function(){[...this.files].forEach(f=>{if(npI.length<4)rF(f,u=>{npI.push(u);rnI()})});this.value=''});
+function rnI(){const c=$('npImagesPreview');c.innerHTML='';npI.forEach((img,i)=>{const w=document.createElement('div');w.className='np-img-wrap';w.innerHTML='<img src="'+img+'"><div class="np-img-del"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>';w.querySelector('.np-img-del').addEventListener('click',()=>{npI.splice(i,1);rnI()});c.appendChild(w)})}
+$('btnNpFile').addEventListener('click',()=>$('npFileFile').click());
+$('npFileFile').addEventListener('change',function(){if(this.files[0])$('npContentInput').value+=($('npContentInput').value?'\n':'')+'[附件: '+this.files[0].name+']';this.value=''});
+const emos=['😀','😂','🥰','😎','🤔','👍','❤️','🔥','✨','🎉','😭','🥺','💀','👀','🙏','💕','😊','🤣','😍','🥳'];
+const ep=$('emojiPicker');emos.forEach(e=>{const s=document.createElement('span');s.textContent=e;s.addEventListener('click',()=>{$('npContentInput').value+=e;$('npContentInput').focus()});ep.appendChild(s)});
+$('btnNpEmoji').addEventListener('click',()=>ep.classList.toggle('show'));
+$('btnNpSpoiler').addEventListener('click',()=>{const ta=$('npContentInput'),s=ta.selectionStart,e=ta.selectionEnd,v=ta.value;if(s!==e){ta.value=v.slice(0,s)+'||'+v.slice(s,e)+'||'+v.slice(e)}else{ta.value=v.slice(0,s)+'||||'+v.slice(s);ta.selectionStart=ta.selectionEnd=s+2}ta.focus()});
+$('btnSubmitPost').addEventListener('click',()=>{const t=$('npTitleInput').value.trim(),c=$('npContentInput').value.trim();if(!t||!c)return;const ch=gC();if(!ch.posts)ch.posts=[];ch.posts.push({id:Uid(),user:U.name,avatar:U.avatar,title:t,content:c,time:Nm(),replies:[],roles:gWR().map(r=>({name:r.name,color:r.color})),images:[...npI]});$('newPostPage').classList.remove('show');if(ch.type==='persona')rPe();else rPo()});
+// create server
+let sAv=null;
+$('btnAddServer').addEventListener('click',()=>{$('modalCreate').classList.add('show');$('inputServerName').value='';$('inputServerId').value='';sAv=null;$('serverAvatarPreview').style.display='none';$('serverAvatarPicker').querySelector('svg').style.display='';$('idHint').style.display='none'});
+$('serverAvatarPicker').addEventListener('click',()=>$('serverAvatarFile').click());
+$('serverAvatarFile').addEventListener('change',function(){if(this.files[0])rF(this.files[0],u=>{sAv=u;$('serverAvatarPreview').src=u;$('serverAvatarPreview').style.display='block';$('serverAvatarPicker').querySelector('svg').style.display='none'})});
+$('btnCancelCreate').addEventListener('click',()=>$('modalCreate').classList.remove('show'));
+$('modalCreate').addEventListener('click',e=>{if(e.target===$('modalCreate'))$('modalCreate').classList.remove('show')});
+$('btnConfirmCreate').addEventListener('click',()=>{const n=$('inputServerName').value.trim();const sid=$('inputServerId').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');if(!n||!sid)return;if(S.some(s=>s.sid===sid)){$('idHint').style.display='block';return}S.push({id:Uid(),sid,name:n,avatar:sAv,channels:[],roles:[],owner:'me'});$('modalCreate').classList.remove('show');rSb();selS(S[S.length-1].id)});
+$('btnAddChannel').addEventListener('click',()=>{$('modalChannel').classList.add('show');$('inputChName').value='';$('inputChType').value='forum'});
+$('btnCancelCh').addEventListener('click',()=>$('modalChannel').classList.remove('show'));
+$('modalChannel').addEventListener('click',e=>{if(e.target===$('modalChannel'))$('modalChannel').classList.remove('show')});
+$('btnConfirmCh').addEventListener('click',()=>{const n=$('inputChName').value.trim();if(!n)return;gS().channels.push({id:Uid(),name:n,type:$('inputChType').value,posts:[]});$('modalChannel').classList.remove('show');rCL()});
+$('btnInvite').addEventListener('click',()=>{const s=gS();const txt=s.name+' #'+s.sid;navigator.clipboard&&navigator.clipboard.writeText(txt).then(()=>alert('已复制: '+txt))});
+// vault
+let vf='all';document.querySelectorAll('.vault-tabs .vt').forEach(t=>{t.addEventListener('click',()=>{vf=t.dataset.vt;document.querySelectorAll('.vault-tabs .vt').forEach(x=>x.classList.toggle('active',x===t));rV()})});
+function rV(){const l=$('vaultList');l.innerHTML='';const items=saved.filter(x=>vf==='all'||x.type===vf);$('vaultEmpty').style.display=items.length?'none':'block';items.forEach(item=>{const s=S.find(x=>x.id===item.s);if(!s)return;let p=null;s.channels.forEach(ch=>{if(!p&&ch.posts)ch.posts.forEach(pp=>{if(pp.id===item.p)p=pp})});if(!p)return;const el=document.createElement('div');el.className='vault-item';el.innerHTML=`<div class="vi-img">${p.images&&p.images.length?'<img src="'+p.images[0]+'">':'<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'}</div><div class="vi-info"><div class="vi-title">${p.title}</div><div class="vi-sub">${s.name} · ${item.type==='persona'?'角色':'帖子'}</div></div><div class="vi-unsave"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>`;el.querySelector('.vi-unsave').addEventListener('click',e=>{e.stopPropagation();tgSv(item.s,item.p,item.type);rV()});l.appendChild(el)})}
+// roles
+function rRo(){const g=$('roleSettingsGroup'),b=$('roleSettingsBody');const ow=S.filter(s=>s.owner==='me');if(!ow.length){g.style.display='none';return}g.style.display='block';b.innerHTML='';ow.forEach(s=>{const w=document.createElement('div');w.style.marginBottom='16px';w.innerHTML='<div style="font-size:12px;font-weight:600;margin-bottom:6px">'+s.name+'</div>';const l=document.createElement('div');l.style.cssText='display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px';if(!s.roles)s.roles=[];if(!s.roles.length)l.innerHTML='<span style="font-size:11px;color:#ccc">暂无</span>';else s.roles.forEach(r=>{const t=document.createElement('div');t.className='role-tag';t.style.background=r.color+'20';t.style.color=r.color;t.innerHTML=r.name+' <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';t.addEventListener('click',()=>{s.roles=s.roles.filter(x=>x.id!==r.id);rRo()});l.appendChild(t)});w.appendChild(l);const row=document.createElement('div');row.className='add-role-row';const ni=document.createElement('input');ni.type='text';ni.placeholder='名称';ni.maxLength=12;const ci=document.createElement('input');ci.type='color';ci.value=['#ff6b6b','#845ef7','#22b8cf','#ff922b','#51cf66'][s.roles.length%5];const bt=document.createElement('button');bt.textContent='添加';bt.addEventListener('click',()=>{const n=ni.value.trim();if(!n)return;s.roles.push({id:Uid(),name:n,color:ci.value});ni.value='';rRo()});row.appendChild(ni);row.appendChild(ci);row.appendChild(bt);w.appendChild(row);b.appendChild(w)})}
+function hA(){$('welcomeView').style.display='none';$('channelPage').classList.remove('show');$('channelView').classList.remove('show');$('pageChat').classList.remove('show');$('dmView').classList.remove('show');$('userProfile').classList.remove('show');$('chatListView').style.display='flex';$('pageVault').classList.remove('show');$('pageSettings').classList.remove('show');cPM()}
+function sT(tab){cT=tab;document.querySelectorAll('.tab-bar .tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));hA();if(tab==='home'){$('sidebar').classList.remove('hidden');if(aS){if(aCh)$('channelView').classList.add('show');else $('channelPage').classList.add('show')}else $('welcomeView').style.display='flex'}else{$('sidebar').classList.add('hidden');if(tab==='chat')$('pageChat').classList.add('show');else if(tab==='vault'){$('pageVault').classList.add('show');rV()}else{$('pageSettings').classList.add('show');rRo()}}}
+document.querySelectorAll('.tab-bar .tab').forEach(t=>{t.addEventListener('click',()=>sT(t.dataset.tab))});
+document.querySelectorAll('.toggle').forEach(t=>{t.addEventListener('click',()=>t.classList.toggle('on'))});
+rSb();
 })();
 </script>
 </body>
