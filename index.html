@@ -162,10 +162,6 @@ let saved=LS.get('saved')||[];
 let aS=null,aCh=null,vP=null,cT='home',npI=[],rTo=null,dmQ=null,wR=LS.get('wornRoles')||{};
 function saveAll(){LS.set('servers',S);LS.set('saved',saved);LS.set('wornRoles',wR)}
 
-// NPC
-const npc={name:'沐白',avatar:null,bio:'山有木兮木有枝',roles:[{name:'好友',color:'#22b8cf'}],id:'_npc1',unread:2,lastMsg:'在吗？想聊聊',time:'12:30',posts:[{title:'今天的天空很好看',content:'分享一下心情',time:'10:15'},{title:'读了一本好书',content:'推荐给大家',time:'昨天'}],msgs:LS.get('npcMsgs')||[{w:'them',text:'你好呀',time:'12:28'},{w:'them',text:'在吗？想聊聊',time:'12:30'}]};
-function saveNpc(){LS.set('npcMsgs',npc.msgs)}
-
 // AUTH
 let isLogin=false;
 function showAuth(){
