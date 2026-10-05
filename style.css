@@ -205,3 +205,14 @@ body.dark .update-box{background:#2a2a2a}
 body.dark .update-title{color:#e0e0e0}
 body.dark .update-later{background:#3a3a3a;color:#aaa}
 body.dark .update-now{background:#e0e0e0;color:#1a1a1a}
+/* FIX: forum post images full width */
+.post-card .pc-images{flex-direction:column}
+.post-card .pc-images img{width:100%;height:auto;max-height:300px;object-fit:contain}
+.pd-op .op-imgs{flex-direction:column}
+.pd-op .op-imgs img{max-width:100%;height:auto}
+/* Font size */
+body.fs-small{font-size:12px}
+body.fs-normal{font-size:13px}
+body.fs-large{font-size:15px}
+body.fs-xlarge{font-size:17px}
+
