@@ -22,12 +22,13 @@
   <div class="auth-switch" id="authSwitch">已有账号？<b>登录</b></div>
   <div class="auth-err" id="authErr"></div>
 </div>
-<div class="modal-overlay" id="chActionOverlay"><div class="modal" style="padding:14px 18px 20px"><h3 id="chActionTitle">频道操作</h3><div class="modal-btns" style="flex-direction:column;gap:6px"><button class="confirm" id="chMoveUp" style="background:#f0f0f0;color:#333">↑ 上移</button><button class="confirm" id="chMoveDown" style="background:#f0f0f0;color:#333">↓ 下移</button><button class="confirm" id="chDelete" style="background:#e74c3c;color:#fff">删除频道</button><button class="cancel" id="chActionCancel">取消</button></div></div></div>
+<div class="modal-overlay" id="chActionOverlay"><div class="modal" style="padding:14px 18px 20px"><h3 id="chActionTitle">频道操作</h3><div class="modal-btns" style="flex-direction:column;gap:6px"><button class="confirm" id="chDelete" style="background:#e74c3c;color:#fff">删除频道</button><button class="cancel" id="chActionCancel">取消</button></div></div></div>
+<div class="modal-overlay" id="postActionOverlay"><div class="modal" style="padding:14px 18px 20px"><h3 id="postActionTitle">帖子操作</h3><div class="modal-btns" style="flex-direction:column;gap:6px"><button class="confirm" id="postDelete" style="background:#e74c3c;color:#fff">删除</button><button class="cancel" id="postActionCancel">取消</button></div></div></div>
 <div class="app" id="app">
   <div class="sidebar" id="sidebar"><div class="server-icon add" id="btnAddServer"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="server-divider"></div><div class="sidebar-bottom"><div class="sidebar-search" id="sidebarSearch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div></div></div>
   <div class="main" id="mainArea">
     <div class="welcome" id="welcomeView"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><p>选择左侧社区开始浏览<br>或点击 <b>+</b> 创建新社区</p></div>
-    <div class="channel-page" id="channelPage"><div class="cp-header"><div class="cp-name-row"><span class="cp-name" id="cpName"></span><span class="cp-id" id="cpId"></span></div><div class="cp-sub">社区</div></div><div class="cp-toolbar"><div class="cp-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="cpSearchInput" placeholder="搜索频道" autocomplete="off"></div><div class="cp-btn" id="btnAddChannel"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="cp-btn" id="btnServerSettings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09"/></svg></div><div class="cp-btn" id="btnInvite"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="17" y1="14" x2="23" y2="14"/></svg></div></div><div class="cp-list" id="cpList"></div><div class="cp-empty" id="cpEmpty">还没有频道</div></div>
+    <div class="channel-page" id="channelPage"><div class="cp-header"><div class="cp-name-row"><span class="cp-name" id="cpName"></span><span class="cp-id" id="cpId"></span></div><div class="cp-sub" id="cpSub">社区</div></div><div class="cp-toolbar"><div class="cp-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="cpSearchInput" placeholder="搜索频道" autocomplete="off"></div><div class="cp-btn" id="btnAddChannel"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="cp-btn" id="btnServerSettings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09"/></svg></div><div class="cp-btn" id="btnInvite"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="17" y1="14" x2="23" y2="14"/></svg></div></div><div class="cp-list" id="cpList"></div><div class="cp-empty" id="cpEmpty">还没有频道</div></div>
     <div class="channel-view" id="channelView"><div class="cv-header"><svg id="btnBackToChannels" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="title" id="cvTitle"></div><div class="subtitle" id="cvSubtitle"></div></div><div class="forum-area" id="forumArea"></div><div class="persona-area" id="personaArea" style="display:none"></div><div class="announce-area" id="announceArea" style="display:none"></div><div class="announce-input" id="announceInput" style="display:none"><input type="text" id="annInput" placeholder="发布通告..." autocomplete="off"><button id="btnAnnPost"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><div class="fab-group" id="fabGroup" style="display:none"><div class="fab-top" id="fabTop"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></div><button class="fab-post" id="fabPost"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div><div class="post-detail" id="postDetail"><div class="pd-header"><svg id="btnBackToList" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="title">详情</div></div><div class="pd-body" id="pdBody"></div><div class="reply-quote" id="replyQuote"><span class="rq-name" id="rqName"></span><span id="rqText"></span><div class="rq-close" id="rqClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div><div class="reply-bar"><input type="text" id="replyInput" placeholder="回复…" autocomplete="off"><button id="btnReply"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div></div></div>
     <div class="page-chat" id="pageChat"><div class="chat-list-view" id="chatListView"><div class="cl-scroll"><div class="chat-top"><div class="ct-title">Chat</div><div class="ct-dots" id="chatDots"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="#999" stroke="none"/></svg></div></div><div class="chat-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search" autocomplete="off"></div><div class="chat-section-title"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>Friend Requests</div><div class="friend-req"><div class="fr-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="17" y1="14" x2="23" y2="14"/></svg></div><div class="fr-info"><div class="fr-title">Pending</div><div class="fr-sub">查看好友请求</div></div><div class="fr-badge">0</div></div><div class="chat-section-title" style="margin-top:4px"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Friends</div><div id="friendList"><div class="empty-hint">还没有好友</div></div></div></div></div>
     <div class="page-vault" id="pageVault"><div class="vault-top">仓库</div><div class="vault-tabs"><div class="vt active" data-vt="all">全部</div><div class="vt" data-vt="post">帖子</div><div class="vt" data-vt="persona">角色</div></div><div class="vault-list" id="vaultList"></div><div class="vault-empty" id="vaultEmpty">还没有收藏</div></div>
@@ -36,56 +37,70 @@
     <div class="page-settings" id="pageSettings">
       <div style="padding:20px 0 12px;font-size:20px;font-weight:700">设置</div>
       <div class="settings-group"><div class="settings-group-title">通用</div><div class="settings-item"><span>深色模式</span><div class="toggle"></div></div><div class="settings-item"><span>消息通知</span><div class="toggle on"></div></div><div class="settings-item" id="btnFontSize"><span>字号大小</span><span id="fontSizeLabel" style="font-size:11px;color:#999">标准</span></div></div>
-      <div class="settings-group"><div class="settings-group-title">账号</div><div class="settings-item"><span>隐私与安全</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div><div class="settings-item" id="btnLogout" style="color:#e74c3c"><span>退出登录</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+      <div class="settings-group"><div class="settings-group-title">账号</div><div class="settings-item"><span id="myRoleLabel">我的身份</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div><div class="settings-item" id="btnLogout" style="color:#e74c3c"><span>退出登录</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
       <div class="settings-group"><div class="settings-group-title">更新</div><div class="settings-item" id="btnCheckUpdate"><span>检查更新 <span id="updateDot" style="display:none;width:6px;height:6px;background:#e74c3c;border-radius:50%;display:inline-block;margin-left:4px;vertical-align:middle"></span></span><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.22-8.56"/><polyline points="21 3 21 9 15 9"/></svg></div><div class="settings-item"><span id="currentVer">当前版本</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
       <div class="settings-group"><div class="settings-group-title">关于</div><div class="settings-item"><span>Mint-Ds</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
     </div>
   </div>
 </div>
 <div class="tab-bar" style="display:none"><div class="tab active" data-tab="home"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>主页</span></div><div class="tab" data-tab="chat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>私信</span></div><div class="tab" data-tab="vault"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>仓库</span></div><div class="tab" data-tab="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>设置</span></div></div>
-<div class="modal-overlay" id="modalCreate"><div class="modal"><h3>创建社区</h3><div class="modal-avatar" id="serverAvatarPicker"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><img id="serverAvatarPreview" style="display:none" alt=""></div><input type="file" id="serverAvatarFile" accept="image/*" style="display:none"><input type="text" id="inputServerName" placeholder="社区名称" maxlength="20" autocomplete="off"><input type="text" id="inputServerId" placeholder="社区ID（唯一，如 mint01）" maxlength="16" autocomplete="off"><div class="id-hint" id="idHint">该ID已被使用</div><div class="modal-btns"><button class="cancel" id="btnCancelCreate">取消</button><button class="confirm" id="btnConfirmCreate">创建</button></div></div></div>
+<div class="modal-overlay" id="modalCreate"><div class="modal"><h3>创建社区</h3><div class="modal-avatar" id="serverAvatarPicker"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><img id="serverAvatarPreview" style="display:none" alt=""></div><input type="file" id="serverAvatarFile" accept="image/*" style="display:none"><input type="text" id="inputServerName" placeholder="社区名称" maxlength="20" autocomplete="off"><input type="text" id="inputServerId" placeholder="社区ID（唯一，如 mint01）" maxlength="16" autocomplete="off"><select id="inputServerPriv"><option value="public">公开（所有人可见）</option><option value="private">私密（需搜ID加入）</option></select><div class="id-hint" id="idHint">该ID已被使用</div><div class="modal-btns"><button class="cancel" id="btnCancelCreate">取消</button><button class="confirm" id="btnConfirmCreate">创建</button></div></div></div>
 <div class="modal-overlay" id="modalChannel"><div class="modal"><h3>创建频道</h3><input type="text" id="inputChName" placeholder="频道名称" maxlength="20" autocomplete="off"><select id="inputChType"><option value="announce">通告</option><option value="forum">论坛</option><option value="persona">角色</option></select><div class="modal-btns"><button class="cancel" id="btnCancelCh">取消</button><button class="confirm" id="btnConfirmCh">创建</button></div></div></div>
 <div class="new-post-page" id="newPostPage"><div class="np-header"><svg id="btnCloseNewPost" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span class="np-title">新帖子</span></div><div class="np-author" id="npAuthor"></div><div class="np-body"><input class="np-title-input" id="npTitleInput" placeholder="标题" maxlength="50" autocomplete="off"><textarea class="np-content-input" id="npContentInput" placeholder="输入消息......"></textarea></div><div class="np-images-preview" id="npImagesPreview"></div><div class="emoji-picker" id="emojiPicker"></div><div class="np-toolbar"><button id="btnNpImage"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></button><button id="btnNpFile"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button><button id="btnNpEmoji"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-linecap="round" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-linecap="round" stroke-width="2.5"/></svg></button><button id="btnNpSpoiler"><svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg></button><button class="np-submit-btn" id="btnSubmitPost"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><input type="file" id="npImageFile" accept="image/*" multiple style="display:none"><input type="file" id="npFileFile" style="display:none"></div>
 <div class="modal-overlay" id="modalProfile"><div class="profile-sheet"><h3>编辑资料</h3><div class="ps-avatar" id="psAvatar"><div class="ph" id="psPlaceholder"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>更换头像</span></div><img id="psAvatarImg" style="display:none" alt=""><div class="cam"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div></div><input type="file" id="psFileInput" accept="image/*" style="display:none"><input class="ps-name-input" type="text" id="psNameInput" placeholder="昵称" maxlength="16" autocomplete="off"><div class="modal-btns"><button class="cancel" id="btnCancelProfile">取消</button><button class="confirm" id="btnSaveProfile">保存</button></div></div></div>
 <div class="search-overlay" id="searchOverlay"><div class="search-sheet"><h3>搜索社区</h3><input type="text" id="searchServerInput" placeholder="输入社区ID" autocomplete="off"><div id="searchResults"></div><div class="ss-hint" id="ssHint">输入社区ID加入</div></div></div>
 <script>
 (function(){
-const APP_VERSION='1.0.4';
+const APP_VERSION='1.1.0';
 const SB_ENV='mintds-d8gybgoqke953154b';
 const SB_REGION='ap-shanghai';
+const STORAGE_HOST='https://6d69-mintds-d8gybgoqke953154b-1500834017.tcb.qcloud.la';
 const SB_AK='eyJhbGciOiJSUzI1NiIsImtpZCI6IjlkMWRjMzFlLWI0ZDAtNDQ4Yi1hNzZmLWIwY2M2M2Q4MTQ5OCJ9.eyJpc3MiOiJodHRwczovL21pbnRkcy1kOGd5YmdvcWtlOTUzMTU0Yi5hcC1zaGFuZ2hhaS50Y2ItYXBpLnRlbmNlbnRjbG91ZGFwaS5jb20iLCJzdWIiOiJhbm9uIiwiYXVkIjoibWludGRzLWQ4Z3liZ29xa2U5NTMxNTRiIiwiZXhwIjo0MDk0OTE2OTgyLCJpYXQiOjE3OTEyMzM3ODIsIm5vbmNlIjoic09kcWxwa2dRXzJKejVhSkEyXzJRQSIsImF0X2hhc2giOiJzT2RxbHBrZ1FfMkp6NWFKQTJfMlFBIiwibmFtZSI6IkFub255bW91cyIsInNjb3BlIjoiYW5vbnltb3VzIiwicHJvamVjdF9pZCI6Im1pbnRkcy1kOGd5YmdvcWtlOTUzMTU0YiIsIm1ldGEiOnsicGxhdGZvcm0iOiJQdWJsaXNoYWJsZUtleSJ9LCJ1c2VyX3R5cGUiOiIiLCJjbGllbnRfdHlwZSI6ImNsaWVudF91c2VyIiwiaXNfc3lzdGVtX2FkbWluIjpmYWxzZX0.ejq8wPPq_jsR0eyZQfjAtJ-NZ4oaQWowXYCWCfxeIVsiHDpDWV79kWbmn14JsG9yG36OxG7SgywEE_gO86595GnXSzAlNHnlSb9WY2rx2BrqSFayKTnHpo98wbMhFxY97bu19w_zSGBLb3JJyLyYFrGGS7RqPkbtP1PT40Dntsda7tpDtKRRITZA0ce2p72TZ-sMPWLhoC94iFWAw-z0XFcnahRl1NdYa0Tbe7lM9votXDQQDK6ANXMObXyVec3FNiK8yOe3Z46cdftn0y37kwK7yDM8jcscyIgCfmKsu_677mKjCHyyPy_nFpDC9747Yaq9Yvzo_UTxUZ6boVtsDA';
-const SDK_URLS=[
-'https://static.cloudbase.net/cloudbase-js-sdk/2.28.8/cloudbase.full.js',
-'https://cdn.jsdelivr.net/npm/@cloudbase/js-sdk@2.28.8/dist/index.umd.js',
-'https://unpkg.com/@cloudbase/js-sdk@2.28.8/dist/index.umd.js'
-];
+const SDK_URLS=['https://static.cloudbase.net/cloudbase-js-sdk/2.28.8/cloudbase.full.js','https://cdn.jsdelivr.net/npm/@cloudbase/js-sdk@2.28.8/dist/index.umd.js','https://unpkg.com/@cloudbase/js-sdk@2.28.8/dist/index.umd.js'];
 function getCloud(){return window.cloudbase||window.tcb||null}
 function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=()=>res();s.onerror=()=>rej(new Error('fail'));document.head.appendChild(s)})}
-let sdkErr='';
-async function ensureSDK(){if(getCloud())return getCloud();for(const u of SDK_URLS){try{await loadScript(u);if(getCloud())return getCloud()}catch(e){sdkErr=u.split('/')[2]}}throw new Error('SDK加载失败:'+(sdkErr||'未知'))}
+async function ensureSDK(){if(getCloud())return getCloud();let le='';for(const u of SDK_URLS){try{await loadScript(u);if(getCloud())return getCloud()}catch(e){le=u.split('/')[2]}}throw new Error('SDK加载失败:'+le)}
 function errText(e){if(!e)return '未知';if(typeof e==='string')return e;return e.message||e.code||e.errMsg||JSON.stringify(e)}
 let app=null,db=null;
-const cloudInit=(async()=>{
-const C=await ensureSDK();
-app=C.init({env:SB_ENV,region:SB_REGION,accessKey:SB_AK});
-try{const a=(typeof app.auth==='function')?app.auth({persistence:'local'}):app.auth;if(a&&typeof a.signInAnonymously==='function'){const r=await a.signInAnonymously();if(r&&r.error)console.log('匿名登录提示',r.error)}}catch(e){console.log('匿名登录跳过',errText(e))}
-db=app.database();
-})();
+const cloudInit=(async()=>{const C=await ensureSDK();app=C.init({env:SB_ENV,region:SB_REGION,accessKey:SB_AK});try{const a=(typeof app.auth==='function')?app.auth({persistence:'local'}):app.auth;if(a&&typeof a.signInAnonymously==='function')await a.signInAnonymously()}catch(e){}db=app.database()})();
 cloudInit.catch(e=>console.log('云连接失败',errText(e)));
 async function hashPwd(p){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
+
+function compressImg(file,maxW,q){return new Promise(res=>{const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{let w=img.width,h=img.height;if(w>maxW){h=Math.round(h*maxW/w);w=maxW}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);c.toBlob(b=>res(b||file),'image/jpeg',q)};img.onerror=()=>res(file);img.src=e.target.result};r.onerror=()=>res(file);r.readAsDataURL(file)})}
+async function uploadImg(file,maxW){
+await cloudInit;
+const blob=await compressImg(file,maxW||800,0.7);
+const cloudPath='img/'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'.jpg';
+if(typeof app.uploadFile==='function'){const r=await app.uploadFile({cloudPath,filePath:blob});if(!r||(!r.fileID&&!r.fileId))throw new Error('上传无返回');return STORAGE_HOST+'/'+cloudPath}
+if(app.storage&&typeof app.storage.from==='function'){const{error}=await app.storage.from().upload(cloudPath,blob);if(error)throw error;return STORAGE_HOST+'/'+cloudPath}
+throw new Error('无上传方法');
+}
+async function uploadFileRaw(file){
+await cloudInit;
+const safe=file.name.replace(/[^\w.\-]/g,'_');
+const cloudPath='file/'+Date.now()+'_'+safe;
+if(typeof app.uploadFile==='function'){await app.uploadFile({cloudPath,filePath:file});return STORAGE_HOST+'/'+cloudPath}
+if(app.storage&&typeof app.storage.from==='function'){const{error}=await app.storage.from().upload(cloudPath,file);if(error)throw error;return STORAGE_HOST+'/'+cloudPath}
+throw new Error('无上传方法');
+}
+
 var TB=document.querySelector('.tab-bar');
 const $=id=>document.getElementById(id);
 const In=n=>n?n.slice(0,2).toUpperCase():'??';
-const Nm=()=>{const d=new Date();return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')};
-const Uid=()=>'_'+Math.random().toString(36).slice(2,9);
-const LS={get:k=>JSON.parse(localStorage.getItem('md_'+k)||'null'),set:(k,v)=>{try{localStorage.setItem('md_'+k,JSON.stringify(v))}catch(e){try{localStorage.removeItem('md_servers');localStorage.setItem('md_'+k,JSON.stringify(v))}catch(e2){}}}};
-let U=LS.get('user'),S=LS.get('servers')||[],saved=LS.get('saved')||[];
-let aS=null,aCh=null,vP=null,cT='home',npI=[],rTo=null,chActIdx=null;
-function saveAll(){LS.set('servers',S);LS.set('saved',saved)}
+const Tm=ts=>{const d=new Date(ts||Date.now());return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')};
+const LS={get:k=>JSON.parse(localStorage.getItem('md_'+k)||'null'),set:(k,v)=>{try{localStorage.setItem('md_'+k,JSON.stringify(v))}catch(e){}}};
+let U=LS.get('user'),saved=LS.get('saved')||[],joined=LS.get('joined')||[];
+let S=[],CH=[],PO=[],RE=[];
+let aS=null,aCh=null,vP=null,cT='home',rTo=null,chActIdx=null,poActId=null;
+let watchPost=null,watchRep=null;
 let darkMode=LS.get('darkMode')||false;
 function applyDark(){document.body.classList.toggle('dark',darkMode)}
 applyDark();
 function chkDot(){const d=$('updateDot');if(d){const v=LS.get('appVersion');d.style.display=(!v||v!==APP_VERSION)?'inline-block':'none'}}
+function isAdminOf(sv){if(!sv||!U)return false;return sv.owner===U.id||U.role==='super'}
+function esc(t){return (t==null?'':String(t)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function SP(t){return esc(t).replace(/\|\|(.+?)\|\|/g,'<span class="spoiler">$1</span>').replace(/\n/g,'<br>')}
+function LNK(t){return SP(t).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener" style="color:#4a90d9">$1</a>')}
 
 let isLogin=false;
 function showAuth(){$('authPage').classList.remove('hidden');$('app').classList.remove('show');TB.style.display='none'}
@@ -95,139 +110,249 @@ function hideErr(){$('authErr').style.display='none'}
 if(U){showApp();initApp()}else showAuth();
 
 $('authSwitch').addEventListener('click',()=>{isLogin=!isLogin;hideErr();if(isLogin){$('authSub').textContent='欢迎回来';$('authBtn').textContent='登录';$('authSwitch').innerHTML='没有账号？<b>创建</b>';$('authAvatar').style.display='none'}else{$('authSub').textContent='创建你的账号';$('authBtn').textContent='创建账号';$('authSwitch').innerHTML='已有账号？<b>登录</b>';$('authAvatar').style.display='flex'}});
-let authAv=null;
+let authAvFile=null;
 $('authAvatar').addEventListener('click',()=>$('authAvatarFile').click());
-$('authAvatarFile').addEventListener('change',function(){if(this.files[0]){const r=new FileReader();r.onload=e=>{authAv=e.target.result;$('authAvatarImg').src=authAv;$('authAvatarImg').style.display='block';$('authAvatar').querySelector('svg').style.display='none'};r.readAsDataURL(this.files[0])}});
+$('authAvatarFile').addEventListener('change',function(){if(this.files[0]){authAvFile=this.files[0];const r=new FileReader();r.onload=e=>{$('authAvatarImg').src=e.target.result;$('authAvatarImg').style.display='block';$('authAvatar').querySelector('svg').style.display='none'};r.readAsDataURL(this.files[0])}});
 $('authBtn').addEventListener('click',async()=>{
 const name=$('authName').value.trim(),pwd=$('authPwd').value;hideErr();
 if(!name||name.length<2)return showErr('用户名至少2个字');
 if(!pwd||pwd.length<4)return showErr('密码至少4位');
-const oldLabel=isLogin?'登录':'创建账号';$('authBtn').textContent='请稍候...';
-try{await cloudInit}catch(e){$('authBtn').textContent=oldLabel;return showErr('连接失败:'+errText(e))}
+const lab=isLogin?'登录':'创建账号';$('authBtn').textContent='请稍候...';
+try{await cloudInit}catch(e){$('authBtn').textContent=lab;return showErr('连接失败:'+errText(e))}
 try{
 const h=await hashPwd(pwd);
 if(isLogin){
-const r=await db.collection('users').where({name}).get();
-if(!r.data||!r.data.length){$('authBtn').textContent=oldLabel;return showErr('用户名或密码错误')}
+const r=await db.collection('users').where({name}).limit(1).get();
+if(!r.data||!r.data.length){$('authBtn').textContent=lab;return showErr('用户名或密码错误')}
 const u=r.data[0];
-if(u.pwd!==h){$('authBtn').textContent=oldLabel;return showErr('用户名或密码错误')}
+if(u.pwd!==h){$('authBtn').textContent=lab;return showErr('用户名或密码错误')}
 U={name:u.name,avatar:u.avatar||null,id:u._id,role:u.role||'user'};
 }else{
-const ex=await db.collection('users').where({name}).get();
-if(ex.data&&ex.data.length){$('authBtn').textContent=oldLabel;return showErr('用户名已被使用')}
+const ex=await db.collection('users').where({name}).limit(1).get();
+if(ex.data&&ex.data.length){$('authBtn').textContent=lab;return showErr('用户名已被使用')}
 const first=await db.collection('users').limit(1).get();
 const isSuper=!(first.data&&first.data.length);
-const add=await db.collection('users').add({name,pwd:h,avatar:authAv||null,role:isSuper?'super':'user',createdAt:Date.now()});
-U={name,avatar:authAv||null,id:add.id,role:isSuper?'super':'user'};
+let av=null;if(authAvFile){try{av=await uploadImg(authAvFile,300)}catch(e){}}
+const add=await db.collection('users').add({name,pwd:h,avatar:av,role:isSuper?'super':'user',createdAt:Date.now()});
+U={name,avatar:av,id:add.id,role:isSuper?'super':'user'};
 }
 LS.set('user',U);LS.set('appVersion',APP_VERSION);showApp();initApp();
-}catch(e){$('authBtn').textContent=oldLabel;showErr('出错了:'+errText(e))}
+}catch(e){$('authBtn').textContent=lab;showErr('出错了:'+errText(e))}
 });
-$('btnLogout').addEventListener('click',async()=>{LS.set('user',null);location.reload()});
+$('btnLogout').addEventListener('click',()=>{LS.set('user',null);location.reload()});
 
-function rF(f,cb){const r=new FileReader();r.onload=e=>cb(e.target.result);r.readAsDataURL(f)}
-function SP(t){return t.replace(/\|\|(.+?)\|\|/g,'<span class="spoiler">$1</span>')}
-document.addEventListener('click',e=>{if(e.target.classList.contains('spoiler')){e.target.classList.toggle('revealed');e.stopPropagation()}});
-function isSv(s,p){return saved.some(x=>x.s===s&&x.p===p)}
-function tgSv(s,p,t){if(isSv(s,p))saved=saved.filter(x=>!(x.s===s&&x.p===p));else saved.push({s,p,type:t});saveAll()}
-function gS(){return S.find(x=>x.id===aS)}
-function gC(){const s=gS();return s?s.channels.find(c=>c.id===aCh):null}
-function imgGrid(images,cls){if(!images||!images.length)return '';const cnt=Math.min(images.length,4);return '<div class="'+cls+' img-'+cnt+'">'+images.slice(0,4).map(i=>'<img src="'+i+'">').join('')+'</div>'}
+function gS(){return S.find(x=>x._id===aS)}
+function gC(){return CH.find(x=>x._id===aCh)}
+function gP(){return PO.find(x=>x._id===vP)}
+function isSv(p){return saved.some(x=>x.p===p)}
+function tgSv(p,t,sn){if(isSv(p))saved=saved.filter(x=>x.p!==p);else saved.push({p,type:t,sn});LS.set('saved',saved)}
+function imgGrid(images,cls){if(!images||!images.length)return '';const c=Math.min(images.length,4);return '<div class="'+cls+' img-'+c+'">'+images.slice(0,4).map(i=>'<img src="'+i+'" loading="lazy">').join('')+'</div>'}
+function stopWatch(){[watchPost,watchRep].forEach(w=>{if(w){try{w.close()}catch(e){}}});watchPost=null;watchRep=null}
 
 function initApp(){
 if(!U)return;
 chkDot();
 $('currentVer').textContent='当前版本 '+APP_VERSION;
+$('myRoleLabel').textContent='我的身份 · '+(U.role==='super'?'超级管理员':'普通用户');
 $('btnCheckUpdate').addEventListener('click',()=>{const v=LS.get('appVersion');if(!v||v!==APP_VERSION){LS.set('appVersion',APP_VERSION);chkDot();alert('已更新到 '+APP_VERSION)}else alert('已是最新版本')});
 document.querySelectorAll('.toggle').forEach((t,i)=>{if(i===0){if(darkMode)t.classList.add('on');t.addEventListener('click',()=>{darkMode=!darkMode;t.classList.toggle('on');LS.set('darkMode',darkMode);applyDark()})}else t.addEventListener('click',()=>t.classList.toggle('on'))});
-const fsSizes=['fs-small','fs-normal','fs-large','fs-xlarge'],fsLabels=['小','标准','大','特大'];
-let fsIdx=parseInt(localStorage.getItem('md_fontSize')||'1');
-document.body.classList.add(fsSizes[fsIdx]);
-$('fontSizeLabel').textContent=fsLabels[fsIdx];
-$('btnFontSize').addEventListener('click',()=>{document.body.classList.remove(fsSizes[fsIdx]);fsIdx=(fsIdx+1)%4;document.body.classList.add(fsSizes[fsIdx]);localStorage.setItem('md_fontSize',String(fsIdx));$('fontSizeLabel').textContent=fsLabels[fsIdx]});
+const fsS=['fs-small','fs-normal','fs-large','fs-xlarge'],fsL=['小','标准','大','特大'];
+let fi=parseInt(localStorage.getItem('md_fontSize')||'1');
+document.body.classList.add(fsS[fi]);$('fontSizeLabel').textContent=fsL[fi];
+$('btnFontSize').addEventListener('click',()=>{document.body.classList.remove(fsS[fi]);fi=(fi+1)%4;document.body.classList.add(fsS[fi]);localStorage.setItem('md_fontSize',String(fi));$('fontSizeLabel').textContent=fsL[fi]});
 
 let pmO=false;
 function cPM(){pmO=false;$('profileMenu').classList.remove('show');$('pmOverlay').classList.remove('show')}
 $('chatDots').addEventListener('click',()=>{pmO=!pmO;$('profileMenu').classList.toggle('show',pmO);$('pmOverlay').classList.toggle('show',pmO)});
 $('pmOverlay').addEventListener('click',cPM);
 $('pmEditProfile').addEventListener('click',()=>{cPM();oPM()});
-let pAv=null;
-function oPM(){$('modalProfile').classList.add('show');$('psNameInput').value=U.name;pAv=null;if(U.avatar){$('psAvatarImg').src=U.avatar;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'}else{$('psAvatarImg').style.display='none';$('psPlaceholder').style.display='flex'}}
+let pAvFile=null;
+function oPM(){$('modalProfile').classList.add('show');$('psNameInput').value=U.name;pAvFile=null;if(U.avatar){$('psAvatarImg').src=U.avatar;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'}else{$('psAvatarImg').style.display='none';$('psPlaceholder').style.display='flex'}}
 $('psAvatar').addEventListener('click',()=>$('psFileInput').click());
-$('psFileInput').addEventListener('change',function(){if(this.files[0])rF(this.files[0],u=>{pAv=u;$('psAvatarImg').src=u;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'})});
+$('psFileInput').addEventListener('change',function(){if(this.files[0]){pAvFile=this.files[0];const r=new FileReader();r.onload=e=>{$('psAvatarImg').src=e.target.result;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'};r.readAsDataURL(this.files[0])}});
 $('btnCancelProfile').addEventListener('click',()=>$('modalProfile').classList.remove('show'));
 $('modalProfile').addEventListener('click',e=>{if(e.target===$('modalProfile'))$('modalProfile').classList.remove('show')});
-$('btnSaveProfile').addEventListener('click',async()=>{const n=$('psNameInput').value.trim();if(!n)return;U.name=n;if(pAv)U.avatar=pAv;LS.set('user',U);if(db&&U.id)try{await db.collection('users').doc(U.id).update({name:n,avatar:pAv||U.avatar})}catch(e){};saveAll();$('modalProfile').classList.remove('show')});
+$('btnSaveProfile').addEventListener('click',async()=>{const n=$('psNameInput').value.trim();if(!n)return;const b=$('btnSaveProfile');b.textContent='保存中';try{let av=U.avatar;if(pAvFile)av=await uploadImg(pAvFile,300);await db.collection('users').doc(U.id).update({name:n,avatar:av});U.name=n;U.avatar=av;LS.set('user',U);$('modalProfile').classList.remove('show')}catch(e){alert('保存失败:'+errText(e))}b.textContent='保存'});
 
 $('chActionCancel').addEventListener('click',()=>$('chActionOverlay').classList.remove('show'));
 $('chActionOverlay').addEventListener('click',e=>{if(e.target===$('chActionOverlay'))$('chActionOverlay').classList.remove('show')});
-$('chMoveUp').addEventListener('click',()=>{const s=gS();if(chActIdx>0){const t=s.channels[chActIdx];s.channels[chActIdx]=s.channels[chActIdx-1];s.channels[chActIdx-1]=t;saveAll();rCL()}$('chActionOverlay').classList.remove('show')});
-$('chMoveDown').addEventListener('click',()=>{const s=gS();if(chActIdx<s.channels.length-1){const t=s.channels[chActIdx];s.channels[chActIdx]=s.channels[chActIdx+1];s.channels[chActIdx+1]=t;saveAll();rCL()}$('chActionOverlay').classList.remove('show')});
-$('chDelete').addEventListener('click',()=>{const s=gS();if(confirm('确定删除「'+s.channels[chActIdx].name+'」？')){s.channels.splice(chActIdx,1);saveAll();rCL()}$('chActionOverlay').classList.remove('show')});
+$('chDelete').addEventListener('click',async()=>{const ch=CH[chActIdx];$('chActionOverlay').classList.remove('show');if(!ch)return;if(!isAdminOf(gS()))return alert('只有社区创建者可以删除');if(!confirm('确定删除「'+ch.name+'」？'))return;try{await db.collection('channels').doc(ch._id).remove();await loadChannels()}catch(e){alert('删除失败:'+errText(e))}});
+$('postActionCancel').addEventListener('click',()=>$('postActionOverlay').classList.remove('show'));
+$('postActionOverlay').addEventListener('click',e=>{if(e.target===$('postActionOverlay'))$('postActionOverlay').classList.remove('show')});
+$('postDelete').addEventListener('click',async()=>{const id=poActId;$('postActionOverlay').classList.remove('show');if(!id)return;if(!confirm('确定删除这条？'))return;try{await db.collection('posts').doc(id).remove();await loadPosts()}catch(e){alert('删除失败（只能删自己发的）:'+errText(e))}});
 
-function rSb(){const sb2=$('sidebar');sb2.querySelectorAll('.server-icon:not(.add)').forEach(e=>e.remove());const dv=sb2.querySelector('.server-divider');S.forEach(s=>{const el=document.createElement('div');el.className='server-icon'+(s.id===aS?' active':'');el.title=s.name;if(s.avatar)el.innerHTML='<img src="'+s.avatar+'">';else el.innerHTML='<span class="si-text">'+In(s.name)+'</span>';el.addEventListener('click',()=>selS(s.id));dv.after(el)})}
+async function loadServers(){
+await cloudInit;
+try{const r=await db.collection('servers').limit(100).get();S=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){S=[];console.log('读社区失败',errText(e))}
+rSb();
+}
+function visServers(){return S.filter(s=>s.priv!=='private'||joined.indexOf(s._id)>=0||s.owner===U.id)}
+function rSb(){const sb=$('sidebar');sb.querySelectorAll('.server-icon:not(.add)').forEach(e=>e.remove());const dv=sb.querySelector('.server-divider');visServers().forEach(s=>{const el=document.createElement('div');el.className='server-icon'+(s._id===aS?' active':'');el.title=s.name;el.innerHTML=s.avatar?'<img src="'+s.avatar+'">':'<span class="si-text">'+esc(In(s.name))+'</span>';el.addEventListener('click',()=>selS(s._id));dv.after(el)})}
+
 $('sidebarSearch').addEventListener('click',()=>{$('searchOverlay').classList.add('show');$('searchServerInput').value='';$('searchResults').innerHTML='';$('ssHint').style.display='block'});
 $('searchOverlay').addEventListener('click',e=>{if(e.target===$('searchOverlay'))$('searchOverlay').classList.remove('show')});
-$('searchServerInput').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();const r=$('searchResults');r.innerHTML='';if(!q){$('ssHint').style.display='block';return}$('ssHint').style.display='none';S.filter(s=>s.sid.toLowerCase().includes(q)||s.name.toLowerCase().includes(q)).forEach(s=>{const d=document.createElement('div');d.className='ss-result';d.innerHTML=s.name+'<span>#'+s.sid+'</span>';d.addEventListener('click',()=>{$('searchOverlay').classList.remove('show');selS(s.id)});r.appendChild(d)})});
-function selS(id){aS=id;aCh=null;vP=null;rSb();hA();$('channelPage').classList.add('show');const s=gS();$('cpName').textContent=s.name;$('cpId').textContent='#'+s.sid;rCL();sT('home')}
+$('searchServerInput').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();const r=$('searchResults');r.innerHTML='';if(!q){$('ssHint').style.display='block';return}$('ssHint').style.display='none';S.filter(s=>(s.sid||'').toLowerCase().includes(q)||(s.name||'').toLowerCase().includes(q)).forEach(s=>{const d=document.createElement('div');d.className='ss-result';d.innerHTML=esc(s.name)+'<span>#'+esc(s.sid)+(s.priv==='private'?' 私密':'')+'</span>';d.addEventListener('click',()=>{if(joined.indexOf(s._id)<0){joined.push(s._id);LS.set('joined',joined)}$('searchOverlay').classList.remove('show');rSb();selS(s._id)});r.appendChild(d)})});
 
-$('btnServerSettings').addEventListener('click',()=>{const s=gS();if(!s||s.owner!=='me')return alert('只有创建者可以修改');const nn=prompt('修改社区名称',s.name);if(nn&&nn.trim()){s.name=nn.trim();$('cpName').textContent=s.name;rSb();saveAll()}});
+async function selS(id){aS=id;aCh=null;vP=null;stopWatch();rSb();hA();$('channelPage').classList.add('show');const s=gS();if(!s)return;$('cpName').textContent=s.name;$('cpId').textContent='#'+(s.sid||'');$('cpSub').textContent=(s.priv==='private'?'私密社区':'公开社区')+' · 由 '+(s.ownerName||'?')+' 创建';sT('home');await loadChannels()}
 
-function rCL(){const s=gS();if(!s)return;const l=$('cpList');l.innerHTML='';$('cpEmpty').style.display=s.channels.length?'none':'block';const ic={announce:'<svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>',forum:'<svg viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>',persona:'<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'};
-s.channels.forEach((ch,idx)=>{const el=document.createElement('div');el.className='ch-item';el.innerHTML='<div class="chi-icon">'+ic[ch.type]+'</div><div class="chi-name">'+ch.name+'</div>';el.addEventListener('click',()=>oCh(ch.id));let lpt=null;el.addEventListener('touchstart',()=>{lpt=setTimeout(()=>{chActIdx=idx;$('chActionTitle').textContent=ch.name;$('chActionOverlay').classList.add('show')},500)});el.addEventListener('touchend',()=>clearTimeout(lpt));el.addEventListener('touchmove',()=>clearTimeout(lpt));l.appendChild(el)})}
+$('btnServerSettings').addEventListener('click',async()=>{const s=gS();if(!s)return;if(!isAdminOf(s))return alert('只有创建者可以修改');const nn=prompt('修改社区名称',s.name);if(!nn||!nn.trim())return;try{await db.collection('servers').doc(s._id).update({name:nn.trim()});s.name=nn.trim();$('cpName').textContent=s.name;rSb()}catch(e){alert('修改失败:'+errText(e))}});
 
-function oCh(id){aCh=id;vP=null;rTo=null;const ch=gC();if(!ch)return;$('channelPage').classList.remove('show');$('channelView').classList.add('show');$('cvTitle').textContent='# '+ch.name;$('cvSubtitle').textContent={announce:'通告',forum:'论坛',persona:'角色'}[ch.type];$('forumArea').style.display='none';$('personaArea').style.display='none';$('announceArea').style.display='none';$('announceInput').style.display='none';$('postDetail').classList.remove('show');$('fabGroup').style.display='none';$('replyQuote').classList.remove('show');if(ch.type==='announce'){$('announceArea').style.display='flex';if(gS().owner==='me')$('announceInput').style.display='flex';rAn()}else if(ch.type==='persona'){$('personaArea').style.display='flex';$('fabGroup').style.display='flex';rPe()}else{$('forumArea').style.display='flex';$('fabGroup').style.display='flex';rPo()}}
-$('btnBackToChannels').addEventListener('click',()=>{$('channelView').classList.remove('show');$('channelPage').classList.add('show')});
+async function loadChannels(){
+const s=gS();if(!s)return;
+$('cpList').innerHTML='<div class="empty-hint">加载中…</div>';$('cpEmpty').style.display='none';
+try{const r=await db.collection('channels').where({serverId:s._id}).limit(100).get();CH=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){CH=[];console.log('读频道失败',errText(e))}
+rCL();
+}
+function rCL(){const l=$('cpList');l.innerHTML='';$('cpEmpty').style.display=CH.length?'none':'block';
+const ic={announce:'<svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>',forum:'<svg viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>',persona:'<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'};
+CH.forEach((ch,idx)=>{const el=document.createElement('div');el.className='ch-item';el.innerHTML='<div class="chi-icon">'+(ic[ch.type]||'')+'</div><div class="chi-name">'+esc(ch.name)+'</div>';el.addEventListener('click',()=>oCh(ch._id));let t=null;el.addEventListener('touchstart',()=>{t=setTimeout(()=>{chActIdx=idx;$('chActionTitle').textContent=ch.name;$('chActionOverlay').classList.add('show')},550)});el.addEventListener('touchend',()=>clearTimeout(t));el.addEventListener('touchmove',()=>clearTimeout(t));l.appendChild(el)})}
+$('cpSearchInput').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();document.querySelectorAll('#cpList .ch-item').forEach((el,i)=>{el.style.display=(!q||(CH[i].name||'').toLowerCase().includes(q))?'flex':'none'})});
 
-function rAn(){const ch=gC(),a=$('announceArea');a.innerHTML='';if(!ch.posts||!ch.posts.length){a.innerHTML='<div class="empty-hint">暂无通告</div>';return}[...ch.posts].reverse().forEach(p=>{const d=document.createElement('div');d.className='ann-item';d.innerHTML='<div class="ann-time">'+p.time+'</div><div class="ann-title">'+p.title+'</div>'+(p.content?'<div class="ann-content">'+p.content+'</div>':'');a.appendChild(d)})}
-$('btnAnnPost').addEventListener('click',()=>{const v=$('annInput').value.trim();if(!v)return;const ch=gC();if(!ch.posts)ch.posts=[];ch.posts.push({id:Uid(),title:v,content:'',time:Nm()});$('annInput').value='';rAn();saveAll()});
+async function oCh(id){aCh=id;vP=null;rTo=null;stopWatch();const ch=gC();if(!ch)return;
+$('channelPage').classList.remove('show');$('channelView').classList.add('show');
+$('cvTitle').textContent='# '+ch.name;$('cvSubtitle').textContent={announce:'通告',forum:'论坛',persona:'角色'}[ch.type]||'';
+$('forumArea').style.display='none';$('personaArea').style.display='none';$('announceArea').style.display='none';$('announceInput').style.display='none';$('postDetail').classList.remove('show');$('fabGroup').style.display='none';$('replyQuote').classList.remove('show');
+if(ch.type==='announce'){$('announceArea').style.display='flex';if(isAdminOf(gS()))$('announceInput').style.display='flex';$('announceArea').innerHTML='<div class="empty-hint">加载中…</div>'}
+else if(ch.type==='persona'){$('personaArea').style.display='flex';$('fabGroup').style.display='flex';$('personaArea').innerHTML='<div class="empty-hint" style="width:100%">加载中…</div>'}
+else{$('forumArea').style.display='flex';$('fabGroup').style.display='flex';$('forumArea').innerHTML='<div class="empty-hint">加载中…</div>'}
+await loadPosts();startWatchPosts();
+}
+$('btnBackToChannels').addEventListener('click',()=>{stopWatch();$('channelView').classList.remove('show');$('channelPage').classList.add('show');loadChannels()});
 
-function rPo(){const ch=gC(),a=$('forumArea');a.innerHTML='';if(!ch.posts||!ch.posts.length){a.innerHTML='<div class="empty-hint">还没有帖子</div>';return}[...ch.posts].reverse().forEach(p=>{const c=document.createElement('div');c.className='post-card';const av=p.avatar?'<img src="'+p.avatar+'">':In(p.user);const ih=imgGrid(p.images,'pc-images');const sv=isSv(aS,p.id);c.innerHTML='<div class="pc-bookmark '+(sv?'saved':'')+'" data-pid="'+p.id+'"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div><div class="pc-head"><div class="pc-avatar">'+av+'</div><div class="pc-meta"><div class="pc-user">'+p.user+'</div></div><span class="pc-time">'+p.time+'</span></div><div class="pc-title">'+SP(p.title)+'</div><div class="pc-preview">'+SP(p.content)+'</div>'+ih+'<div class="pc-footer"><span><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+(p.replies?p.replies.length:0)+'</span></div>';c.querySelector('.pc-bookmark').addEventListener('click',e=>{e.stopPropagation();tgSv(aS,p.id,'post');rPo()});c.addEventListener('click',e=>{if(e.target.closest('.pc-bookmark')||e.target.classList.contains('spoiler'))return;oP(p.id)});a.appendChild(c)})}
+async function loadPosts(){
+const ch=gC();if(!ch)return;
+try{const r=await db.collection('posts').where({channelId:ch._id}).limit(200).get();PO=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){PO=[];console.log('读帖子失败',errText(e))}
+renderCur();
+}
+function renderCur(){const ch=gC();if(!ch)return;if(ch.type==='announce')rAn();else if(ch.type==='persona')rPe();else rPo()}
+function startWatchPosts(){const ch=gC();if(!ch||!db)return;try{watchPost=db.collection('posts').where({channelId:ch._id}).watch({onChange:s=>{if(!s||!s.docs)return;PO=s.docs.slice().sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));if(vP){const p=gP();if(p)renderDetail(p)}else renderCur()},onError:e=>console.log('实时帖子失败',errText(e))})}catch(e){console.log('watch不可用',errText(e))}}
+function startWatchReplies(pid){if(!db)return;try{watchRep=db.collection('replies').where({postId:pid}).watch({onChange:s=>{if(!s||!s.docs)return;RE=s.docs.slice().sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));const p=gP();if(p&&vP===pid)renderDetail(p)},onError:e=>console.log('实时回复失败',errText(e))})}catch(e){}}
 
-function rPe(){const ch=gC(),a=$('personaArea');a.innerHTML='';if(!ch.posts||!ch.posts.length){a.innerHTML='<div class="empty-hint" style="width:100%">还没有角色</div>';return}ch.posts.forEach(p=>{const c=document.createElement('div');c.className='persona-card';const hi=p.images&&p.images.length;const sv=isSv(aS,p.id);c.innerHTML='<div class="psc-img">'+(hi?'<img src="'+p.images[0]+'">':'<div style="display:flex;align-items:center;justify-content:center;height:100%"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>')+'<div class="psc-author">@'+p.user+'</div><div class="psc-bookmark '+(sv?'saved':'')+'"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div></div><div class="psc-body"><div class="psc-name">'+p.title+'</div><div class="psc-desc">'+p.content+'</div><div class="psc-stats"><span><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>0</span><span><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+(p.replies?p.replies.length:0)+'</span></div></div>';c.querySelector('.psc-bookmark').addEventListener('click',e=>{e.stopPropagation();tgSv(aS,p.id,'persona');rPe()});c.addEventListener('click',e=>{if(e.target.closest('.psc-bookmark'))return;oP(p.id)});a.appendChild(c)})}
+function rAn(){const a=$('announceArea');a.innerHTML='';if(!PO.length){a.innerHTML='<div class="empty-hint">暂无通告</div>';return}
+PO.slice().reverse().forEach(p=>{const d=document.createElement('div');d.className='ann-item';d.innerHTML='<div class="ann-time">'+Tm(p.createdAt)+' · '+esc(p.user)+'</div><div class="ann-title">'+esc(p.title)+'</div>'+(p.content?'<div class="ann-content">'+LNK(p.content)+'</div>':'');a.appendChild(d)})}
+$('btnAnnPost').addEventListener('click',async()=>{const v=$('annInput').value.trim();if(!v)return;const ch=gC(),s=gS();if(!ch)return;const b=$('btnAnnPost');b.disabled=true;try{await db.collection('posts').add({serverId:s._id,channelId:ch._id,user:U.name,userId:U.id,avatar:U.avatar||null,title:v,content:'',images:[],createdAt:Date.now()});$('annInput').value='';await loadPosts()}catch(e){alert('发布失败:'+errText(e))}b.disabled=false});
 
-function oP(pid){const ch=gC(),p=ch.posts.find(x=>x.id===pid);if(!p)return;vP=pid;rTo=null;$('replyQuote').classList.remove('show');$('forumArea').style.display='none';$('personaArea').style.display='none';$('announceArea').style.display='none';$('fabGroup').style.display='none';$('postDetail').classList.add('show');const av=p.avatar?'<img src="'+p.avatar+'">':In(p.user);const ih=imgGrid(p.images,'op-imgs');let h='<div class="pd-op"><div class="op-head"><div class="op-avatar">'+av+'</div><div class="op-info"><div class="op-name">'+p.user+'</div><div class="op-time">'+p.time+'</div></div></div><div class="op-title">'+SP(p.title)+'</div><div class="op-content">'+SP(p.content)+'</div>'+ih+'</div>';if(p.replies&&p.replies.length){h+='<div class="pd-replies-title">回复 ('+p.replies.length+')</div>';p.replies.forEach((r,i)=>{const ra=r.avatar?'<img src="'+r.avatar+'">':In(r.user);const il=i===p.replies.length-1;h+='<div class="reply-item" data-rid="'+r.id+'"><div class="ri-line"><div class="ri-avatar">'+ra+'</div>'+(!il?'<div class="ri-thread"></div>':'')+'</div><div class="ri-body"><div class="ri-name-row"><span class="ri-name">'+r.user+'</span><span class="ri-time">'+r.time+'</span></div>'+(r.qn?'<div style="font-size:10px;color:#bbb;margin-bottom:2px;padding-left:8px;border-left:2px solid #eee">回复 <b>'+r.qn+'</b>: '+r.qt.slice(0,30)+'</div>':'')+'<div class="ri-text">'+SP(r.text)+'</div></div></div>'})}else h+='<div class="empty-hint" style="padding:16px 0">暂无回复</div>';$('pdBody').innerHTML=h;$('pdBody').scrollTop=0;$('pdBody').querySelectorAll('.reply-item').forEach(el=>{el.addEventListener('click',()=>{const rid=el.dataset.rid;const r=gC().posts.find(x=>x.id===vP).replies.find(x=>x.id===rid);if(!r)return;rTo={name:r.user,text:r.text};$('rqName').textContent=r.user;$('rqText').textContent=r.text.slice(0,40);$('replyQuote').classList.add('show');$('replyInput').focus()})})}
+function rPo(){const a=$('forumArea');a.innerHTML='';if(!PO.length){a.innerHTML='<div class="empty-hint">还没有帖子</div>';return}
+PO.slice().reverse().forEach(p=>{const c=document.createElement('div');c.className='post-card';
+const av=p.avatar?'<img src="'+p.avatar+'">':esc(In(p.user));
+c.innerHTML='<div class="pc-bookmark '+(isSv(p._id)?'saved':'')+'"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div><div class="pc-head"><div class="pc-avatar">'+av+'</div><div class="pc-meta"><div class="pc-user">'+esc(p.user)+'</div></div><span class="pc-time">'+Tm(p.createdAt)+'</span></div><div class="pc-title">'+SP(p.title)+'</div><div class="pc-preview">'+SP(p.content)+'</div>'+imgGrid(p.images,'pc-images')+'<div class="pc-footer"><span><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+(p.replyCount||0)+'</span></div>';
+c.querySelector('.pc-bookmark').addEventListener('click',e=>{e.stopPropagation();tgSv(p._id,'post',(gS()||{}).name);rPo()});
+c.addEventListener('click',e=>{if(e.target.closest('.pc-bookmark')||e.target.classList.contains('spoiler')||e.target.tagName==='A')return;oP(p._id)});
+let t=null;c.addEventListener('touchstart',()=>{t=setTimeout(()=>{if(p.userId===U.id||U.role==='super'){poActId=p._id;$('postActionTitle').textContent=p.title;$('postActionOverlay').classList.add('show')}},550)});c.addEventListener('touchend',()=>clearTimeout(t));c.addEventListener('touchmove',()=>clearTimeout(t));
+a.appendChild(c)})}
+
+function rPe(){const a=$('personaArea');a.innerHTML='';if(!PO.length){a.innerHTML='<div class="empty-hint" style="width:100%">还没有角色</div>';return}
+PO.forEach(p=>{const c=document.createElement('div');c.className='persona-card';const hi=p.images&&p.images.length;
+c.innerHTML='<div class="psc-img">'+(hi?'<img src="'+p.images[0]+'" loading="lazy">':'<div style="display:flex;align-items:center;justify-content:center;height:100%"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>')+'<div class="psc-author">@'+esc(p.user)+'</div><div class="psc-bookmark '+(isSv(p._id)?'saved':'')+'"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div></div><div class="psc-body"><div class="psc-name">'+esc(p.title)+'</div><div class="psc-desc">'+esc(p.content)+'</div><div class="psc-stats"><span><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>0</span><span><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+(p.replyCount||0)+'</span></div></div>';
+c.querySelector('.psc-bookmark').addEventListener('click',e=>{e.stopPropagation();tgSv(p._id,'persona',(gS()||{}).name);rPe()});
+c.addEventListener('click',e=>{if(e.target.closest('.psc-bookmark'))return;oP(p._id)});
+let t=null;c.addEventListener('touchstart',()=>{t=setTimeout(()=>{if(p.userId===U.id||U.role==='super'){poActId=p._id;$('postActionTitle').textContent=p.title;$('postActionOverlay').classList.add('show')}},550)});c.addEventListener('touchend',()=>clearTimeout(t));c.addEventListener('touchmove',()=>clearTimeout(t));
+a.appendChild(c)})}
+
+async function oP(pid){vP=pid;rTo=null;if(watchRep){try{watchRep.close()}catch(e){}watchRep=null}
+$('replyQuote').classList.remove('show');$('forumArea').style.display='none';$('personaArea').style.display='none';$('announceArea').style.display='none';$('fabGroup').style.display='none';$('postDetail').classList.add('show');
+$('pdBody').innerHTML='<div class="empty-hint">加载中…</div>';
+try{const r=await db.collection('replies').where({postId:pid}).limit(200).get();RE=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){RE=[]}
+const p=gP();if(p)renderDetail(p);startWatchReplies(pid);
+}
+function renderDetail(p){
+const av=p.avatar?'<img src="'+p.avatar+'">':esc(In(p.user));
+let h='<div class="pd-op"><div class="op-head"><div class="op-avatar">'+av+'</div><div class="op-info"><div class="op-name">'+esc(p.user)+'</div><div class="op-time">'+Tm(p.createdAt)+'</div></div></div><div class="op-title">'+SP(p.title)+'</div><div class="op-content">'+LNK(p.content)+'</div>'+imgGrid(p.images,'op-imgs')+'</div>';
+if(RE.length){h+='<div class="pd-replies-title">回复 ('+RE.length+')</div>';
+RE.forEach((r,i)=>{const ra=r.avatar?'<img src="'+r.avatar+'">':esc(In(r.user));const last=i===RE.length-1;
+h+='<div class="reply-item" data-rid="'+r._id+'"><div class="ri-line"><div class="ri-avatar">'+ra+'</div>'+(!last?'<div class="ri-thread"></div>':'')+'</div><div class="ri-body"><div class="ri-name-row"><span class="ri-name">'+esc(r.user)+'</span><span class="ri-time">'+Tm(r.createdAt)+'</span></div>'+(r.qn?'<div style="font-size:10px;color:#bbb;margin-bottom:2px;padding-left:8px;border-left:2px solid #eee">回复 <b>'+esc(r.qn)+'</b>: '+esc((r.qt||'').slice(0,30))+'</div>':'')+'<div class="ri-text">'+LNK(r.text)+'</div></div></div>'})}
+else h+='<div class="empty-hint" style="padding:16px 0">暂无回复</div>';
+$('pdBody').innerHTML=h;
+$('pdBody').querySelectorAll('.reply-item').forEach(el=>{el.addEventListener('click',e=>{if(e.target.tagName==='A')return;const r=RE.find(x=>x._id===el.dataset.rid);if(!r)return;rTo={name:r.user,text:r.text};$('rqName').textContent=r.user;$('rqText').textContent=(r.text||'').slice(0,40);$('replyQuote').classList.add('show');$('replyInput').focus()})});
+}
 $('rqClose').addEventListener('click',()=>{rTo=null;$('replyQuote').classList.remove('show')});
-$('btnBackToList').addEventListener('click',()=>{vP=null;$('postDetail').classList.remove('show');const ch=gC();$('fabGroup').style.display='flex';if(ch.type==='persona'){$('personaArea').style.display='flex';rPe()}else if(ch.type==='forum'){$('forumArea').style.display='flex';rPo()}else{$('announceArea').style.display='flex';rAn()}});
-function sRp(){const t=$('replyInput').value.trim();if(!t||!vP)return;const p=gC().posts.find(x=>x.id===vP);if(!p.replies)p.replies=[];const r={id:Uid(),user:U.name,avatar:U.avatar,text:t,time:Nm(),roles:[]};if(rTo){r.qn=rTo.name;r.qt=rTo.text}p.replies.push(r);$('replyInput').value='';rTo=null;$('replyQuote').classList.remove('show');oP(vP);$('pdBody').scrollTop=$('pdBody').scrollHeight;saveAll()}
+$('btnBackToList').addEventListener('click',()=>{vP=null;if(watchRep){try{watchRep.close()}catch(e){}watchRep=null}$('postDetail').classList.remove('show');const ch=gC();$('fabGroup').style.display='flex';if(ch.type==='persona'){$('personaArea').style.display='flex'}else if(ch.type==='forum'){$('forumArea').style.display='flex'}else{$('announceArea').style.display='flex';$('fabGroup').style.display='none'}renderCur()});
+async function sRp(){const t=$('replyInput').value.trim();if(!t||!vP)return;const b=$('btnReply');b.disabled=true;
+try{await db.collection('replies').add({postId:vP,user:U.name,userId:U.id,avatar:U.avatar||null,text:t,qn:rTo?rTo.name:null,qt:rTo?rTo.text:null,createdAt:Date.now()});
+$('replyInput').value='';rTo=null;$('replyQuote').classList.remove('show');
+const p=gP();if(p){try{await db.collection('posts').doc(vP).update({replyCount:(p.replyCount||0)+1})}catch(e){}p.replyCount=(p.replyCount||0)+1}
+const r=await db.collection('replies').where({postId:vP}).limit(200).get();RE=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+if(p)renderDetail(p);$('pdBody').scrollTop=$('pdBody').scrollHeight;
+}catch(e){alert('回复失败:'+errText(e))}
+b.disabled=false}
 $('btnReply').addEventListener('click',sRp);$('replyInput').addEventListener('keydown',e=>{if(e.key==='Enter')sRp()});
-$('fabTop').addEventListener('click',()=>{const ch=gC();if(ch.type==='persona')$('personaArea').scrollTo({top:0,behavior:'smooth'});else $('forumArea').scrollTo({top:0,behavior:'smooth'})});
+$('fabTop').addEventListener('click',()=>{const ch=gC();if(ch&&ch.type==='persona')$('personaArea').scrollTo({top:0,behavior:'smooth'});else $('forumArea').scrollTo({top:0,behavior:'smooth'})});
 
-let npFiles=[];
-$('fabPost').addEventListener('click',()=>{npI=[];npFiles=[];rnI();$('npTitleInput').value='';$('npContentInput').value='';$('emojiPicker').classList.remove('show');const av=U.avatar?'<img src="'+U.avatar+'">':In(U.name);const ch=gC();const isP=ch&&ch.type==='persona';$('npTitleInput').placeholder=isP?'角色名':'标题';$('npContentInput').placeholder=isP?'角色简介 / 标签...':'输入消息......';$('npAuthor').innerHTML='<div class="npa-avatar">'+av+'</div><div class="npa-info"><div class="npa-name">'+U.name+'</div><div class="npa-hint">发布至 # '+(ch?ch.name:'')+'</div></div>';$('newPostPage').classList.add('show')});
+let npFiles=[],npPrev=[];
+$('fabPost').addEventListener('click',()=>{npFiles=[];npPrev=[];rnI();$('npTitleInput').value='';$('npContentInput').value='';$('emojiPicker').classList.remove('show');
+const av=U.avatar?'<img src="'+U.avatar+'">':esc(In(U.name));const ch=gC();const isP=ch&&ch.type==='persona';
+$('npTitleInput').placeholder=isP?'角色名':'标题';$('npContentInput').placeholder=isP?'角色简介 / 标签...':'输入消息......';
+$('npAuthor').innerHTML='<div class="npa-avatar">'+av+'</div><div class="npa-info"><div class="npa-name">'+esc(U.name)+'</div><div class="npa-hint">发布至 # '+esc(ch?ch.name:'')+'</div></div>';
+$('newPostPage').classList.add('show')});
 $('btnCloseNewPost').addEventListener('click',()=>$('newPostPage').classList.remove('show'));
 $('btnNpImage').addEventListener('click',()=>$('npImageFile').click());
-$('npImageFile').addEventListener('change',function(){[...this.files].forEach(f=>{if(npFiles.length<4){npFiles.push(f);rF(f,u=>{npI.push(u);rnI()})}});this.value=''});
-function rnI(){const c=$('npImagesPreview');c.innerHTML='';npI.forEach((img,i)=>{const w=document.createElement('div');w.className='np-img-wrap';w.innerHTML='<img src="'+img+'"><div class="np-img-del"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>';w.querySelector('.np-img-del').addEventListener('click',()=>{npI.splice(i,1);npFiles.splice(i,1);rnI()});c.appendChild(w)})}
+$('npImageFile').addEventListener('change',function(){[...this.files].forEach(f=>{if(npFiles.length<4){npFiles.push(f);const r=new FileReader();r.onload=e=>{npPrev.push(e.target.result);rnI()};r.readAsDataURL(f)}});this.value=''});
+function rnI(){const c=$('npImagesPreview');c.innerHTML='';npPrev.forEach((img,i)=>{const w=document.createElement('div');w.className='np-img-wrap';w.innerHTML='<img src="'+img+'"><div class="np-img-del"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>';w.querySelector('.np-img-del').addEventListener('click',()=>{npPrev.splice(i,1);npFiles.splice(i,1);rnI()});c.appendChild(w)})}
 $('btnNpFile').addEventListener('click',()=>$('npFileFile').click());
-$('npFileFile').addEventListener('change',function(){if(this.files[0])$('npContentInput').value+=($('npContentInput').value?'\n':'')+'[附件: '+this.files[0].name+']';this.value=''});
+$('npFileFile').addEventListener('change',async function(){const f=this.files[0];this.value='';if(!f)return;if(f.size>10*1024*1024)return alert('文件请小于10MB');const ta=$('npContentInput');const mark='\n[上传中: '+f.name+']';ta.value+=mark;try{const url=await uploadFileRaw(f);ta.value=ta.value.replace(mark,'\n附件 '+f.name+': '+url)}catch(e){ta.value=ta.value.replace(mark,'');alert('上传失败:'+errText(e))}});
 const emos=['😀','😂','🥰','😎','🤔','👍','❤️','🔥','✨','🎉','😭','🥺','💀','👀','🙏','💕','😊','🤣','😍','🥳'];
 const ep=$('emojiPicker');emos.forEach(e=>{const s=document.createElement('span');s.textContent=e;s.addEventListener('click',()=>{$('npContentInput').value+=e;$('npContentInput').focus()});ep.appendChild(s)});
 $('btnNpEmoji').addEventListener('click',()=>ep.classList.toggle('show'));
 $('btnNpSpoiler').addEventListener('click',()=>{const ta=$('npContentInput'),s=ta.selectionStart,e=ta.selectionEnd,v=ta.value;if(s!==e)ta.value=v.slice(0,s)+'||'+v.slice(s,e)+'||'+v.slice(e);else{ta.value=v.slice(0,s)+'||||'+v.slice(s);ta.selectionStart=ta.selectionEnd=s+2}ta.focus()});
-$('btnSubmitPost').addEventListener('click',async()=>{const t=$('npTitleInput').value.trim(),c=$('npContentInput').value.trim();if(!t||!c)return;let imgUrls=npI.slice();const ch=gC();if(!ch.posts)ch.posts=[];ch.posts.push({id:Uid(),user:U.name,avatar:U.avatar,title:t,content:c,time:Nm(),replies:[],roles:[],images:imgUrls});$('newPostPage').classList.remove('show');if(ch.type==='persona')rPe();else rPo();saveAll()});
+$('btnSubmitPost').addEventListener('click',async()=>{
+const t=$('npTitleInput').value.trim(),c=$('npContentInput').value.trim();if(!t||!c)return;
+const ch=gC(),s=gS();if(!ch||!s)return;
+const b=$('btnSubmitPost');b.disabled=true;
+try{
+const urls=[];for(const f of npFiles){try{urls.push(await uploadImg(f,800))}catch(e){console.log('图片上传失败',errText(e))}}
+await db.collection('posts').add({serverId:s._id,channelId:ch._id,user:U.name,userId:U.id,avatar:U.avatar||null,title:t,content:c,images:urls,replyCount:0,createdAt:Date.now()});
+$('newPostPage').classList.remove('show');npFiles=[];npPrev=[];
+await loadPosts();
+}catch(e){alert('发布失败:'+errText(e))}
+b.disabled=false});
 
-let sAv=null;
-$('btnAddServer').addEventListener('click',()=>{$('modalCreate').classList.add('show');$('inputServerName').value='';$('inputServerId').value='';sAv=null;$('serverAvatarPreview').style.display='none';$('serverAvatarPicker').querySelector('svg').style.display='';$('idHint').style.display='none'});
+let sAvFile=null;
+$('btnAddServer').addEventListener('click',()=>{$('modalCreate').classList.add('show');$('inputServerName').value='';$('inputServerId').value='';$('inputServerPriv').value='public';sAvFile=null;$('serverAvatarPreview').style.display='none';$('serverAvatarPicker').querySelector('svg').style.display='';$('idHint').style.display='none'});
 $('serverAvatarPicker').addEventListener('click',()=>$('serverAvatarFile').click());
-$('serverAvatarFile').addEventListener('change',function(){if(this.files[0])rF(this.files[0],u=>{sAv=u;$('serverAvatarPreview').src=u;$('serverAvatarPreview').style.display='block';$('serverAvatarPicker').querySelector('svg').style.display='none'})});
+$('serverAvatarFile').addEventListener('change',function(){if(this.files[0]){sAvFile=this.files[0];const r=new FileReader();r.onload=e=>{$('serverAvatarPreview').src=e.target.result;$('serverAvatarPreview').style.display='block';$('serverAvatarPicker').querySelector('svg').style.display='none'};r.readAsDataURL(this.files[0])}});
 $('btnCancelCreate').addEventListener('click',()=>$('modalCreate').classList.remove('show'));
 $('modalCreate').addEventListener('click',e=>{if(e.target===$('modalCreate'))$('modalCreate').classList.remove('show')});
-$('btnConfirmCreate').addEventListener('click',()=>{const n=$('inputServerName').value.trim(),sid=$('inputServerId').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');if(!n||!sid)return;if(S.some(s=>s.sid===sid)){$('idHint').style.display='block';return}S.push({id:Uid(),sid:sid,name:n,avatar:sAv,channels:[],roles:[],owner:'me'});$('modalCreate').classList.remove('show');rSb();selS(S[S.length-1].id);saveAll()});
-$('btnAddChannel').addEventListener('click',()=>{$('modalChannel').classList.add('show');$('inputChName').value='';$('inputChType').value='forum'});
+$('btnConfirmCreate').addEventListener('click',async()=>{
+const n=$('inputServerName').value.trim(),sid=$('inputServerId').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
+if(!n||!sid)return;
+const b=$('btnConfirmCreate');b.disabled=true;b.textContent='创建中';
+try{
+const ex=await db.collection('servers').where({sid}).limit(1).get();
+if(ex.data&&ex.data.length){$('idHint').style.display='block';b.disabled=false;b.textContent='创建';return}
+let av=null;if(sAvFile)try{av=await uploadImg(sAvFile,300)}catch(e){}
+const add=await db.collection('servers').add({sid,name:n,avatar:av,priv:$('inputServerPriv').value,owner:U.id,ownerName:U.name,createdAt:Date.now()});
+$('modalCreate').classList.remove('show');
+await loadServers();selS(add.id);
+}catch(e){alert('创建失败:'+errText(e))}
+b.disabled=false;b.textContent='创建'});
+$('btnAddChannel').addEventListener('click',()=>{const s=gS();if(!s)return;if(!isAdminOf(s))return alert('只有社区创建者可以建频道');$('modalChannel').classList.add('show');$('inputChName').value='';$('inputChType').value='forum'});
 $('btnCancelCh').addEventListener('click',()=>$('modalChannel').classList.remove('show'));
 $('modalChannel').addEventListener('click',e=>{if(e.target===$('modalChannel'))$('modalChannel').classList.remove('show')});
-$('btnConfirmCh').addEventListener('click',()=>{const n=$('inputChName').value.trim();if(!n)return;gS().channels.push({id:Uid(),name:n,type:$('inputChType').value,posts:[]});$('modalChannel').classList.remove('show');rCL();saveAll()});
-$('btnInvite').addEventListener('click',()=>{const s=gS();navigator.clipboard&&navigator.clipboard.writeText(s.name+' #'+s.sid).then(()=>alert('已复制'))});
+$('btnConfirmCh').addEventListener('click',async()=>{const n=$('inputChName').value.trim();if(!n)return;const s=gS();if(!s)return;const b=$('btnConfirmCh');b.disabled=true;
+try{await db.collection('channels').add({serverId:s._id,name:n,type:$('inputChType').value,createdAt:Date.now()});$('modalChannel').classList.remove('show');await loadChannels()}catch(e){alert('创建失败:'+errText(e))}b.disabled=false});
+$('btnInvite').addEventListener('click',()=>{const s=gS();if(!s)return;const txt=s.name+' #'+s.sid;if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>alert('已复制：'+txt),()=>alert(txt));else alert(txt)});
 
 let vf='all';
 document.querySelectorAll('.vault-tabs .vt').forEach(t=>{t.addEventListener('click',()=>{vf=t.dataset.vt;document.querySelectorAll('.vault-tabs .vt').forEach(x=>x.classList.toggle('active',x===t));rV()})});
-function rV(){const l=$('vaultList');l.innerHTML='';const items=saved.filter(x=>vf==='all'||x.type===vf);$('vaultEmpty').style.display=items.length?'none':'block';items.forEach(item=>{const s=S.find(x=>x.id===item.s);if(!s)return;let p=null;s.channels.forEach(ch=>{if(!p&&ch.posts)ch.posts.forEach(pp=>{if(pp.id===item.p)p=pp})});if(!p)return;const el=document.createElement('div');el.className='vault-item';el.innerHTML='<div class="vi-img">'+(p.images&&p.images.length?'<img src="'+p.images[0]+'">':'<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>')+'</div><div class="vi-info"><div class="vi-title">'+p.title+'</div><div class="vi-sub">'+s.name+' · '+(item.type==='persona'?'角色':'帖子')+'</div></div><div class="vi-unsave"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>';el.querySelector('.vi-unsave').addEventListener('click',e=>{e.stopPropagation();tgSv(item.s,item.p,item.type);rV()});l.appendChild(el)})}
+async function rV(){const l=$('vaultList');l.innerHTML='';const items=saved.filter(x=>vf==='all'||x.type===vf);$('vaultEmpty').style.display=items.length?'none':'block';
+if(!items.length)return;
+l.innerHTML='<div class="empty-hint">加载中…</div>';
+const out=[];
+for(const it of items){try{const r=await db.collection('posts').doc(it.p).get();const p=(r.data&&r.data[0])||r.data;if(p)out.push({it,p})}catch(e){}}
+l.innerHTML='';
+if(!out.length){$('vaultEmpty').style.display='block';return}
+out.forEach(({it,p})=>{const el=document.createElement('div');el.className='vault-item';
+el.innerHTML='<div class="vi-img">'+(p.images&&p.images.length?'<img src="'+p.images[0]+'">':'<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>')+'</div><div class="vi-info"><div class="vi-title">'+esc(p.title)+'</div><div class="vi-sub">'+esc(it.sn||'')+' · '+(it.type==='persona'?'角色':'帖子')+'</div></div><div class="vi-unsave"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>';
+el.querySelector('.vi-unsave').addEventListener('click',e=>{e.stopPropagation();tgSv(it.p,it.type);rV()});
+l.appendChild(el)})}
 
 function hA(){$('welcomeView').style.display='none';$('channelPage').classList.remove('show');$('channelView').classList.remove('show');$('pageChat').classList.remove('show');$('pageVault').classList.remove('show');$('pageSettings').classList.remove('show');$('chatListView').style.display='flex';cPM();TB.style.display='flex'}
-function sT(tab){cT=tab;document.querySelectorAll('.tab-bar .tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));hA();if(tab==='home'){$('sidebar').classList.remove('hidden');if(aS){if(aCh)$('channelView').classList.add('show');else $('channelPage').classList.add('show')}else $('welcomeView').style.display='flex'}else{$('sidebar').classList.add('hidden');if(tab==='chat')$('pageChat').classList.add('show');else if(tab==='vault'){$('pageVault').classList.add('show');rV()}else $('pageSettings').classList.add('show')}}
+function sT(tab){cT=tab;document.querySelectorAll('.tab-bar .tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));hA();
+if(tab==='home'){$('sidebar').classList.remove('hidden');if(aS){if(aCh)$('channelView').classList.add('show');else $('channelPage').classList.add('show')}else $('welcomeView').style.display='flex'}
+else{$('sidebar').classList.add('hidden');if(tab==='chat')$('pageChat').classList.add('show');else if(tab==='vault'){$('pageVault').classList.add('show');rV()}else $('pageSettings').classList.add('show')}}
 document.querySelectorAll('.tab-bar .tab').forEach(t=>{t.addEventListener('click',()=>sT(t.dataset.tab))});
-rSb();
+document.addEventListener('click',e=>{if(e.target.classList.contains('spoiler')){e.target.classList.toggle('revealed');e.stopPropagation()}});
+loadServers();
 }
 })();
 </script>
