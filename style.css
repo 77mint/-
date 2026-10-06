@@ -403,3 +403,71 @@ body.dark .srch-item .s-tt{color:#e0e0e0}
 body.dark .msg-act .sheet{background:#2a2a2a}
 body.dark .msg-act .sheet .q{background:#3a3a3a;color:#ddd}
 body.dark .msg-act .sheet .c{background:#333;color:#999}
+/* ===== 字号倍率（实时生效） ===== */
+:root{--fs:1}
+body.fs-0{--fs:.88}
+body.fs-1{--fs:1}
+body.fs-2{--fs:1.14}
+body.fs-3{--fs:1.3}
+.post-card .pc-title{font-size:calc(14px*var(--fs))!important}
+.post-card .pc-preview{font-size:calc(11px*var(--fs))!important}
+.post-card .pc-user{font-size:calc(12px*var(--fs))!important}
+.pd-op .op-title{font-size:calc(16px*var(--fs))!important}
+.pd-op .op-content{font-size:calc(12px*var(--fs))!important}
+.pd-op .op-name{font-size:calc(12px*var(--fs))!important}
+.reply-item .ri-text{font-size:calc(12px*var(--fs))!important}
+.reply-item .ri-name{font-size:calc(11px*var(--fs))!important}
+.ann-item .ann-title{font-size:calc(14px*var(--fs))!important}
+.ann-item .ann-content{font-size:calc(12px*var(--fs))!important}
+.ch-item .chi-name{font-size:calc(13px*var(--fs))!important}
+.rm-txt{font-size:calc(12.5px*var(--fs))!important}
+.rm-nm{font-size:calc(12px*var(--fs))!important}
+.dm-row .dm-capsule{font-size:calc(12.5px*var(--fs))!important}
+.persona-card .psc-name{font-size:calc(13px*var(--fs))!important}
+.persona-card .psc-desc{font-size:calc(10px*var(--fs))!important}
+.srch-item .s-tt{font-size:calc(13px*var(--fs))!important}
+.srch-item .s-pv{font-size:calc(11px*var(--fs))!important}
+.friend-item .fi-name{font-size:calc(12px*var(--fs))!important}
+.friend-item .fi-msg{font-size:calc(10px*var(--fs))!important}
+.cp-name{font-size:calc(16px*var(--fs))!important}
+.settings-item{font-size:calc(13px*var(--fs))!important}
+.empty-hint{font-size:calc(12px*var(--fs))!important}
+.mem-item .m-nm{font-size:calc(12px*var(--fs))!important}
+.noti-item .n-top{font-size:calc(11px*var(--fs))!important}
+.noti-item .n-txt{font-size:calc(11px*var(--fs))!important}
+.vault-item .vi-title{font-size:calc(12px*var(--fs))!important}
+/* ===== 字号滑块 ===== */
+.fs-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #eee}
+.fs-row .fs-ttl{font-size:13px;flex-shrink:0}
+.fs-row .fs-s{font-size:12px;color:#999;flex-shrink:0;font-weight:600}
+.fs-row .fs-b{font-size:18px;color:#666;flex-shrink:0;font-weight:600}
+.fs-wrap{position:relative;flex:1;height:30px;display:flex;align-items:center;min-width:0}
+.fs-line{position:absolute;left:13px;right:13px;height:3px;background:#b4b4b4;border-radius:2px;pointer-events:none}
+.fs-ticks{position:absolute;left:13px;right:13px;display:flex;justify-content:space-between;pointer-events:none}
+.fs-ticks i{width:2px;height:7px;background:#b4b4b4;border-radius:1px}
+.fs-slider{-webkit-appearance:none;appearance:none;position:relative;width:100%;height:30px;background:transparent;outline:none;margin:0}
+.fs-slider::-webkit-slider-runnable-track{height:3px;background:transparent}
+.fs-slider::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.28);margin-top:-12px;cursor:pointer}
+.fs-slider::-moz-range-track{height:3px;background:transparent}
+.fs-slider::-moz-range-thumb{width:26px;height:26px;border:none;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.28)}
+body.dark .fs-row{border-color:#333}
+body.dark .fs-row .fs-ttl{color:#e0e0e0}
+body.dark .fs-line,body.dark .fs-ticks i{background:#555}
+body.dark .fs-slider::-webkit-slider-thumb{background:#e0e0e0}
+/* ===== 社区工具栏不挤压 ===== */
+.cp-toolbar{gap:5px}
+.cp-search{flex:1 1 0;min-width:0}
+.cp-search input{min-width:0;font-size:11px!important}
+.cp-btn{flex-shrink:0;width:30px;height:30px}
+.cp-toolbar .cp-btn svg{width:14px;height:14px}
+/* ===== 免责声明 ===== */
+.doc-page{display:none;flex-direction:column;height:100%;background:#fff;position:absolute;inset:0;z-index:80}
+.doc-page.show{display:flex}
+.doc-body{flex:1;overflow-y:auto;padding:16px 18px 90px}
+.doc-body h4{font-size:13px;font-weight:700;margin:16px 0 6px}
+.doc-body h4:first-child{margin-top:0}
+.doc-body p{font-size:12px;line-height:1.85;color:#555;margin-bottom:8px}
+.doc-body .upd{font-size:10px;color:#bbb;margin-top:18px}
+body.dark .doc-page{background:#1e1e1e}
+body.dark .doc-body h4{color:#e0e0e0}
+body.dark .doc-body p{color:#aaa}
