@@ -545,3 +545,12 @@ body.dark .stk-item{background:#2a2a2a}
 .upd-bar button{height:26px;padding:0 13px;border:none;border-radius:7px;background:#fff;color:#222;font-size:11px;font-weight:700;cursor:pointer}
 /* ===== 加载骨架 ===== */
 .ldg{text-align:center;color:#ccc;font-size:11px;padding:22px 0}
+/* ===== 频道分组线 ===== */
+.ch-gap{height:1px;background:#ededed;margin:9px 16px}
+body.dark .ch-gap{background:#2e2e2e}
+/* ===== 附件卡片收紧 ===== */
+.file-chip{display:inline-flex;align-items:center;gap:7px;max-width:260px;padding:9px 13px;margin:7px 0;background:#f4f5f7;border:1px solid #e8e9ec;border-radius:10px;text-decoration:none;vertical-align:middle;overflow:hidden}
+.file-chip svg{width:16px;height:16px;flex-shrink:0}
+.file-chip span{max-width:200px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+/* ===== 整体缩放（字号滑块用） ===== */
+.main{transform-origin:top left}
