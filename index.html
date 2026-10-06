@@ -30,10 +30,15 @@
     <div class="welcome" id="welcomeView"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><p>选择左侧社区开始浏览<br>或点击 <b>+</b> 创建新社区</p></div>
     <div class="channel-page" id="channelPage"><div class="cp-header"><div class="cp-name-row"><span class="cp-name" id="cpName"></span><span class="cp-id" id="cpId"></span></div><div class="cp-sub" id="cpSub">社区</div></div><div class="cp-toolbar"><div class="cp-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="cpSearchInput" placeholder="搜索频道" autocomplete="off"></div><div class="cp-btn" id="btnAddChannel"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="cp-btn" id="btnServerSettings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09"/></svg></div><div class="cp-btn" id="btnInvite"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="17" y1="14" x2="23" y2="14"/></svg></div></div><div class="cp-list" id="cpList"></div><div class="cp-empty" id="cpEmpty">还没有频道</div></div>
     <div class="channel-view" id="channelView"><div class="cv-header"><svg id="btnBackToChannels" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="title" id="cvTitle"></div><div class="subtitle" id="cvSubtitle"></div></div><div class="forum-area" id="forumArea"></div><div class="persona-area" id="personaArea" style="display:none"></div><div class="announce-area" id="announceArea" style="display:none"></div><div class="announce-input" id="announceInput" style="display:none"><input type="text" id="annInput" placeholder="发布通告..." autocomplete="off"><button id="btnAnnPost"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><div class="fab-group" id="fabGroup" style="display:none"><div class="fab-top" id="fabTop"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></div><button class="fab-post" id="fabPost"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div><div class="post-detail" id="postDetail"><div class="pd-header"><svg id="btnBackToList" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="title">详情</div></div><div class="pd-body" id="pdBody"></div><div class="reply-quote" id="replyQuote"><span class="rq-name" id="rqName"></span><span id="rqText"></span><div class="rq-close" id="rqClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div><div class="reply-bar"><input type="text" id="replyInput" placeholder="回复…" autocomplete="off"><button id="btnReply"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div></div></div>
-    <div class="page-chat" id="pageChat"><div class="chat-list-view" id="chatListView"><div class="cl-scroll"><div class="chat-top"><div class="ct-title">Chat</div><div class="ct-dots" id="chatDots"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="#999" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="#999" stroke="none"/></svg></div></div><div class="chat-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Search" autocomplete="off"></div><div class="chat-section-title"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>Friend Requests</div><div class="friend-req"><div class="fr-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="17" y1="14" x2="23" y2="14"/></svg></div><div class="fr-info"><div class="fr-title">Pending</div><div class="fr-sub">查看好友请求</div></div><div class="fr-badge">0</div></div><div class="chat-section-title" style="margin-top:4px"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Friends</div><div id="friendList"><div class="empty-hint">还没有好友</div></div></div></div></div>
+    <div class="page-chat" id="pageChat">
+      <div class="chat-list-view" id="chatListView"><div class="cl-scroll"><div class="chat-top"><div class="ct-title">Chat</div><div class="ct-dots" id="chatDots"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></div></div><div class="chat-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="chatSearchInput" placeholder="搜索好友" autocomplete="off"></div><div class="chat-section-title"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>好友请求</div><div class="friend-req" id="frEntry"><div class="fr-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="11" x2="20" y2="17"/><line x1="17" y1="14" x2="23" y2="14"/></svg></div><div class="fr-info"><div class="fr-title">待处理</div><div class="fr-sub">查看好友请求</div></div><div class="fr-badge" id="frBadge">0</div></div><div class="chat-section-title" style="margin-top:4px"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>好友</div><div id="friendList"><div class="empty-hint">还没有好友</div></div></div></div>
+      <div class="fr-page" id="frPage"><div class="frp-header"><svg id="btnBackFromFr" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="title">好友请求</div></div><div class="frp-body" id="frBody"></div></div>
+      <div class="fr-page" id="addFrPage"><div class="frp-header"><svg id="btnBackFromAdd" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="title">添加好友</div></div><div style="padding:12px"><div class="chat-search" style="margin:0 0 12px"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="addFrInput" placeholder="输入用户名搜索" autocomplete="off"></div></div><div class="frp-body"><div class="search-user-res" id="addFrRes"></div></div></div>
+      <div class="dm-view" id="dmView"><div class="dm-header"><svg id="btnBackFromDm" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg><div class="dm-name" id="dmName"></div></div><div class="dm-msgs" id="dmMsgs"></div><div class="dm-quote-bar" id="dmQuote"><div class="dqb-text" id="dqbText"></div><div class="dqb-close" id="dqbClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div><div class="dm-input"><input type="text" id="dmInput" placeholder="发送消息…" autocomplete="off"><button id="btnDmSend"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div></div>
+    </div>
     <div class="page-vault" id="pageVault"><div class="vault-top">仓库</div><div class="vault-tabs"><div class="vt active" data-vt="all">全部</div><div class="vt" data-vt="post">帖子</div><div class="vt" data-vt="persona">角色</div></div><div class="vault-list" id="vaultList"></div><div class="vault-empty" id="vaultEmpty">还没有收藏</div></div>
     <div class="profile-menu-overlay" id="pmOverlay"></div>
-    <div class="profile-menu" id="profileMenu"><div class="pm-item" id="pmEditProfile"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>编辑资料</div></div>
+    <div class="profile-menu" id="profileMenu"><div class="pm-item" id="pmEditProfile"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>编辑资料</div><div class="pm-item" id="pmAddFriend"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg>添加好友</div></div>
     <div class="page-settings" id="pageSettings">
       <div style="padding:20px 0 12px;font-size:20px;font-weight:700">设置</div>
       <div class="settings-group"><div class="settings-group-title">通用</div><div class="settings-item"><span>深色模式</span><div class="toggle"></div></div><div class="settings-item"><span>消息通知</span><div class="toggle on"></div></div><div class="settings-item" id="btnFontSize"><span>字号大小</span><span id="fontSizeLabel" style="font-size:11px;color:#999">标准</span></div></div>
@@ -51,7 +56,7 @@
 <div class="search-overlay" id="searchOverlay"><div class="search-sheet"><h3>搜索社区</h3><input type="text" id="searchServerInput" placeholder="输入社区ID" autocomplete="off"><div id="searchResults"></div><div class="ss-hint" id="ssHint">输入社区ID加入</div></div></div>
 <script>
 (function(){
-const APP_VERSION='1.1.0';
+const APP_VERSION='1.2.0';
 const SB_ENV='mintds-d8gybgoqke953154b';
 const SB_REGION='ap-shanghai';
 const STORAGE_HOST='https://6d69-mintds-d8gybgoqke953154b-1500834017.tcb.qcloud.la';
@@ -65,34 +70,20 @@ let app=null,db=null;
 const cloudInit=(async()=>{const C=await ensureSDK();app=C.init({env:SB_ENV,region:SB_REGION,accessKey:SB_AK});try{const a=(typeof app.auth==='function')?app.auth({persistence:'local'}):app.auth;if(a&&typeof a.signInAnonymously==='function')await a.signInAnonymously()}catch(e){}db=app.database()})();
 cloudInit.catch(e=>console.log('云连接失败',errText(e)));
 async function hashPwd(p){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
-
 function compressImg(file,maxW,q){return new Promise(res=>{const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{let w=img.width,h=img.height;if(w>maxW){h=Math.round(h*maxW/w);w=maxW}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);c.toBlob(b=>res(b||file),'image/jpeg',q)};img.onerror=()=>res(file);img.src=e.target.result};r.onerror=()=>res(file);r.readAsDataURL(file)})}
-async function uploadImg(file,maxW){
-await cloudInit;
-const blob=await compressImg(file,maxW||800,0.7);
-const cloudPath='img/'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'.jpg';
-if(typeof app.uploadFile==='function'){const r=await app.uploadFile({cloudPath,filePath:blob});if(!r||(!r.fileID&&!r.fileId))throw new Error('上传无返回');return STORAGE_HOST+'/'+cloudPath}
-if(app.storage&&typeof app.storage.from==='function'){const{error}=await app.storage.from().upload(cloudPath,blob);if(error)throw error;return STORAGE_HOST+'/'+cloudPath}
-throw new Error('无上传方法');
-}
-async function uploadFileRaw(file){
-await cloudInit;
-const safe=file.name.replace(/[^\w.\-]/g,'_');
-const cloudPath='file/'+Date.now()+'_'+safe;
-if(typeof app.uploadFile==='function'){await app.uploadFile({cloudPath,filePath:file});return STORAGE_HOST+'/'+cloudPath}
-if(app.storage&&typeof app.storage.from==='function'){const{error}=await app.storage.from().upload(cloudPath,file);if(error)throw error;return STORAGE_HOST+'/'+cloudPath}
-throw new Error('无上传方法');
-}
+async function uploadImg(file,maxW){await cloudInit;const blob=await compressImg(file,maxW||800,0.7);const cp='img/'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'.jpg';if(typeof app.uploadFile==='function'){await app.uploadFile({cloudPath:cp,filePath:blob});return STORAGE_HOST+'/'+cp}if(app.storage&&app.storage.from){const{error}=await app.storage.from().upload(cp,blob);if(error)throw error;return STORAGE_HOST+'/'+cp}throw new Error('无上传方法')}
+async function uploadFileRaw(file){await cloudInit;const safe=file.name.replace(/[^\w.\-]/g,'_');const cp='file/'+Date.now()+'_'+safe;if(typeof app.uploadFile==='function'){await app.uploadFile({cloudPath:cp,filePath:file});return STORAGE_HOST+'/'+cp}if(app.storage&&app.storage.from){const{error}=await app.storage.from().upload(cp,file);if(error)throw error;return STORAGE_HOST+'/'+cp}throw new Error('无上传方法')}
 
 var TB=document.querySelector('.tab-bar');
 const $=id=>document.getElementById(id);
 const In=n=>n?n.slice(0,2).toUpperCase():'??';
 const Tm=ts=>{const d=new Date(ts||Date.now());return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')};
+const Dy=ts=>{const d=new Date(ts||Date.now()),n=new Date();if(d.toDateString()===n.toDateString())return Tm(ts);return (d.getMonth()+1)+'/'+d.getDate()};
 const LS={get:k=>JSON.parse(localStorage.getItem('md_'+k)||'null'),set:(k,v)=>{try{localStorage.setItem('md_'+k,JSON.stringify(v))}catch(e){}}};
-let U=LS.get('user'),saved=LS.get('saved')||[],joined=LS.get('joined')||[];
-let S=[],CH=[],PO=[],RE=[];
-let aS=null,aCh=null,vP=null,cT='home',rTo=null,chActIdx=null,poActId=null;
-let watchPost=null,watchRep=null;
+let U=LS.get('user'),saved=LS.get('saved')||[],joined=LS.get('joined')||[],readAt=LS.get('readAt')||{};
+let S=[],CH=[],PO=[],RE=[],FR=[],REQ=[],MSG=[];
+let aS=null,aCh=null,vP=null,cT='home',rTo=null,chActIdx=null,poActId=null,dmPeer=null,dmQuoteTxt=null;
+let watchPost=null,watchRep=null,watchMsg=null,watchFr=null;
 let darkMode=LS.get('darkMode')||false;
 function applyDark(){document.body.classList.toggle('dark',darkMode)}
 applyDark();
@@ -101,6 +92,7 @@ function isAdminOf(sv){if(!sv||!U)return false;return sv.owner===U.id||U.role===
 function esc(t){return (t==null?'':String(t)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function SP(t){return esc(t).replace(/\|\|(.+?)\|\|/g,'<span class="spoiler">$1</span>').replace(/\n/g,'<br>')}
 function LNK(t){return SP(t).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener" style="color:#4a90d9">$1</a>')}
+function cid(a,b){return [a,b].sort().join('_')}
 
 let isLogin=false;
 function showAuth(){$('authPage').classList.remove('hidden');$('app').classList.remove('show');TB.style.display='none'}
@@ -147,7 +139,8 @@ function gP(){return PO.find(x=>x._id===vP)}
 function isSv(p){return saved.some(x=>x.p===p)}
 function tgSv(p,t,sn){if(isSv(p))saved=saved.filter(x=>x.p!==p);else saved.push({p,type:t,sn});LS.set('saved',saved)}
 function imgGrid(images,cls){if(!images||!images.length)return '';const c=Math.min(images.length,4);return '<div class="'+cls+' img-'+c+'">'+images.slice(0,4).map(i=>'<img src="'+i+'" loading="lazy">').join('')+'</div>'}
-function stopWatch(){[watchPost,watchRep].forEach(w=>{if(w){try{w.close()}catch(e){}}});watchPost=null;watchRep=null}
+function closeW(w){if(w){try{w.close()}catch(e){}}}
+function stopWatch(){closeW(watchPost);closeW(watchRep);watchPost=null;watchRep=null}
 
 function initApp(){
 if(!U)return;
@@ -166,6 +159,7 @@ function cPM(){pmO=false;$('profileMenu').classList.remove('show');$('pmOverlay'
 $('chatDots').addEventListener('click',()=>{pmO=!pmO;$('profileMenu').classList.toggle('show',pmO);$('pmOverlay').classList.toggle('show',pmO)});
 $('pmOverlay').addEventListener('click',cPM);
 $('pmEditProfile').addEventListener('click',()=>{cPM();oPM()});
+$('pmAddFriend').addEventListener('click',()=>{cPM();$('chatListView').style.display='none';$('addFrPage').classList.add('show');$('addFrInput').value='';$('addFrRes').innerHTML='';$('addFrInput').focus()});
 let pAvFile=null;
 function oPM(){$('modalProfile').classList.add('show');$('psNameInput').value=U.name;pAvFile=null;if(U.avatar){$('psAvatarImg').src=U.avatar;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'}else{$('psAvatarImg').style.display='none';$('psPlaceholder').style.display='flex'}}
 $('psAvatar').addEventListener('click',()=>$('psFileInput').click());
@@ -181,11 +175,7 @@ $('postActionCancel').addEventListener('click',()=>$('postActionOverlay').classL
 $('postActionOverlay').addEventListener('click',e=>{if(e.target===$('postActionOverlay'))$('postActionOverlay').classList.remove('show')});
 $('postDelete').addEventListener('click',async()=>{const id=poActId;$('postActionOverlay').classList.remove('show');if(!id)return;if(!confirm('确定删除这条？'))return;try{await db.collection('posts').doc(id).remove();await loadPosts()}catch(e){alert('删除失败（只能删自己发的）:'+errText(e))}});
 
-async function loadServers(){
-await cloudInit;
-try{const r=await db.collection('servers').limit(100).get();S=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){S=[];console.log('读社区失败',errText(e))}
-rSb();
-}
+async function loadServers(){await cloudInit;try{const r=await db.collection('servers').limit(100).get();S=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){S=[]}rSb()}
 function visServers(){return S.filter(s=>s.priv!=='private'||joined.indexOf(s._id)>=0||s.owner===U.id)}
 function rSb(){const sb=$('sidebar');sb.querySelectorAll('.server-icon:not(.add)').forEach(e=>e.remove());const dv=sb.querySelector('.server-divider');visServers().forEach(s=>{const el=document.createElement('div');el.className='server-icon'+(s._id===aS?' active':'');el.title=s.name;el.innerHTML=s.avatar?'<img src="'+s.avatar+'">':'<span class="si-text">'+esc(In(s.name))+'</span>';el.addEventListener('click',()=>selS(s._id));dv.after(el)})}
 
@@ -194,15 +184,9 @@ $('searchOverlay').addEventListener('click',e=>{if(e.target===$('searchOverlay')
 $('searchServerInput').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();const r=$('searchResults');r.innerHTML='';if(!q){$('ssHint').style.display='block';return}$('ssHint').style.display='none';S.filter(s=>(s.sid||'').toLowerCase().includes(q)||(s.name||'').toLowerCase().includes(q)).forEach(s=>{const d=document.createElement('div');d.className='ss-result';d.innerHTML=esc(s.name)+'<span>#'+esc(s.sid)+(s.priv==='private'?' 私密':'')+'</span>';d.addEventListener('click',()=>{if(joined.indexOf(s._id)<0){joined.push(s._id);LS.set('joined',joined)}$('searchOverlay').classList.remove('show');rSb();selS(s._id)});r.appendChild(d)})});
 
 async function selS(id){aS=id;aCh=null;vP=null;stopWatch();rSb();hA();$('channelPage').classList.add('show');const s=gS();if(!s)return;$('cpName').textContent=s.name;$('cpId').textContent='#'+(s.sid||'');$('cpSub').textContent=(s.priv==='private'?'私密社区':'公开社区')+' · 由 '+(s.ownerName||'?')+' 创建';sT('home');await loadChannels()}
-
 $('btnServerSettings').addEventListener('click',async()=>{const s=gS();if(!s)return;if(!isAdminOf(s))return alert('只有创建者可以修改');const nn=prompt('修改社区名称',s.name);if(!nn||!nn.trim())return;try{await db.collection('servers').doc(s._id).update({name:nn.trim()});s.name=nn.trim();$('cpName').textContent=s.name;rSb()}catch(e){alert('修改失败:'+errText(e))}});
 
-async function loadChannels(){
-const s=gS();if(!s)return;
-$('cpList').innerHTML='<div class="empty-hint">加载中…</div>';$('cpEmpty').style.display='none';
-try{const r=await db.collection('channels').where({serverId:s._id}).limit(100).get();CH=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){CH=[];console.log('读频道失败',errText(e))}
-rCL();
-}
+async function loadChannels(){const s=gS();if(!s)return;$('cpList').innerHTML='<div class="empty-hint">加载中…</div>';$('cpEmpty').style.display='none';try{const r=await db.collection('channels').where({serverId:s._id}).limit(100).get();CH=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){CH=[]}rCL()}
 function rCL(){const l=$('cpList');l.innerHTML='';$('cpEmpty').style.display=CH.length?'none':'block';
 const ic={announce:'<svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>',forum:'<svg viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>',persona:'<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'};
 CH.forEach((ch,idx)=>{const el=document.createElement('div');el.className='ch-item';el.innerHTML='<div class="chi-icon">'+(ic[ch.type]||'')+'</div><div class="chi-name">'+esc(ch.name)+'</div>';el.addEventListener('click',()=>oCh(ch._id));let t=null;el.addEventListener('touchstart',()=>{t=setTimeout(()=>{chActIdx=idx;$('chActionTitle').textContent=ch.name;$('chActionOverlay').classList.add('show')},550)});el.addEventListener('touchend',()=>clearTimeout(t));el.addEventListener('touchmove',()=>clearTimeout(t));l.appendChild(el)})}
@@ -215,22 +199,19 @@ $('forumArea').style.display='none';$('personaArea').style.display='none';$('ann
 if(ch.type==='announce'){$('announceArea').style.display='flex';if(isAdminOf(gS()))$('announceInput').style.display='flex';$('announceArea').innerHTML='<div class="empty-hint">加载中…</div>'}
 else if(ch.type==='persona'){$('personaArea').style.display='flex';$('fabGroup').style.display='flex';$('personaArea').innerHTML='<div class="empty-hint" style="width:100%">加载中…</div>'}
 else{$('forumArea').style.display='flex';$('fabGroup').style.display='flex';$('forumArea').innerHTML='<div class="empty-hint">加载中…</div>'}
-await loadPosts();startWatchPosts();
-}
+await loadPosts();startWatchPosts()}
 $('btnBackToChannels').addEventListener('click',()=>{stopWatch();$('channelView').classList.remove('show');$('channelPage').classList.add('show');loadChannels()});
 
-async function loadPosts(){
-const ch=gC();if(!ch)return;
-try{const r=await db.collection('posts').where({channelId:ch._id}).limit(200).get();PO=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){PO=[];console.log('读帖子失败',errText(e))}
-renderCur();
-}
+async function loadPosts(){const ch=gC();if(!ch)return;try{const r=await db.collection('posts').where({channelId:ch._id}).limit(200).get();PO=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){PO=[]}renderCur()}
 function renderCur(){const ch=gC();if(!ch)return;if(ch.type==='announce')rAn();else if(ch.type==='persona')rPe();else rPo()}
-function startWatchPosts(){const ch=gC();if(!ch||!db)return;try{watchPost=db.collection('posts').where({channelId:ch._id}).watch({onChange:s=>{if(!s||!s.docs)return;PO=s.docs.slice().sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));if(vP){const p=gP();if(p)renderDetail(p)}else renderCur()},onError:e=>console.log('实时帖子失败',errText(e))})}catch(e){console.log('watch不可用',errText(e))}}
-function startWatchReplies(pid){if(!db)return;try{watchRep=db.collection('replies').where({postId:pid}).watch({onChange:s=>{if(!s||!s.docs)return;RE=s.docs.slice().sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));const p=gP();if(p&&vP===pid)renderDetail(p)},onError:e=>console.log('实时回复失败',errText(e))})}catch(e){}}
+function startWatchPosts(){const ch=gC();if(!ch||!db)return;try{watchPost=db.collection('posts').where({channelId:ch._id}).watch({onChange:s=>{if(!s||!s.docs)return;PO=s.docs.slice().sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));if(vP){const p=gP();if(p)renderDetail(p)}else renderCur()},onError:()=>{}})}catch(e){}}
+function startWatchReplies(pid){if(!db)return;try{watchRep=db.collection('replies').where({postId:pid}).watch({onChange:s=>{if(!s||!s.docs)return;RE=s.docs.slice().sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));const p=gP();if(p&&vP===pid)renderDetail(p)},onError:()=>{}})}catch(e){}}
 
 function rAn(){const a=$('announceArea');a.innerHTML='';if(!PO.length){a.innerHTML='<div class="empty-hint">暂无通告</div>';return}
 PO.slice().reverse().forEach(p=>{const d=document.createElement('div');d.className='ann-item';d.innerHTML='<div class="ann-time">'+Tm(p.createdAt)+' · '+esc(p.user)+'</div><div class="ann-title">'+esc(p.title)+'</div>'+(p.content?'<div class="ann-content">'+LNK(p.content)+'</div>':'');a.appendChild(d)})}
 $('btnAnnPost').addEventListener('click',async()=>{const v=$('annInput').value.trim();if(!v)return;const ch=gC(),s=gS();if(!ch)return;const b=$('btnAnnPost');b.disabled=true;try{await db.collection('posts').add({serverId:s._id,channelId:ch._id,user:U.name,userId:U.id,avatar:U.avatar||null,title:v,content:'',images:[],createdAt:Date.now()});$('annInput').value='';await loadPosts()}catch(e){alert('发布失败:'+errText(e))}b.disabled=false});
+
+async function toggleLike(p,el){try{const r=await db.collection('likes').where({postId:p._id,userId:U.id}).limit(1).get();if(r.data&&r.data.length){await db.collection('likes').doc(r.data[0]._id).remove();p.likeCount=Math.max(0,(p.likeCount||0)-1)}else{await db.collection('likes').add({postId:p._id,userId:U.id,createdAt:Date.now()});p.likeCount=(p.likeCount||0)+1}try{await db.collection('posts').doc(p._id).update({likeCount:p.likeCount})}catch(e){}if(el)el.textContent=p.likeCount}catch(e){}}
 
 function rPo(){const a=$('forumArea');a.innerHTML='';if(!PO.length){a.innerHTML='<div class="empty-hint">还没有帖子</div>';return}
 PO.slice().reverse().forEach(p=>{const c=document.createElement('div');c.className='post-card';
@@ -243,18 +224,18 @@ a.appendChild(c)})}
 
 function rPe(){const a=$('personaArea');a.innerHTML='';if(!PO.length){a.innerHTML='<div class="empty-hint" style="width:100%">还没有角色</div>';return}
 PO.forEach(p=>{const c=document.createElement('div');c.className='persona-card';const hi=p.images&&p.images.length;
-c.innerHTML='<div class="psc-img">'+(hi?'<img src="'+p.images[0]+'" loading="lazy">':'<div style="display:flex;align-items:center;justify-content:center;height:100%"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>')+'<div class="psc-author">@'+esc(p.user)+'</div><div class="psc-bookmark '+(isSv(p._id)?'saved':'')+'"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div></div><div class="psc-body"><div class="psc-name">'+esc(p.title)+'</div><div class="psc-desc">'+esc(p.content)+'</div><div class="psc-stats"><span><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>0</span><span><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+(p.replyCount||0)+'</span></div></div>';
+c.innerHTML='<div class="psc-img">'+(hi?'<img src="'+p.images[0]+'" loading="lazy">':'<div style="display:flex;align-items:center;justify-content:center;height:100%"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>')+'<div class="psc-author">@'+esc(p.user)+'</div><div class="psc-bookmark '+(isSv(p._id)?'saved':'')+'"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div></div><div class="psc-body"><div class="psc-name">'+esc(p.title)+'</div><div class="psc-desc">'+esc(p.content)+'</div><div class="psc-stats"><span class="lk"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg><b>'+(p.likeCount||0)+'</b></span><span><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+(p.replyCount||0)+'</span></div></div>';
 c.querySelector('.psc-bookmark').addEventListener('click',e=>{e.stopPropagation();tgSv(p._id,'persona',(gS()||{}).name);rPe()});
-c.addEventListener('click',e=>{if(e.target.closest('.psc-bookmark'))return;oP(p._id)});
+const lk=c.querySelector('.lk');lk.addEventListener('click',e=>{e.stopPropagation();toggleLike(p,lk.querySelector('b'))});
+c.addEventListener('click',e=>{if(e.target.closest('.psc-bookmark')||e.target.closest('.lk'))return;oP(p._id)});
 let t=null;c.addEventListener('touchstart',()=>{t=setTimeout(()=>{if(p.userId===U.id||U.role==='super'){poActId=p._id;$('postActionTitle').textContent=p.title;$('postActionOverlay').classList.add('show')}},550)});c.addEventListener('touchend',()=>clearTimeout(t));c.addEventListener('touchmove',()=>clearTimeout(t));
 a.appendChild(c)})}
 
-async function oP(pid){vP=pid;rTo=null;if(watchRep){try{watchRep.close()}catch(e){}watchRep=null}
+async function oP(pid){vP=pid;rTo=null;closeW(watchRep);watchRep=null;
 $('replyQuote').classList.remove('show');$('forumArea').style.display='none';$('personaArea').style.display='none';$('announceArea').style.display='none';$('fabGroup').style.display='none';$('postDetail').classList.add('show');
 $('pdBody').innerHTML='<div class="empty-hint">加载中…</div>';
 try{const r=await db.collection('replies').where({postId:pid}).limit(200).get();RE=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){RE=[]}
-const p=gP();if(p)renderDetail(p);startWatchReplies(pid);
-}
+const p=gP();if(p)renderDetail(p);startWatchReplies(pid)}
 function renderDetail(p){
 const av=p.avatar?'<img src="'+p.avatar+'">':esc(In(p.user));
 let h='<div class="pd-op"><div class="op-head"><div class="op-avatar">'+av+'</div><div class="op-info"><div class="op-name">'+esc(p.user)+'</div><div class="op-time">'+Tm(p.createdAt)+'</div></div></div><div class="op-title">'+SP(p.title)+'</div><div class="op-content">'+LNK(p.content)+'</div>'+imgGrid(p.images,'op-imgs')+'</div>';
@@ -263,17 +244,15 @@ RE.forEach((r,i)=>{const ra=r.avatar?'<img src="'+r.avatar+'">':esc(In(r.user));
 h+='<div class="reply-item" data-rid="'+r._id+'"><div class="ri-line"><div class="ri-avatar">'+ra+'</div>'+(!last?'<div class="ri-thread"></div>':'')+'</div><div class="ri-body"><div class="ri-name-row"><span class="ri-name">'+esc(r.user)+'</span><span class="ri-time">'+Tm(r.createdAt)+'</span></div>'+(r.qn?'<div style="font-size:10px;color:#bbb;margin-bottom:2px;padding-left:8px;border-left:2px solid #eee">回复 <b>'+esc(r.qn)+'</b>: '+esc((r.qt||'').slice(0,30))+'</div>':'')+'<div class="ri-text">'+LNK(r.text)+'</div></div></div>'})}
 else h+='<div class="empty-hint" style="padding:16px 0">暂无回复</div>';
 $('pdBody').innerHTML=h;
-$('pdBody').querySelectorAll('.reply-item').forEach(el=>{el.addEventListener('click',e=>{if(e.target.tagName==='A')return;const r=RE.find(x=>x._id===el.dataset.rid);if(!r)return;rTo={name:r.user,text:r.text};$('rqName').textContent=r.user;$('rqText').textContent=(r.text||'').slice(0,40);$('replyQuote').classList.add('show');$('replyInput').focus()})});
-}
+$('pdBody').querySelectorAll('.reply-item').forEach(el=>{el.addEventListener('click',e=>{if(e.target.tagName==='A')return;const r=RE.find(x=>x._id===el.dataset.rid);if(!r)return;rTo={name:r.user,text:r.text};$('rqName').textContent=r.user;$('rqText').textContent=(r.text||'').slice(0,40);$('replyQuote').classList.add('show');$('replyInput').focus()})})}
 $('rqClose').addEventListener('click',()=>{rTo=null;$('replyQuote').classList.remove('show')});
-$('btnBackToList').addEventListener('click',()=>{vP=null;if(watchRep){try{watchRep.close()}catch(e){}watchRep=null}$('postDetail').classList.remove('show');const ch=gC();$('fabGroup').style.display='flex';if(ch.type==='persona'){$('personaArea').style.display='flex'}else if(ch.type==='forum'){$('forumArea').style.display='flex'}else{$('announceArea').style.display='flex';$('fabGroup').style.display='none'}renderCur()});
+$('btnBackToList').addEventListener('click',()=>{vP=null;closeW(watchRep);watchRep=null;$('postDetail').classList.remove('show');const ch=gC();if(ch.type==='persona'){$('personaArea').style.display='flex';$('fabGroup').style.display='flex'}else if(ch.type==='forum'){$('forumArea').style.display='flex';$('fabGroup').style.display='flex'}else{$('announceArea').style.display='flex'}renderCur()});
 async function sRp(){const t=$('replyInput').value.trim();if(!t||!vP)return;const b=$('btnReply');b.disabled=true;
 try{await db.collection('replies').add({postId:vP,user:U.name,userId:U.id,avatar:U.avatar||null,text:t,qn:rTo?rTo.name:null,qt:rTo?rTo.text:null,createdAt:Date.now()});
 $('replyInput').value='';rTo=null;$('replyQuote').classList.remove('show');
 const p=gP();if(p){try{await db.collection('posts').doc(vP).update({replyCount:(p.replyCount||0)+1})}catch(e){}p.replyCount=(p.replyCount||0)+1}
 const r=await db.collection('replies').where({postId:vP}).limit(200).get();RE=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-if(p)renderDetail(p);$('pdBody').scrollTop=$('pdBody').scrollHeight;
-}catch(e){alert('回复失败:'+errText(e))}
+if(p)renderDetail(p);$('pdBody').scrollTop=$('pdBody').scrollHeight}catch(e){alert('回复失败:'+errText(e))}
 b.disabled=false}
 $('btnReply').addEventListener('click',sRp);$('replyInput').addEventListener('keydown',e=>{if(e.key==='Enter')sRp()});
 $('fabTop').addEventListener('click',()=>{const ch=gC();if(ch&&ch.type==='persona')$('personaArea').scrollTo({top:0,behavior:'smooth'});else $('forumArea').scrollTo({top:0,behavior:'smooth'})});
@@ -296,14 +275,10 @@ $('btnNpEmoji').addEventListener('click',()=>ep.classList.toggle('show'));
 $('btnNpSpoiler').addEventListener('click',()=>{const ta=$('npContentInput'),s=ta.selectionStart,e=ta.selectionEnd,v=ta.value;if(s!==e)ta.value=v.slice(0,s)+'||'+v.slice(s,e)+'||'+v.slice(e);else{ta.value=v.slice(0,s)+'||||'+v.slice(s);ta.selectionStart=ta.selectionEnd=s+2}ta.focus()});
 $('btnSubmitPost').addEventListener('click',async()=>{
 const t=$('npTitleInput').value.trim(),c=$('npContentInput').value.trim();if(!t||!c)return;
-const ch=gC(),s=gS();if(!ch||!s)return;
-const b=$('btnSubmitPost');b.disabled=true;
-try{
-const urls=[];for(const f of npFiles){try{urls.push(await uploadImg(f,800))}catch(e){console.log('图片上传失败',errText(e))}}
-await db.collection('posts').add({serverId:s._id,channelId:ch._id,user:U.name,userId:U.id,avatar:U.avatar||null,title:t,content:c,images:urls,replyCount:0,createdAt:Date.now()});
-$('newPostPage').classList.remove('show');npFiles=[];npPrev=[];
-await loadPosts();
-}catch(e){alert('发布失败:'+errText(e))}
+const ch=gC(),s=gS();if(!ch||!s)return;const b=$('btnSubmitPost');b.disabled=true;
+try{const urls=[];for(const f of npFiles){try{urls.push(await uploadImg(f,800))}catch(e){}}
+await db.collection('posts').add({serverId:s._id,channelId:ch._id,user:U.name,userId:U.id,avatar:U.avatar||null,title:t,content:c,images:urls,replyCount:0,likeCount:0,createdAt:Date.now()});
+$('newPostPage').classList.remove('show');npFiles=[];npPrev=[];await loadPosts()}catch(e){alert('发布失败:'+errText(e))}
 b.disabled=false});
 
 let sAvFile=null;
@@ -313,17 +288,13 @@ $('serverAvatarFile').addEventListener('change',function(){if(this.files[0]){sAv
 $('btnCancelCreate').addEventListener('click',()=>$('modalCreate').classList.remove('show'));
 $('modalCreate').addEventListener('click',e=>{if(e.target===$('modalCreate'))$('modalCreate').classList.remove('show')});
 $('btnConfirmCreate').addEventListener('click',async()=>{
-const n=$('inputServerName').value.trim(),sid=$('inputServerId').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
-if(!n||!sid)return;
+const n=$('inputServerName').value.trim(),sid=$('inputServerId').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');if(!n||!sid)return;
 const b=$('btnConfirmCreate');b.disabled=true;b.textContent='创建中';
-try{
-const ex=await db.collection('servers').where({sid}).limit(1).get();
+try{const ex=await db.collection('servers').where({sid}).limit(1).get();
 if(ex.data&&ex.data.length){$('idHint').style.display='block';b.disabled=false;b.textContent='创建';return}
 let av=null;if(sAvFile)try{av=await uploadImg(sAvFile,300)}catch(e){}
 const add=await db.collection('servers').add({sid,name:n,avatar:av,priv:$('inputServerPriv').value,owner:U.id,ownerName:U.name,createdAt:Date.now()});
-$('modalCreate').classList.remove('show');
-await loadServers();selS(add.id);
-}catch(e){alert('创建失败:'+errText(e))}
+$('modalCreate').classList.remove('show');await loadServers();selS(add.id)}catch(e){alert('创建失败:'+errText(e))}
 b.disabled=false;b.textContent='创建'});
 $('btnAddChannel').addEventListener('click',()=>{const s=gS();if(!s)return;if(!isAdminOf(s))return alert('只有社区创建者可以建频道');$('modalChannel').classList.add('show');$('inputChName').value='';$('inputChType').value='forum'});
 $('btnCancelCh').addEventListener('click',()=>$('modalChannel').classList.remove('show'));
@@ -332,24 +303,106 @@ $('btnConfirmCh').addEventListener('click',async()=>{const n=$('inputChName').va
 try{await db.collection('channels').add({serverId:s._id,name:n,type:$('inputChType').value,createdAt:Date.now()});$('modalChannel').classList.remove('show');await loadChannels()}catch(e){alert('创建失败:'+errText(e))}b.disabled=false});
 $('btnInvite').addEventListener('click',()=>{const s=gS();if(!s)return;const txt=s.name+' #'+s.sid;if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>alert('已复制：'+txt),()=>alert(txt));else alert(txt)});
 
+/* ====== 私信 ====== */
+async function loadFriends(){
+await cloudInit;
+try{const a=await db.collection('friends').where({a:U.id,status:'ok'}).limit(100).get();
+const b=await db.collection('friends').where({b:U.id,status:'ok'}).limit(100).get();
+const list=[];(a.data||[]).forEach(f=>list.push({id:f.b,name:f.bName,avatar:f.bAvatar,rid:f._id}));
+(b.data||[]).forEach(f=>list.push({id:f.a,name:f.aName,avatar:f.aAvatar,rid:f._id}));
+FR=list}catch(e){FR=[]}
+try{const r=await db.collection('friends').where({b:U.id,status:'pending'}).limit(50).get();REQ=r.data||[]}catch(e){REQ=[]}
+$('frBadge').textContent=REQ.length;$('frBadge').style.display=REQ.length?'flex':'none';
+await loadLastMsgs();rFriends()}
+async function loadLastMsgs(){
+for(const f of FR){try{const r=await db.collection('messages').where({conv:cid(U.id,f.id)}).orderBy('createdAt','desc').limit(20).get();const ms=r.data||[];f.last=ms[0]||null;f.unread=ms.filter(m=>m.from!==U.id&&m.createdAt>(readAt[f.id]||0)).length}catch(e){f.last=null;f.unread=0}}}
+function rFriends(flt){
+const l=$('friendList');l.innerHTML='';
+const q=(flt||'').trim().toLowerCase();
+const list=q?FR.filter(f=>(f.name||'').toLowerCase().includes(q)):FR;
+if(!list.length){l.innerHTML='<div class="empty-hint">'+(q?'没有匹配的好友':'还没有好友')+'</div>';return}
+list.sort((x,y)=>((y.last&&y.last.createdAt)||0)-((x.last&&x.last.createdAt)||0));
+list.forEach(f=>{const el=document.createElement('div');el.className='friend-item';
+const av=f.avatar?'<img src="'+f.avatar+'">':esc(In(f.name));
+el.innerHTML='<div class="fi-avatar-wrap"><div class="fi-avatar">'+av+'</div>'+(f.unread?'<div class="fi-unread">'+f.unread+'</div>':'')+'</div><div class="fi-info"><div class="fi-name">'+esc(f.name)+'</div><div class="fi-msg">'+esc(f.last?((f.last.from===U.id?'我: ':'')+f.last.text):'打个招呼吧')+'</div></div><div class="fi-time">'+(f.last?Dy(f.last.createdAt):'')+'</div>';
+el.addEventListener('click',()=>openDm(f));l.appendChild(el)})}
+$('chatSearchInput').addEventListener('input',e=>rFriends(e.target.value));
+$('frEntry').addEventListener('click',()=>{$('chatListView').style.display='none';$('frPage').classList.add('show');rReq()});
+$('btnBackFromFr').addEventListener('click',()=>{$('frPage').classList.remove('show');$('chatListView').style.display='flex';loadFriends()});
+$('btnBackFromAdd').addEventListener('click',()=>{$('addFrPage').classList.remove('show');$('chatListView').style.display='flex';loadFriends()});
+function rReq(){const b=$('frBody');b.innerHTML='';if(!REQ.length){b.innerHTML='<div class="empty-hint">没有待处理的请求</div>';return}
+REQ.forEach(r=>{const el=document.createElement('div');el.className='req-item';
+const av=r.aAvatar?'<img src="'+r.aAvatar+'">':esc(In(r.aName));
+el.innerHTML='<div class="ri-av">'+av+'</div><div class="ri-nm">'+esc(r.aName)+'</div><div class="ri-btns"><button class="ok">同意</button><button class="no">拒绝</button></div>';
+el.querySelector('.ok').addEventListener('click',async()=>{try{await db.collection('friends').doc(r._id).update({status:'ok'});REQ=REQ.filter(x=>x._id!==r._id);rReq();await loadFriends()}catch(e){alert('操作失败:'+errText(e))}});
+el.querySelector('.no').addEventListener('click',async()=>{try{await db.collection('friends').doc(r._id).remove();REQ=REQ.filter(x=>x._id!==r._id);rReq();await loadFriends()}catch(e){alert('只有对方能撤回，稍后再试')}});
+b.appendChild(el)})}
+let addTimer=null;
+$('addFrInput').addEventListener('input',e=>{clearTimeout(addTimer);const q=e.target.value.trim();if(!q){$('addFrRes').innerHTML='';return}addTimer=setTimeout(()=>searchUsers(q),400)});
+async function searchUsers(q){
+const box=$('addFrRes');box.innerHTML='<div class="empty-hint">搜索中…</div>';
+try{const r=await db.collection('users').where({name:q}).limit(10).get();
+let list=r.data||[];
+if(!list.length){const all=await db.collection('users').limit(100).get();list=(all.data||[]).filter(u=>(u.name||'').toLowerCase().includes(q.toLowerCase()))}
+list=list.filter(u=>u._id!==U.id);
+box.innerHTML='';
+if(!list.length){box.innerHTML='<div class="empty-hint">没找到这个用户</div>';return}
+list.forEach(u=>{const el=document.createElement('div');el.className='sur-item';
+const av=u.avatar?'<img src="'+u.avatar+'">':esc(In(u.name));
+const already=FR.some(f=>f.id===u._id);
+el.innerHTML='<div class="su-av">'+av+'</div><div class="su-nm">'+esc(u.name)+'</div><button '+(already?'disabled':'')+'>'+(already?'已是好友':'添加')+'</button>';
+const btn=el.querySelector('button');
+if(!already)btn.addEventListener('click',async()=>{btn.disabled=true;btn.textContent='发送中';
+try{const ex=await db.collection('friends').where({a:U.id,b:u._id}).limit(1).get();
+const ex2=await db.collection('friends').where({a:u._id,b:U.id}).limit(1).get();
+if((ex.data&&ex.data.length)||(ex2.data&&ex2.data.length)){btn.textContent='已申请';return}
+await db.collection('friends').add({a:U.id,aName:U.name,aAvatar:U.avatar||null,b:u._id,bName:u.name,bAvatar:u.avatar||null,status:'pending',createdAt:Date.now()});
+btn.textContent='已发送'}catch(e){btn.textContent='失败';alert(errText(e))}});
+box.appendChild(el)})}catch(e){box.innerHTML='<div class="empty-hint">搜索失败</div>'}}
+
+async function openDm(f){
+dmPeer=f;dmQuoteTxt=null;$('dmQuote').classList.remove('show');
+$('chatListView').style.display='none';$('dmView').classList.add('show');
+$('dmName').textContent=f.name;$('dmMsgs').innerHTML='<div class="empty-hint">加载中…</div>';
+closeW(watchMsg);watchMsg=null;
+await loadMsgs();
+readAt[f.id]=Date.now();LS.set('readAt',readAt);
+try{watchMsg=db.collection('messages').where({conv:cid(U.id,f.id)}).watch({onChange:s=>{if(!s||!s.docs)return;MSG=s.docs.slice().sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));rMsgs();readAt[f.id]=Date.now();LS.set('readAt',readAt)},onError:()=>{}})}catch(e){}}
+async function loadMsgs(){try{const r=await db.collection('messages').where({conv:cid(U.id,dmPeer.id)}).limit(300).get();MSG=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){MSG=[]}rMsgs()}
+function rMsgs(){const m=$('dmMsgs');m.innerHTML='';
+if(!MSG.length){m.innerHTML='<div class="empty-hint">还没有消息</div>';return}
+let lastDay='';
+MSG.forEach(x=>{const d=new Date(x.createdAt||0);const dk=d.toDateString();
+if(dk!==lastDay){lastDay=dk;const t=document.createElement('div');t.className='dm-time-div';t.textContent=(d.getMonth()+1)+'月'+d.getDate()+'日';m.appendChild(t)}
+const me=x.from===U.id;const row=document.createElement('div');row.className='dm-row '+(me?'me':'them');
+const av=me?(U.avatar?'<img src="'+U.avatar+'">':esc(In(U.name))):(dmPeer.avatar?'<img src="'+dmPeer.avatar+'">':esc(In(dmPeer.name)));
+row.innerHTML='<div class="dm-av"><div class="dm-av-img">'+av+'</div></div><div><div'+(x.q?' class="dm-quote-ref"':' style="display:none"')+'>'+esc(x.q||'')+'</div><div class="dm-capsule">'+LNK(x.text)+'</div><div class="dm-grp-info"><span>'+Tm(x.createdAt)+'</span></div></div>';
+row.querySelector('.dm-capsule').addEventListener('click',()=>{dmQuoteTxt=(me?'我: ':dmPeer.name+': ')+(x.text||'').slice(0,30);$('dqbText').textContent=dmQuoteTxt;$('dmQuote').classList.add('show');$('dmInput').focus()});
+m.appendChild(row)});
+m.scrollTop=m.scrollHeight}
+$('dqbClose').addEventListener('click',()=>{dmQuoteTxt=null;$('dmQuote').classList.remove('show')});
+$('btnBackFromDm').addEventListener('click',()=>{closeW(watchMsg);watchMsg=null;dmPeer=null;$('dmView').classList.remove('show');$('chatListView').style.display='flex';loadFriends()});
+async function sendDm(){const t=$('dmInput').value.trim();if(!t||!dmPeer)return;const b=$('btnDmSend');b.disabled=true;
+try{await db.collection('messages').add({conv:cid(U.id,dmPeer.id),from:U.id,fromName:U.name,to:dmPeer.id,text:t,q:dmQuoteTxt||null,createdAt:Date.now()});
+$('dmInput').value='';dmQuoteTxt=null;$('dmQuote').classList.remove('show');await loadMsgs()}catch(e){alert('发送失败:'+errText(e))}
+b.disabled=false}
+$('btnDmSend').addEventListener('click',sendDm);$('dmInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendDm()});
+
 let vf='all';
 document.querySelectorAll('.vault-tabs .vt').forEach(t=>{t.addEventListener('click',()=>{vf=t.dataset.vt;document.querySelectorAll('.vault-tabs .vt').forEach(x=>x.classList.toggle('active',x===t));rV()})});
 async function rV(){const l=$('vaultList');l.innerHTML='';const items=saved.filter(x=>vf==='all'||x.type===vf);$('vaultEmpty').style.display=items.length?'none':'block';
-if(!items.length)return;
-l.innerHTML='<div class="empty-hint">加载中…</div>';
+if(!items.length)return;l.innerHTML='<div class="empty-hint">加载中…</div>';
 const out=[];
-for(const it of items){try{const r=await db.collection('posts').doc(it.p).get();const p=(r.data&&r.data[0])||r.data;if(p)out.push({it,p})}catch(e){}}
-l.innerHTML='';
-if(!out.length){$('vaultEmpty').style.display='block';return}
+for(const it of items){try{const r=await db.collection('posts').doc(it.p).get();const p=(r.data&&r.data[0])||r.data;if(p&&p._id)out.push({it,p})}catch(e){}}
+l.innerHTML='';if(!out.length){$('vaultEmpty').style.display='block';return}
 out.forEach(({it,p})=>{const el=document.createElement('div');el.className='vault-item';
 el.innerHTML='<div class="vi-img">'+(p.images&&p.images.length?'<img src="'+p.images[0]+'">':'<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>')+'</div><div class="vi-info"><div class="vi-title">'+esc(p.title)+'</div><div class="vi-sub">'+esc(it.sn||'')+' · '+(it.type==='persona'?'角色':'帖子')+'</div></div><div class="vi-unsave"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>';
-el.querySelector('.vi-unsave').addEventListener('click',e=>{e.stopPropagation();tgSv(it.p,it.type);rV()});
-l.appendChild(el)})}
+el.querySelector('.vi-unsave').addEventListener('click',e=>{e.stopPropagation();tgSv(it.p,it.type);rV()});l.appendChild(el)})}
 
-function hA(){$('welcomeView').style.display='none';$('channelPage').classList.remove('show');$('channelView').classList.remove('show');$('pageChat').classList.remove('show');$('pageVault').classList.remove('show');$('pageSettings').classList.remove('show');$('chatListView').style.display='flex';cPM();TB.style.display='flex'}
+function hA(){$('welcomeView').style.display='none';$('channelPage').classList.remove('show');$('channelView').classList.remove('show');$('pageChat').classList.remove('show');$('pageVault').classList.remove('show');$('pageSettings').classList.remove('show');$('chatListView').style.display='flex';$('frPage').classList.remove('show');$('addFrPage').classList.remove('show');$('dmView').classList.remove('show');closeW(watchMsg);watchMsg=null;cPM();TB.style.display='flex'}
 function sT(tab){cT=tab;document.querySelectorAll('.tab-bar .tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===tab));hA();
 if(tab==='home'){$('sidebar').classList.remove('hidden');if(aS){if(aCh)$('channelView').classList.add('show');else $('channelPage').classList.add('show')}else $('welcomeView').style.display='flex'}
-else{$('sidebar').classList.add('hidden');if(tab==='chat')$('pageChat').classList.add('show');else if(tab==='vault'){$('pageVault').classList.add('show');rV()}else $('pageSettings').classList.add('show')}}
+else{$('sidebar').classList.add('hidden');if(tab==='chat'){$('pageChat').classList.add('show');loadFriends()}else if(tab==='vault'){$('pageVault').classList.add('show');rV()}else $('pageSettings').classList.add('show')}}
 document.querySelectorAll('.tab-bar .tab').forEach(t=>{t.addEventListener('click',()=>sT(t.dataset.tab))});
 document.addEventListener('click',e=>{if(e.target.classList.contains('spoiler')){e.target.classList.toggle('revealed');e.stopPropagation()}});
 loadServers();
