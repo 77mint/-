@@ -67,7 +67,7 @@
 <input type="file" id="stkFile" accept="image/*" multiple style="display:none">
 <script>
 (function(){
-const APP_VERSION='1.10.0';
+const APP_VERSION='1.10.1';
 const SB_ENV='mintds-d8gybgoqke953154b';
 const SB_REGION='ap-shanghai';
 const STORAGE_HOST='https://6d69-mintds-d8gybgoqke953154b-1500834017.tcb.qcloud.la';
@@ -82,6 +82,8 @@ const cloudInit=(async()=>{const C=await ensureSDK();app=C.init({env:SB_ENV,regi
 cloudInit.catch(e=>console.log('云连接失败',errText(e)));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function q(fn,tries){tries=tries||3;let le;for(let i=0;i<tries;i++){try{return await fn()}catch(e){le=e;await sleep(260*(i+1))}}throw le}
+function okUpd(r){if(!r)return true;if(r.updated===undefined&&r.updated===null)return true;if(typeof r.updated==='number')return r.updated>0;return true}
+function okDel(r){if(!r)return true;if(typeof r.removed==='number')return r.removed>0;if(typeof r.deleted==='number')return r.deleted>0;return true}
 async function hashPwd(p){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
 function compressImg(file,maxW,qq){return new Promise(res=>{const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{let w=img.width,h=img.height;if(w>maxW){h=Math.round(h*maxW/w);w=maxW}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);c.toBlob(b=>res(b||file),'image/jpeg',qq)};img.onerror=()=>res(file);img.src=e.target.result};r.onerror=()=>res(file);r.readAsDataURL(file)})}
 async function uploadImg(file,maxW){await cloudInit;const blob=await compressImg(file,maxW||1000,0.75);const cp='img/'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'.jpg';if(typeof app.uploadFile==='function'){await app.uploadFile({cloudPath:cp,filePath:blob});return STORAGE_HOST+'/'+cp}if(app.storage&&app.storage.from){const{error}=await app.storage.from().upload(cp,blob);if(error)throw error;return STORAGE_HOST+'/'+cp}throw new Error('无上传方法')}
@@ -135,14 +137,12 @@ function zoom(u){$('izImg').src=u;$('imgZoom').classList.add('show')}
 $('izClose').addEventListener('click',()=>$('imgZoom').classList.remove('show'));
 $('imgZoom').addEventListener('click',e=>{if(e.target.id!=='izImg')$('imgZoom').classList.remove('show')});
 
-/* ===== 键盘顶起输入栏 ===== */
 if(window.visualViewport){const vv=window.visualViewport;
 const onVV=()=>{const kb=Math.max(0,Math.round(window.innerHeight-vv.height-vv.offsetTop));
 document.documentElement.style.setProperty('--kb',kb+'px');
 document.body.classList.toggle('kb-open',kb>80)};
 vv.addEventListener('resize',onVV);vv.addEventListener('scroll',onVV);onVV()}
 
-/* ===== 就地弹出菜单 ===== */
 const ICO={up:'<svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>',
 down:'<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>',
 pen:'<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
@@ -270,7 +270,11 @@ $('psAvatar').addEventListener('click',()=>$('psFileInput').click());
 $('psFileInput').addEventListener('change',function(){if(this.files[0]){pAvFile=this.files[0];const r=new FileReader();r.onload=e=>{$('psAvatarImg').src=e.target.result;$('psAvatarImg').style.display='block';$('psPlaceholder').style.display='none'};r.readAsDataURL(this.files[0])}});
 $('btnCancelProfile').addEventListener('click',()=>$('modalProfile').classList.remove('show'));
 $('modalProfile').addEventListener('click',e=>{if(e.target===$('modalProfile'))$('modalProfile').classList.remove('show')});
-$('btnSaveProfile').addEventListener('click',async()=>{const n=$('psNameInput').value.trim();if(!n)return;const b=$('btnSaveProfile');b.textContent='保存中';try{let av=U.avatar;if(pAvFile)av=await uploadImg(pAvFile,300);await db.collection('users').doc(U.id).update({name:n,avatar:av});U.name=n;U.avatar=av;LS.set('user',U);rMyAv();$('modalProfile').classList.remove('show')}catch(e){alert('保存失败:'+errText(e))}b.textContent='保存'});
+$('btnSaveProfile').addEventListener('click',async()=>{const n=$('psNameInput').value.trim();if(!n)return;const b=$('btnSaveProfile');b.textContent='保存中';
+try{let av=U.avatar;if(pAvFile)av=await uploadImg(pAvFile,300);
+const r=await db.collection('users').doc(U.id).update({name:n,avatar:av});
+if(!okUpd(r))throw new Error('云端拒绝修改（这个账号不是本机创建的）');
+U.name=n;U.avatar=av;LS.set('user',U);rMyAv();$('modalProfile').classList.remove('show')}catch(e){alert('保存失败:'+errText(e))}b.textContent='保存'});
 
 async function loadStk(){try{await cloudInit;const r=await q(()=>db.collection('stickers').where({userId:U.id}).limit(200).get());STK=(r.data||[]).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));LS.set('stk',STK)}catch(e){STK=LS.get('stk')||[]}}
 function rStk(){['stkRoom','stkReply','stkDm','stkPost'].forEach(id=>{const p=$(id);if(!p)return;
@@ -303,11 +307,41 @@ const r=await db.collection('replies').where({postId:vP}).limit(200).get();RE=(r
 const p=gP();if(p){p._rc=RE.length;renderDetail(p)}$('pdBody').scrollTop=$('pdBody').scrollHeight}catch(e){alert('发送失败')}return}
 if(stkCtx==='post'){if(npPrev.length>=4)return alert('最多4张');npKeep.push(url);npPrev.push(url);rnI();$('stkPost').classList.remove('show');$('btnNpStk').classList.remove('on')}}
 
-async function swapCh(i,j){if(i<0||j<0||i>=CH.length||j>=CH.length)return;const a=CH[i],b=CH[j];const ao=a.ord||a.createdAt||0,bo=b.ord||b.createdAt||0;try{await db.collection('channels').doc(a._id).update({ord:bo});await db.collection('channels').doc(b._id).update({ord:ao});await loadChannels()}catch(e){alert('排序失败:'+errText(e))}}
-async function renameCh(ch){const nn=prompt('频道名称',ch.name);if(!nn||!nn.trim())return;try{await db.collection('channels').doc(ch._id).update({name:nn.trim()});await loadChannels()}catch(e){alert('修改失败:'+errText(e))}}
-async function delCh(ch){if(!confirm('确定删除「'+ch.name+'」？'))return;try{await db.collection('channels').doc(ch._id).remove();await loadChannels()}catch(e){alert('删除失败:'+errText(e))}}
-async function pinPost(p){try{await db.collection('posts').doc(p._id).update({pinned:!p.pinned});await loadPosts()}catch(e){alert('置顶失败（受权限限制，只能操作自己发的帖）:'+errText(e))}}
-async function delPost(id){if(!confirm('确定删除这条？'))return;try{await db.collection('posts').doc(id).remove();if(vP===id){vP=null;$('postDetail').classList.remove('show');document.body.classList.remove('no-tab');const ch=gC();if(ch&&ch.type==='persona'){$('personaArea').style.display='flex';$('fabGroup').style.display='flex'}else{$('forumArea').style.display='flex';$('fabGroup').style.display='flex'}}await loadPosts()}catch(e){alert('删除失败（只能删自己发的）:'+errText(e))}}
+async function saveChMeta(patch){const s=gS();if(!s)return false;
+const meta=Object.assign({},s.chMeta||{});
+Object.keys(patch).forEach(k=>{meta[k]=Object.assign({},meta[k]||{},patch[k])});
+try{const r=await db.collection('servers').doc(s._id).update({chMeta:meta});
+if(!okUpd(r))throw new Error('云端拒绝写入社区记录');
+s.chMeta=meta;LS.set('cs',S);return true}catch(e){alert('保存失败:'+errText(e));return false}}
+function applyChMeta(list){const s=gS();const meta=(s&&s.chMeta)||{};
+return list.filter(c=>!(meta[c._id]&&meta[c._id].hidden))
+.map(c=>{const m=meta[c._id];if(m){if(m.name)c.name=m.name;if(m.ord)c.ord=m.ord}return c})
+.sort((a,b)=>((a.ord||a.createdAt||0)-(b.ord||b.createdAt||0)))}
+async function swapCh(i,j){if(i<0||j<0||i>=CH.length||j>=CH.length)return;const a=CH[i],b=CH[j];
+const ao=a.ord||a.createdAt||0,bo=b.ord||b.createdAt||0;
+let ok=true;
+try{const r1=await db.collection('channels').doc(a._id).update({ord:bo});if(!okUpd(r1))ok=false}catch(e){ok=false}
+try{const r2=await db.collection('channels').doc(b._id).update({ord:ao});if(!okUpd(r2))ok=false}catch(e){ok=false}
+if(!ok){const done=await saveChMeta({[a._id]:{ord:bo},[b._id]:{ord:ao}});if(!done)return}
+await loadChannels()}
+async function renameCh(ch){const nn=prompt('频道名称',ch.name);if(!nn||!nn.trim())return;const nm=nn.trim();
+let ok=false;
+try{const r=await db.collection('channels').doc(ch._id).update({name:nm});ok=okUpd(r)}catch(e){ok=false}
+if(!ok){const done=await saveChMeta({[ch._id]:{name:nm}});if(!done)return}
+await loadChannels()}
+async function delCh(ch){if(!confirm('确定删除「'+ch.name+'」？'))return;
+let ok=false;
+try{const r=await db.collection('channels').doc(ch._id).remove();ok=okDel(r)}catch(e){ok=false}
+if(!ok){const done=await saveChMeta({[ch._id]:{hidden:true}});if(!done)return}
+await loadChannels()}
+async function pinPost(p){try{const r=await db.collection('posts').doc(p._id).update({pinned:!p.pinned});
+if(!okUpd(r))return alert('置顶失败：云端只允许修改自己发的帖子，给别人的帖子置顶需要云函数');
+await loadPosts()}catch(e){alert('置顶失败:'+errText(e))}}
+async function delPost(id){if(!confirm('确定删除这条？'))return;
+try{const r=await db.collection('posts').doc(id).remove();
+if(!okDel(r))return alert('删除失败：云端只允许删除自己发的帖子');
+if(vP===id){vP=null;$('postDetail').classList.remove('show');document.body.classList.remove('no-tab');const ch=gC();if(ch&&ch.type==='persona'){$('personaArea').style.display='flex';$('fabGroup').style.display='flex'}else{$('forumArea').style.display='flex';$('fabGroup').style.display='flex'}}
+await loadPosts()}catch(e){alert('删除失败:'+errText(e))}}
 
 async function loadServers(){await cloudInit;const cache=LS.get('cs');if(cache&&cache.length&&!S.length){S=cache;rSb()}
 try{const r=await q(()=>db.collection('servers').limit(100).get());S=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));LS.set('cs',S)}catch(e){}rSb()}
@@ -337,8 +371,9 @@ $('ssOverlay').addEventListener('click',e=>{if(e.target===$('ssOverlay'))$('ssOv
 $('ssSave').addEventListener('click',async()=>{const s=gS();if(!s)return;const n=$('ssName').value.trim();if(!n)return;const b=$('ssSave');b.disabled=true;b.textContent='保存中';
 try{const up={name:n,priv:$('ssPriv').value};
 if(ssAvFile)up.avatar=await uploadImg(ssAvFile,400);
-await db.collection('servers').doc(s._id).update(up);
-Object.assign(s,up);$('cpName').textContent=s.name;$('cpSub').textContent=(s.priv==='private'?'私密社区':'公开社区')+' · 由 '+(s.ownerName||'?')+' 创建';rSb();$('ssOverlay').classList.remove('show')}catch(e){alert('保存失败:'+errText(e))}
+const r=await db.collection('servers').doc(s._id).update(up);
+if(!okUpd(r))throw new Error('云端拒绝修改（这个社区不是本机创建的）');
+Object.assign(s,up);LS.set('cs',S);$('cpName').textContent=s.name;$('cpSub').textContent=(s.priv==='private'?'私密社区':'公开社区')+' · 由 '+(s.ownerName||'?')+' 创建';rSb();$('ssOverlay').classList.remove('show')}catch(e){alert('保存失败:'+errText(e))}
 b.disabled=false;b.textContent='保存'});
 
 async function openUser(uid,nm,av){
@@ -370,6 +405,8 @@ try{const r=await q(()=>db.collection('members').where({serverId:s._id}).limit(3
 (r.data||[]).forEach(m=>{if(!m.userId||seen[m.userId])return;seen[m.userId]=1;list.push({id:m.userId,name:m.name||'?',avatar:m.avatar||null,lastAt:m.lastAt||m.joinedAt||0})})}catch(e){}
 try{const r=await q(()=>db.collection('posts').where({serverId:s._id}).limit(300).get());
 (r.data||[]).forEach(p=>{if(p.userId&&!seen[p.userId]){seen[p.userId]=1;list.push({id:p.userId,name:p.user,avatar:p.avatar,lastAt:p.createdAt||0})}})}catch(e){}
+try{const r=await q(()=>db.collection('roomsg').where({serverId:s._id}).limit(300).get());
+(r.data||[]).forEach(m=>{if(m.userId&&!seen[m.userId]){seen[m.userId]=1;list.push({id:m.userId,name:m.user,avatar:m.avatar,lastAt:m.createdAt||0})}})}catch(e){}
 const b=$('memBody');b.innerHTML='';
 if(!list.length){b.innerHTML='<div class="empty-hint">还没有成员</div>';return}
 list.sort((x,y)=>{if(x.owner!==y.owner)return x.owner?-1:1;return (y.lastAt||0)-(x.lastAt||0)});
@@ -395,9 +432,13 @@ el.addEventListener('click',async()=>{const ch=CH.find(c=>c._id===p.channelId);i
 b.appendChild(el)})}catch(e){b.innerHTML='<div class="empty-hint">搜索失败</div>'}}
 
 async function loadChannels(){const s=gS();if(!s)return;
-const ck=LS.get('cch_'+s._id);if(ck&&ck.length){CH=ck;rCL()}else $('cpList').innerHTML='<div class="ldg">加载中…</div>';
+const ck=LS.get('cch_'+s._id);if(ck&&ck.length){CH=applyChMeta(ck);rCL()}else $('cpList').innerHTML='<div class="ldg">加载中…</div>';
 $('cpEmpty').style.display='none';
-try{const r=await q(()=>db.collection('channels').where({serverId:s._id}).limit(100).get());CH=(r.data||[]).sort((a,b)=>((a.ord||a.createdAt||0)-(b.ord||b.createdAt||0)));LS.set('cch_'+s._id,CH)}catch(e){if(!CH.length){$('cpList').innerHTML='<div class="empty-hint">加载失败，下拉重试</div>';return}}
+let fresh=null;
+try{const r=await q(()=>db.collection('servers').doc(s._id).get());const d=(r.data&&r.data[0])||r.data;if(d&&d._id)Object.assign(s,d)}catch(e){}
+try{const r=await q(()=>db.collection('channels').where({serverId:s._id}).limit(100).get());fresh=r.data||[]}catch(e){}
+if(fresh){LS.set('cch_'+s._id,fresh);CH=applyChMeta(fresh)}
+else if(!CH.length){$('cpList').innerHTML='<div class="empty-hint">加载失败，下拉重试</div>';return}
 rCL()}
 function rCL(){const l=$('cpList');l.innerHTML='';$('cpEmpty').style.display=CH.length?'none':'block';
 let prevType=null;
@@ -443,7 +484,7 @@ const d=new Date(x.createdAt||0),dk=d.toDateString();let brk=false;
 if(dk!==lastDay){lastDay=dk;const t=document.createElement('div');t.className='rm-time';t.textContent=(d.getMonth()+1)+'月'+d.getDate()+'日';m.appendChild(t);brk=true}
 else if((x.createdAt||0)-lastTs>420000){const t=document.createElement('div');t.className='rm-time';t.textContent=Tm(x.createdAt);m.appendChild(t);brk=true}
 const same=(x.userId===lastFrom)&&!brk;
-const row=document.createElement('div');row.className='rm-row';
+const row=document.createElement('div');row.className='rm-row'+(same?'':' grp');
 const avh=x.avatar?'<img src="'+x.avatar+'">':esc(In(x.user));
 const avb=same?'<div class="rm-sp"></div>':'<div class="rm-av" data-uid="'+x.userId+'">'+avh+'</div>';
 let body='';
@@ -463,8 +504,10 @@ m.appendChild(row);lastFrom=x.userId;lastTs=x.createdAt||0});
 if(atBottom)m.scrollTop=m.scrollHeight}
 async function saveAsSticker(url){try{const a=await db.collection('stickers').add({userId:U.id,url,createdAt:Date.now()});STK.unshift({_id:a.id,userId:U.id,url,createdAt:Date.now()});LS.set('stk',STK);alert('已存入我的表情')}catch(e){alert('保存失败')}}
 async function recall(x,kind){if(!confirm('撤回这条消息？'))return;
-try{if(kind==='room'){await db.collection('roomsg').doc(x._id).update({deleted:true,text:'',img:null});await loadRoom()}
-else{await db.collection('messages').doc(x._id).update({deleted:true,text:'',img:null});await loadMsgs()}}catch(e){alert('撤回失败（只能撤回自己的）:'+errText(e))}}
+try{const col=(kind==='room')?'roomsg':'messages';
+const r=await db.collection(col).doc(x._id).update({deleted:true,text:'',img:null});
+if(!okUpd(r))return alert('撤回失败：云端只允许撤回自己发的消息');
+if(kind==='room')await loadRoom();else await loadMsgs()}catch(e){alert('撤回失败:'+errText(e))}}
 $('rqtClose').addEventListener('click',()=>{roomQ=null;$('roomQuote').classList.remove('show')});
 $('roomPic').addEventListener('click',()=>$('roomFile').click());
 $('roomFile').addEventListener('change',async function(){const f=this.files[0];this.value='';if(!f)return;const ch=gC();if(!ch)return;
@@ -630,7 +673,8 @@ $('btnSubmitPost').addEventListener('click',async()=>{
 const t=$('npTitleInput').value.trim(),c=$('npContentInput').value.trim();if(!t||!c)return;
 const ch=gC(),s=gS();if(!ch||!s)return;const b=$('btnSubmitPost');b.disabled=true;
 try{const urls=npKeep.slice();for(const f of npFiles){try{urls.push(await uploadImg(f,1000))}catch(e){}}
-if(editPid){await db.collection('posts').doc(editPid).update({title:t,content:c,images:urls,editedAt:Date.now()});
+if(editPid){const r=await db.collection('posts').doc(editPid).update({title:t,content:c,images:urls,editedAt:Date.now()});
+if(!okUpd(r))throw new Error('云端拒绝修改（只能编辑自己发的帖子）');
 $('newPostPage').classList.remove('show');const id=editPid;editPid=null;await loadPosts();if(vP===id){const p=gP();if(p)renderDetail(p)}}
 else{await db.collection('posts').add({serverId:s._id,channelId:ch._id,user:U.name,userId:U.id,avatar:U.avatar||null,title:t,content:c,images:urls,replyCount:0,likeCount:0,pinned:false,createdAt:Date.now()});
 LS.set(draftKey(),null);$('draftTip').textContent='';$('newPostPage').classList.remove('show');await loadPosts()}
