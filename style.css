@@ -471,3 +471,29 @@ body.dark .fs-slider::-webkit-slider-thumb{background:#e0e0e0}
 body.dark .doc-page{background:#1e1e1e}
 body.dark .doc-body h4{color:#e0e0e0}
 body.dark .doc-body p{color:#aaa}
+/* ===== 图片按原尺寸 ===== */
+.pc-images.img-1,.pd-op .op-imgs.img-1{display:block!important;border-radius:10px}
+.pc-images.img-1 img,.pd-op .op-imgs.img-1 img{width:auto!important;max-width:100%!important;height:auto!important;aspect-ratio:auto!important;max-height:none!important;object-fit:contain!important;border-radius:10px!important;margin:0}
+.pc-images img,.pd-op .op-imgs img{border-radius:0}
+/* ===== 附件卡片 ===== */
+.file-chip{display:inline-flex;align-items:center;gap:7px;max-width:100%;padding:8px 12px;margin:6px 0;background:#f4f5f7;border:1px solid #e8e9ec;border-radius:10px;text-decoration:none;vertical-align:middle}
+.file-chip svg{width:17px;height:17px;stroke:#8a8f98;stroke-width:1.7;fill:none;flex-shrink:0}
+.file-chip span{font-size:11px;color:#555;font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.file-chip:active{background:#ebecef}
+body.dark .file-chip{background:#2c2c2e;border-color:#3a3a3c}
+body.dark .file-chip span{color:#ccc}
+body.dark .file-chip svg{stroke:#999}
+/* ===== 发帖/详情隐藏底栏 ===== */
+body.no-tab .tab-bar{display:none!important}
+body.no-tab .reply-bar{margin-bottom:0}
+body.no-tab .announce-input{margin-bottom:0}
+/* ===== 频道按类型分组 ===== */
+.ch-gap{height:14px}
+.ch-item{padding:10px 16px}
+/* ===== 社区设置弹窗 ===== */
+.ss-avatar{width:56px;height:56px;border-radius:16px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;margin:0 auto 14px}
+.ss-avatar img{width:100%;height:100%;object-fit:cover}
+.ss-avatar svg{width:20px;height:20px;stroke:#bbb;stroke-width:1.5;fill:none}
+/* ===== 编辑模式标识 ===== */
+.np-title.editing::after{content:' · 编辑中';font-size:10px;color:#bbb;font-weight:400}
+
