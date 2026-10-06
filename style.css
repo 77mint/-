@@ -258,10 +258,71 @@ body.in-dm .tab-bar{display:none!important}
 .dm-row{align-items:center;gap:8px;max-width:80%;margin-bottom:3px}
 .dm-row .dm-av{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .dm-row .dm-av-img{width:36px;height:36px;font-size:12px}
-.dm-row .dm-av-spacer{width:36px;height:1px}
+.dm-row .dm-av-spacer{width:36px;height:1px;flex-shrink:0}
 .dm-row.me .dm-capsule{background:#E0F2FE}
 .dm-row .dm-capsule{padding:9px 15px;font-size:12.5px}
 .dm-time-mid{text-align:center;font-size:9px;color:#c8c8c8;padding:8px 0 4px;font-weight:500}
 body.dark .dm-row.me .dm-capsule{background:#2a4a5e;color:#e8f4fb}
 body.dark .dm-time-mid{color:#555}
-
+.dm-input{margin-bottom:0}
+.dm-img{max-width:170px;border-radius:14px;display:block;background:#eee}
+.dm-input .dm-pic{width:32px;height:32px;border:none;background:#f0f0f0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer}
+.dm-input .dm-pic svg{width:16px;height:16px;stroke:#888;stroke-width:1.8;fill:none}
+body.dark .dm-input .dm-pic{background:#333}
+/* 回复区发图 */
+.reply-bar .rb-pic{width:32px;height:32px;border:none;background:#f0f0f0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer}
+.reply-bar .rb-pic svg{width:16px;height:16px;stroke:#888;stroke-width:1.8;fill:none}
+body.dark .reply-bar .rb-pic{background:#333}
+.ri-imgs{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.ri-imgs img{width:88px;height:88px;object-fit:cover;border-radius:8px;background:#eee}
+.rb-prev{display:none;gap:6px;padding:6px 12px;border-top:1px solid #eee;background:#fff}
+.rb-prev.show{display:flex}
+.rb-prev .p{position:relative;width:52px;height:52px;border-radius:8px;overflow:hidden;background:#eee}
+.rb-prev .p img{width:100%;height:100%;object-fit:cover}
+.rb-prev .x{position:absolute;top:1px;right:1px;width:16px;height:16px;border-radius:50%;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center}
+.rb-prev .x svg{width:9px;height:9px;stroke:#fff;stroke-width:3;fill:none}
+body.dark .rb-prev{background:#1e1e1e;border-color:#333}
+/* 成员列表 */
+.mem-page{display:none;flex-direction:column;height:100%;background:#f5f5f5;position:absolute;inset:0;z-index:50}
+.mem-page.show{display:flex}
+.mem-body{flex:1;overflow-y:auto;padding:10px 12px 80px}
+.mem-item{display:flex;align-items:center;gap:10px;padding:10px;background:#fff;border-radius:10px;margin-bottom:8px}
+.mem-item .m-av{width:34px;height:34px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#aaa;overflow:hidden;flex-shrink:0}
+.mem-item .m-av img{width:100%;height:100%;object-fit:cover}
+.mem-item .m-nm{flex:1;font-size:12px;font-weight:600;min-width:0}
+.mem-item .m-tag{font-size:9px;font-weight:600;padding:2px 7px;border-radius:6px;background:#eee;color:#888;flex-shrink:0}
+.mem-item .m-tag.own{background:#222;color:#fff}
+body.dark .mem-item{background:#2a2a2a}
+body.dark .mem-item .m-nm{color:#e0e0e0}
+body.dark .mem-item .m-tag{background:#3a3a3a;color:#aaa}
+body.dark .mem-item .m-tag.own{background:#e0e0e0;color:#1a1a1a}
+/* @提到与通知 */
+.at-list{display:none;position:absolute;bottom:52px;left:10px;right:10px;background:#fff;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.12);max-height:160px;overflow-y:auto;z-index:20}
+.at-list.show{display:block}
+.at-item{display:flex;align-items:center;gap:8px;padding:9px 12px;cursor:pointer;font-size:12px}
+.at-item:active{background:#f5f5f5}
+.at-item .a-av{width:26px;height:26px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#aaa;overflow:hidden;flex-shrink:0}
+.at-item .a-av img{width:100%;height:100%;object-fit:cover}
+body.dark .at-list{background:#2a2a2a}
+body.dark .at-item{color:#e0e0e0}
+body.dark .at-item:active{background:#333}
+.mention{color:#4a90d9;font-weight:600}
+.tab-dot{position:absolute;top:6px;right:50%;margin-right:-14px;width:7px;height:7px;border-radius:50%;background:#e74c3c;display:none}
+.tab-dot.show{display:block}
+.noti-page{display:none;flex-direction:column;height:100%;background:#f5f5f5;position:absolute;inset:0;z-index:50}
+.noti-page.show{display:flex}
+.noti-body{flex:1;overflow-y:auto;padding:10px 12px 80px}
+.noti-item{padding:10px 12px;background:#fff;border-radius:10px;margin-bottom:8px;cursor:pointer}
+.noti-item .n-top{font-size:11px;font-weight:600;margin-bottom:3px}
+.noti-item .n-txt{font-size:11px;color:#888;line-height:1.5}
+.noti-item .n-tm{font-size:9px;color:#ccc;margin-top:3px}
+.noti-item.unread{border-left:3px solid #e74c3c}
+body.dark .noti-item{background:#2a2a2a}
+body.dark .noti-item .n-top{color:#e0e0e0}
+/* 频道排序按钮 */
+.ch-ord{display:flex;gap:4px;flex-shrink:0}
+.ch-ord div{width:24px;height:24px;border-radius:6px;background:#f0f0f0;display:flex;align-items:center;justify-content:center}
+.ch-ord svg{width:12px;height:12px;stroke:#888;stroke-width:2.2;fill:none}
+body.dark .ch-ord div{background:#333}
+/* 帖子操作弹窗多按钮 */
+#postActionOverlay .modal-btns button+button{margin-top:0}
