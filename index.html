@@ -68,7 +68,7 @@
 <input type="file" id="stkFile" accept="image/*" multiple style="display:none">
 <script>
 (function(){
-const APP_VERSION='1.8.0';
+const APP_VERSION='1.9.0';
 const SB_ENV='mintds-d8gybgoqke953154b';
 const SB_REGION='ap-shanghai';
 const STORAGE_HOST='https://6d69-mintds-d8gybgoqke953154b-1500834017.tcb.qcloud.la';
@@ -105,32 +105,25 @@ let watchPost=null,watchRep=null,watchMsg=null,watchRoom=null,notiTimer=null;
 let darkMode=LS.get('darkMode')||false;
 function applyDark(){document.body.classList.toggle('dark',darkMode)}
 applyDark();
-const FS_RATES=[0.88,1,1.14,1.3];
 let fsIdx=parseInt(localStorage.getItem('md_fs')||'1');
-let fsStyleEl=null,fsBase=null;
-const FS_SKIP=['header','title','tab','sub','time','badge','tag','hint','logo','group-title','np-title','dm-name','ct-','fs-','vt','upd','pin'];
-function collectFs(){if(fsBase)return fsBase;const map={};
-for(const sh of document.styleSheets){let rules;try{rules=sh.cssRules}catch(e){continue}if(!rules)continue;
-for(const r of rules){if(!r.style||!r.selectorText)continue;const v=r.style.fontSize;if(!v||v.indexOf('px')<0)continue;const px=parseFloat(v);if(!px)continue;
-r.selectorText.split(',').map(s=>s.trim()).forEach(s=>{if(!s||s.indexOf(':')>=0)return;const low=s.toLowerCase();if(FS_SKIP.some(k=>low.indexOf(k)>=0))return;map[s]=px})}}
-fsBase=map;return map}
-function applyFs(){const rate=FS_RATES[fsIdx]||1;
-if(!fsStyleEl){fsStyleEl=document.createElement('style');document.head.appendChild(fsStyleEl)}
-if(rate===1){fsStyleEl.textContent='';return}
-const map=collectFs();let css='';for(const sel in map)css+=sel+'{font-size:'+(map[sel]*rate).toFixed(2)+'px!important}';
-fsStyleEl.textContent=css}
-setTimeout(applyFs,80);
+function applyFs(){document.body.classList.remove('fz0','fz1','fz2','fz3');document.body.classList.add('fz'+fsIdx)}
+applyFs();
 function isAdminOf(sv){if(!sv||!U)return false;return sv.owner===U.id||U.role==='super'}
 function esc(t){return (t==null?'':String(t)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function SP(t){return esc(t).replace(/\|\|(.+?)\|\|/g,'<span class="spoiler">$1</span>').replace(/\n/g,'<br>')}
 const FICON='<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>';
-function chip(url,nm){return '<a class="file-chip" href="javascript:void(0)" data-dl="'+url+'" data-nm="'+esc(nm)+'">'+FICON+'<span>'+esc(nm)+'</span></a>'}
-function LNK(t){
-let s=SP(t);
-s=s.replace(/附件\s+([^\s:：]+)\s*[:：]\s*(https?:\/\/[^\s<]+)/g,(m,nm,url)=>chip(url,nm));
-s=s.replace(/(https?:\/\/[^\s<"']+)/g,m=>{if(m.indexOf('/file/')>=0){const nm=decodeURIComponent(m.split('/').pop()).replace(/^\d+_/,'');return chip(m,nm)}return '<a href="'+m+'" target="_blank" rel="noopener" style="color:#4a90d9">'+m+'</a>'});
-s=s.replace(/@([^\s<@]{1,16})/g,'<span class="mention">@$1</span>');
-return s}
+function fileName(url){try{return decodeURIComponent(url.split('/').pop()).replace(/^\d+_/,'')}catch(e){return '附件'}}
+function RICH(raw){
+const txt=(raw==null?'':String(raw));
+const toks=[];let s=txt;
+s=s.replace(/附件\s+([^\s:：]+)\s*[:：]\s*(https?:\/\/[^\s]+)/g,(m,nm,url)=>{toks.push({t:'f',url,nm});return '\u0000'+(toks.length-1)+'\u0000'});
+s=s.replace(/(https?:\/\/[^\s]+)/g,m=>{if(m.indexOf('/file/')>=0)toks.push({t:'f',url:m,nm:fileName(m)});else toks.push({t:'a',url:m});return '\u0000'+(toks.length-1)+'\u0000'});
+let h=esc(s).replace(/\|\|(.+?)\|\|/g,'<span class="spoiler">$1</span>').replace(/@([^\s<@]{1,16})/g,'<span class="mention">@$1</span>').replace(/\n/g,'<br>');
+h=h.replace(/\u0000(\d+)\u0000/g,(m,i)=>{const k=toks[parseInt(i)];if(!k)return '';
+if(k.t==='f')return '<a class="file-chip" href="javascript:void(0)" data-dl="'+encodeURI(k.url)+'" data-nm="'+esc(k.nm)+'">'+FICON+'<span>'+esc(k.nm)+'</span></a>';
+return '<a href="'+encodeURI(k.url)+'" target="_blank" rel="noopener" style="color:#4a90d9">'+esc(k.url)+'</a>'});
+return h}
+function SP(t){return esc(t).replace(/\|\|(.+?)\|\|/g,'<span class="spoiler">$1</span>').replace(/\n/g,'<br>')}
+const LNK=RICH;
 document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('[data-dl]');if(a){e.preventDefault();e.stopPropagation();dlFile(a.getAttribute('data-dl'),a.getAttribute('data-nm'))}});
 function cid(a,b){return [a,b].sort().join('_')}
 function closeW(w){if(w){try{w.close()}catch(e){}}}
@@ -143,7 +136,7 @@ async function checkVer(){try{await cloudInit;const r=await db.collection('meta'
 list.forEach(d=>{if(d.ver&&verNum(d.ver)>verNum(mx))mx=d.ver});
 if(verNum(APP_VERSION)>verNum(mx)||!list.length){try{await db.collection('meta').add({ver:APP_VERSION,at:Date.now()})}catch(e){}}
 else if(verNum(mx)>verNum(APP_VERSION)){$('updTxt').textContent='有新版本 '+mx+'，点击更新';$('updBar').classList.add('show')}}catch(e){}}
-$('updBtn').addEventListener('click',()=>{const u=location.href.split('?')[0]+'?v='+Date.now();location.replace(u)});
+$('updBtn').addEventListener('click',()=>{location.replace(location.href.split('?')[0]+'?v='+Date.now())});
 
 let isLogin=false;
 function showAuth(){$('authPage').classList.remove('hidden');$('app').classList.remove('show');TB.style.display='none'}
@@ -227,7 +220,6 @@ $('btnCancelProfile').addEventListener('click',()=>$('modalProfile').classList.r
 $('modalProfile').addEventListener('click',e=>{if(e.target===$('modalProfile'))$('modalProfile').classList.remove('show')});
 $('btnSaveProfile').addEventListener('click',async()=>{const n=$('psNameInput').value.trim();if(!n)return;const b=$('btnSaveProfile');b.textContent='保存中';try{let av=U.avatar;if(pAvFile)av=await uploadImg(pAvFile,300);await db.collection('users').doc(U.id).update({name:n,avatar:av});U.name=n;U.avatar=av;LS.set('user',U);rMyAv();$('modalProfile').classList.remove('show')}catch(e){alert('保存失败:'+errText(e))}b.textContent='保存'});
 
-/* ===== 贴纸 ===== */
 async function loadStk(){try{await cloudInit;const r=await q(()=>db.collection('stickers').where({userId:U.id}).limit(200).get());STK=(r.data||[]).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));LS.set('stk',STK)}catch(e){STK=LS.get('stk')||[]}}
 function rStk(){['stkRoom','stkReply','stkDm','stkPost'].forEach(id=>{const p=$(id);if(!p)return;
 let h='<div class="stk-head"><div class="t">我的表情 ('+STK.length+')</div><div class="stk-add" data-act="add"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加</div><div class="stk-add" data-act="edit" style="color:#999">'+(stkEdit?'完成':'管理')+'</div></div><div class="stk-grid">';
@@ -396,7 +388,7 @@ const avb=same?'<div class="rm-sp"></div>':'<div class="rm-av" data-uid="'+x.use
 let body='';
 if(x.deleted)body='<div class="rm-del">该消息已撤回</div>';
 else if(x.img)body='<img class="'+(x.stk?'msg-sticker':'rm-img')+'" src="'+x.img+'" loading="lazy" data-zoom="'+x.img+'">';
-else body='<div class="rm-txt">'+LNK(x.text)+'</div>';
+else body='<div class="rm-txt">'+RICH(x.text)+'</div>';
 const head=same?'':'<div class="rm-head"><span class="rm-nm">'+esc(x.user)+'</span><span class="rm-tm">'+Tm(x.createdAt)+'</span></div>';
 row.innerHTML=avb+'<div class="rm-body">'+head+(x.q?'<div class="rm-q">'+esc(x.q)+'</div>':'')+body+'</div>';
 const avEl=row.querySelector('.rm-av');
@@ -436,7 +428,7 @@ function startWatchPosts(){const ch=gC();if(!ch||!db)return;try{watchPost=db.col
 function startWatchReplies(pid){if(!db)return;try{watchRep=db.collection('replies').where({postId:pid}).watch({onChange:s=>{if(!s||!s.docs)return;RE=s.docs.slice().sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));const p=gP();if(p&&vP===pid)renderDetail(p)},onError:()=>{}})}catch(e){}}
 
 function rAn(){const a=$('announceArea');a.innerHTML='';if(!PO.length){a.innerHTML='<div class="empty-hint">暂无通告</div>';return}
-PO.slice().reverse().forEach(p=>{const d=document.createElement('div');d.className='ann-item';d.innerHTML='<div class="ann-time">'+Tm(p.createdAt)+' · '+esc(p.user)+'</div><div class="ann-title">'+esc(p.title)+'</div>'+(p.content?'<div class="ann-content">'+LNK(p.content)+'</div>':'');a.appendChild(d)})}
+PO.slice().reverse().forEach(p=>{const d=document.createElement('div');d.className='ann-item';d.innerHTML='<div class="ann-time">'+Tm(p.createdAt)+' · '+esc(p.user)+'</div><div class="ann-title">'+esc(p.title)+'</div>'+(p.content?'<div class="ann-content">'+RICH(p.content)+'</div>':'');a.appendChild(d)})}
 $('btnAnnPost').addEventListener('click',async()=>{const v=$('annInput').value.trim();if(!v)return;const ch=gC(),s=gS();if(!ch)return;const b=$('btnAnnPost');b.disabled=true;try{await db.collection('posts').add({serverId:s._id,channelId:ch._id,user:U.name,userId:U.id,avatar:U.avatar||null,title:v,content:'',images:[],createdAt:Date.now()});$('annInput').value='';await loadPosts()}catch(e){alert('发布失败:'+errText(e))}b.disabled=false});
 
 async function toggleLike(p,el){try{const r=await db.collection('likes').where({postId:p._id,userId:U.id}).limit(1).get();if(r.data&&r.data.length){await db.collection('likes').doc(r.data[0]._id).remove();p.likeCount=Math.max(0,(p.likeCount||0)-1)}else{await db.collection('likes').add({postId:p._id,userId:U.id,createdAt:Date.now()});p.likeCount=(p.likeCount||0)+1}try{await db.collection('posts').doc(p._id).update({likeCount:p.likeCount})}catch(e){}if(el)el.textContent=p.likeCount}catch(e){}}
@@ -470,11 +462,11 @@ try{const r=await q(()=>db.collection('replies').where({postId:pid}).limit(200).
 const p=gP();if(p)renderDetail(p);startWatchReplies(pid);loadMembersForAt()}
 function renderDetail(p){
 const av=p.avatar?'<img src="'+p.avatar+'">':esc(In(p.user));
-let h='<div class="pd-op"><div class="op-head"><div class="op-avatar" data-uid="'+p.userId+'">'+av+'</div><div class="op-info"><div class="op-name">'+esc(p.user)+'</div><div class="op-time">'+Tm(p.createdAt)+(p.editedAt?' · 已编辑':'')+'</div></div></div><div class="op-title">'+SP(p.title)+'</div><div class="op-content">'+LNK(p.content)+'</div>'+imgGrid(p.images,'op-imgs')+'</div>';
+let h='<div class="pd-op"><div class="op-head"><div class="op-avatar" data-uid="'+p.userId+'">'+av+'</div><div class="op-info"><div class="op-name">'+esc(p.user)+'</div><div class="op-time">'+Tm(p.createdAt)+(p.editedAt?' · 已编辑':'')+'</div></div></div><div class="op-title">'+SP(p.title)+'</div><div class="op-content">'+RICH(p.content)+'</div>'+imgGrid(p.images,'op-imgs')+'</div>';
 if(RE.length){h+='<div class="pd-replies-title">回复 ('+RE.length+')</div>';
 RE.forEach((r,i)=>{const ra=r.avatar?'<img src="'+r.avatar+'">':esc(In(r.user));const last=i===RE.length-1;
 const ri=(r.images&&r.images.length)?(r.stk?'<img class="msg-sticker" src="'+r.images[0]+'" loading="lazy" data-zoom="'+r.images[0]+'">':'<div class="ri-imgs">'+r.images.map(u=>'<img src="'+u+'" loading="lazy" data-zoom="'+u+'">').join('')+'</div>'):'';
-h+='<div class="reply-item" data-rid="'+r._id+'"><div class="ri-line"><div class="ri-avatar">'+ra+'</div>'+(!last?'<div class="ri-thread"></div>':'')+'</div><div class="ri-body"><div class="ri-name-row"><span class="ri-name">'+esc(r.user)+'</span><span class="ri-time">'+Tm(r.createdAt)+'</span></div>'+(r.qn?'<div style="font-size:10px;color:#bbb;margin-bottom:2px;padding-left:8px;border-left:2px solid #eee">回复 <b>'+esc(r.qn)+'</b>: '+esc((r.qt||'').slice(0,30))+'</div>':'')+(r.text?'<div class="ri-text">'+LNK(r.text)+'</div>':'')+ri+'</div></div>'})}
+h+='<div class="reply-item" data-rid="'+r._id+'"><div class="ri-line"><div class="ri-avatar">'+ra+'</div>'+(!last?'<div class="ri-thread"></div>':'')+'</div><div class="ri-body"><div class="ri-name-row"><span class="ri-name">'+esc(r.user)+'</span><span class="ri-time">'+Tm(r.createdAt)+'</span></div>'+(r.qn?'<div style="font-size:10px;color:#bbb;margin-bottom:2px;padding-left:8px;border-left:2px solid #eee">回复 <b>'+esc(r.qn)+'</b>: '+esc((r.qt||'').slice(0,30))+'</div>':'')+(r.text?'<div class="ri-text">'+RICH(r.text)+'</div>':'')+ri+'</div></div>'})}
 else h+='<div class="empty-hint" style="padding:16px 0">暂无回复</div>';
 $('pdBody').innerHTML=h;
 const oa=$('pdBody').querySelector('.op-avatar');if(oa)oa.addEventListener('click',()=>openUser(p.userId,p.user,p.avatar));
@@ -667,7 +659,7 @@ $('dmName').textContent=f.name;$('dmMsgs').innerHTML='<div class="ldg">加载中
 closeW(watchMsg);watchMsg=null;
 await loadMsgs();
 readAt[f.id]=Date.now();LS.set('readAt',readAt);
-try{watchMsg=db.collection('messages').where({conv:cid(U.id,f.id)}).watch({onChange:s=>{if(!s||!s.docs)return;MSG=s.docs.slice().sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));rMsgs();readAt[f.id]=Date.now();LS.set('readAt',readAt)},onError:()=>{setTimeout(()=>{if(dmPeer){closeW(watchMsg);openDm(dmPeer)}},4000)}})}catch(e){}}
+try{watchMsg=db.collection('messages').where({conv:cid(U.id,f.id)}).watch({onChange:s=>{if(!s||!s.docs)return;MSG=s.docs.slice().sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));rMsgs();readAt[f.id]=Date.now();LS.set('readAt',readAt)},onError:()=>{}})}catch(e){}}
 async function loadMsgs(){try{const r=await q(()=>db.collection('messages').where({conv:cid(U.id,dmPeer.id)}).limit(300).get());MSG=(r.data||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))}catch(e){if(!MSG.length){$('dmMsgs').innerHTML='<div class="empty-hint">加载失败</div>';return}}rMsgs()}
 function rMsgs(){const m=$('dmMsgs');const atBottom=(m.scrollHeight-m.scrollTop-m.clientHeight)<80;m.innerHTML='';
 if(!MSG.length){m.innerHTML='<div class="empty-hint">还没有消息</div>';return}
@@ -683,7 +675,7 @@ const avBlock=same?'<div class="dm-av-spacer"></div>':'<div class="dm-av"><div c
 let body;
 if(x.deleted)body='<div class="dm-capsule" style="color:#aaa;font-style:italic">已撤回</div>';
 else if(x.img)body='<img class="'+(x.stk?'msg-sticker':'dm-img')+'" src="'+x.img+'" loading="lazy" data-zoom="'+x.img+'">';
-else body='<div class="dm-capsule">'+LNK(x.text)+'</div>';
+else body='<div class="dm-capsule">'+RICH(x.text)+'</div>';
 row.innerHTML=avBlock+'<div>'+(x.q?'<div class="dm-quote-ref">'+esc(x.q)+'</div>':'')+body+'</div>';
 if(!x.deleted){let t=null;const tgt=row.querySelector('.dm-capsule')||row.querySelector('img');
 if(tgt){tgt.addEventListener('touchstart',()=>{t=setTimeout(()=>{actMsg=x;actKind='dm';$('maDel').style.display=me?'block':'none';$('maSave').style.display=x.img?'block':'none';$('msgAct').classList.add('show')},500)});
