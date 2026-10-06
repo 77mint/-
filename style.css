@@ -554,3 +554,54 @@ body.dark .ch-gap{background:#2e2e2e}
 .file-chip span{max-width:200px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 /* ===== 整体缩放（字号滑块用） ===== */
 .main{transform-origin:top left}
+/* ===== 字号方案B：全局相对单位 ===== */
+html{font-size:16px}
+body.fz0{font-size:12px}
+body.fz1{font-size:13px}
+body.fz2{font-size:15px}
+body.fz3{font-size:17px}
+/* 正文类统一跟随 body */
+.pc-title{font-size:1.08em!important}
+.pc-preview{font-size:.86em!important}
+.pc-user{font-size:.93em!important}
+.pd-op .op-title{font-size:1.24em!important}
+.pd-op .op-content{font-size:.95em!important}
+.pd-op .op-name{font-size:.93em!important}
+.reply-item .ri-text{font-size:.95em!important}
+.reply-item .ri-name{font-size:.86em!important}
+.ann-item .ann-title{font-size:1.08em!important}
+.ann-item .ann-content{font-size:.95em!important}
+.ch-item .chi-name{font-size:1em!important}
+.rm-txt{font-size:.97em!important}
+.rm-nm{font-size:.93em!important}
+.dm-row .dm-capsule{font-size:.97em!important}
+.persona-card .psc-name{font-size:1em!important}
+.persona-card .psc-desc{font-size:.8em!important}
+.srch-item .s-tt{font-size:1em!important}
+.srch-item .s-pv{font-size:.86em!important}
+.friend-item .fi-name{font-size:.93em!important}
+.friend-item .fi-msg{font-size:.8em!important}
+.settings-item{font-size:1em!important}
+.mem-item .m-nm{font-size:.93em!important}
+.noti-item .n-top{font-size:.86em!important}
+.noti-item .n-txt{font-size:.86em!important}
+.vault-item .vi-title{font-size:.93em!important}
+.doc-body p{font-size:.93em!important}
+.doc-body h4{font-size:1em!important}
+.cp-search input{font-size:.86em!important}
+.chat-search input{font-size:.86em!important}
+.room-input input{font-size:.93em!important}
+.dm-input input{font-size:.86em!important}
+.reply-bar input{font-size:.93em!important}
+.announce-input input{font-size:.93em!important}
+.np-body .np-content-input{font-size:1em!important}
+.np-body .np-title-input{font-size:1.38em!important}
+.at-item{font-size:.93em!important}
+.sur-item .su-nm{font-size:.93em!important}
+.req-item .ri-nm{font-size:.93em!important}
+.file-chip span{font-size:.86em!important}
+.ss-result{font-size:1em!important}
+.empty-hint{font-size:.93em!important}
+.ldg{font-size:.86em!important}
+/* 固定不变的：头部/标签/时间/徽章 */
+.cv-header .title,.cv-header .subtitle,.pd-header .title,.frp-header .title,.np-header .np-title,.dm-header .dm-name,.tab-bar .tab span,.cp-name,.cp-sub,.cp-id,.vault-top,.ct-title,.chat-section-title,.settings-group-title,.modal h3,.profile-sheet h3,.search-sheet h3,.auth-logo,.auth-sub,.fs-row .fs-ttl,.fs-row .fs-s,.fs-row .fs-b,.pin-badge,.mem-item .m-tag,.rm-tm,.rm-time,.ri-time,.pc-time,.fi-time,.dm-time-mid,.dm-grp-info span,.noti-item .n-tm,.srch-item .s-mt,.up-post-item .upi-time,.doc-body .upd,.draft-tip,.id-hint,.ss-hint,.vault-tabs .vt,.upd-bar,.stk-head .t,.stk-add,.psc-author,.psc-stats,.pc-footer,.ri-imgs,.vi-sub,.up-name,.up-bio,.up-posts-title,.upi-title,.upi-preview,.fr-title,.fr-sub,.fr-badge,.fi-unread,.role-badge,.rm-q,.dm-quote-ref,.reply-quote,.room-quote,.dm-quote-bar,.pd-replies-title,.cp-empty,.vault-empty,.np-author .npa-name,.np-author .npa-hint,.auth-input,.auth-btn,.auth-switch,.auth-err,.modal input,.modal select,.modal-btns button,.ps-name-input,.search-sheet input,.emoji-picker span{font-size:revert!important}
