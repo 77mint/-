@@ -63,7 +63,7 @@
       </div>
       <div class="settings-group"><div class="settings-group-title">账号</div><div class="settings-item" id="btnMyId"><span id="myIdLabel">我的 ID</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div><div class="settings-item"><span id="myRoleLabel">我的头衔</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div><div class="settings-item" id="btnLogout" style="color:#e74c3c"><span>退出登录</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
       <div class="settings-group"><div class="settings-group-title">更新</div><div class="settings-item" id="btnCheckUpdate"><span>检查更新 <span class="upd-dot" id="updateDot"></span></span><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.22-8.56"/><polyline points="21 3 21 9 15 9"/></svg></div><div class="settings-item"><span id="currentVer">当前版本</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-      <div class="settings-group"><div class="settings-group-title">关于</div><div class="settings-item" id="btnAbout"><span>Mint-Ds</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div><div class="settings-item" id="btnDisclaimer"><span>免责声明</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+      <div class="settings-group"><div class="settings-group-title">关于</div><div class="settings-item" id="btnAbout"><span>Mint-Ds</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div><div class="settings-item" id="btnGuide"><span>使用教程</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div><div class="settings-item" id="btnDisclaimer"><span>免责声明</span><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
     </div>
   </div>
 </div>
@@ -77,7 +77,7 @@
 <input type="file" id="stkFile" accept="image/*" multiple style="display:none">
 <script>
 (function(){
-const APP_VERSION='1.12.0';
+const APP_VERSION='1.12.1';
 const SB_ENV='mintds-d8gybgoqke953154b';
 const SB_REGION='ap-shanghai';
 const STORAGE_HOST='https://6d69-mintds-d8gybgoqke953154b-1500834017.tcb.qcloud.la';
@@ -321,8 +321,61 @@ function imgGrid(images,cls){if(!images||!images.length)return '';const c=Math.m
 document.addEventListener('click',e=>{const z=e.target.getAttribute&&e.target.getAttribute('data-zoom');if(z){e.stopPropagation();zoom(z)}});
 
 const DOC_ABOUT='<h4>Mint-Ds</h4><p>一个轻量的同人兴趣社区，支持社区、论坛、角色卡、聊天室与私信。</p><h4>版本</h4><p>当前版本 '+APP_VERSION+'</p><h4>头衔</h4><p>按站内活跃度自动变化：新芽 → 初绽 → 拂叶 → 盛夏 → 常青。</p><p class="upd">感谢你的使用。</p>';
+const GR=(a,b)=>'<div style="display:flex;gap:12px;margin-bottom:7px;line-height:1.6"><span style="width:88px;flex-shrink:0;font-weight:600;font-size:.93em">'+a+'</span><span style="flex:1;min-width:0;opacity:.72;font-size:.9em">'+b+'</span></div>';
+const DOC_GUIDE='<h4>账号</h4>'
++'<p>注册时填昵称和密码，昵称可以和别人重复。每个人有一串 5 位数字 ID，这是你唯一的身份。在「设置 → 我的 ID」能看到自己的 ID。</p>'
++'<p>登录可以用昵称，也可以用 ID。重名的话用 ID 更保险。</p>'
++'<p>改昵称改头像：私信页点自己的名片 → 编辑资料。改完之后站内所有地方都会跟着变，包括你以前发的帖子和消息。</p>'
++'<p><b>第一次用请务必进「编辑资料」把头像重新保存一次</b>，否则别人在帖子和联系人列表里看不到你的头像。</p>'
++'<h4>社区和频道</h4>'
++'<p>最左边一列是你加入的社区，点进去看频道。公开社区所有人都能看见，私密社区要搜 ID 才能加入（点左下角放大镜，输入社区 ID）。</p>'
++'<p>频道有四种，图标不一样：</p>'
++GR('🔔 通告','只有社区创建者能发')
++GR('💬 论坛','发帖、回帖')
++GR('👤 角色','角色卡瀑布流，可以点赞')
++GR('🗨 聊天室','实时聊天，像群聊')
++'<h4>发帖</h4>'
++'<p>论坛和角色频道，右下角 ➕ 发帖。一篇帖子最多配 4 张图。</p>'
++'<p>工具栏从左到右：图片、我的表情、附件、emoji、剧透。</p>'
++'<p>剧透就是遮挡：选中文字点那个眼睛图标，发出来是一块黑条，别人点一下才看得到。手动打也行，用两个竖线包起来，像这样 ||要遮的内容||。</p>'
++'<p>附件最大 10MB，发出来是一张小卡片，点一下下载。</p>'
++'<p>写一半退出去没关系，草稿会自动留着，下次打开自动恢复。草稿按频道分开存，不会串。</p>'
++'<h4>长按能做的事</h4>'
++'<p>长按会在手指旁边弹出小菜单。</p>'
++GR('长按帖子','编辑、删除（只能动自己的）')
++GR('长按回复','删除（只能删自己的）')
++GR('长按聊天消息','引用、@ 他、存为表情、撤回')
++GR('长按私信气泡','引用、存为表情、撤回')
++'<h4>聊天室</h4>'
++'<p>打 @ 会弹出成员列表，选一个就 @ 上了。被 @ 的人会收到通知，那条消息背景会变浅蓝。</p>'
++'<p>有人说话时，左边社区头像会冒红点。有人 @ 你，频道列表里会显示红色的 @。</p>'
++'<p>进频道会有一条「以下为新消息」的线，线以下是你上次离开后别人发的。</p>'
++'<h4>私信</h4>'
++'<p>右上角放大镜 = 加好友，输入对方 5 位 ID。对方同意之后才能聊天。</p>'
++'<p>下面四个分组：</p>'
++GR('Notice','被 @ 和被回复的通知')
++GR('Chats','聊过天的人')
++GR('^ω^','全部好友（包括还没说过话的）')
++GR('Requests','别人加你的申请')
++'<p>上面那个搜索框会跟着分组变，在 Notice 里搜通知，在 ^ω^ 里搜人或 ID。</p>'
++'<p>中间那张大名片是你自己，点一下改资料。</p>'
++'<h4>表情包</h4>'
++'<p>输入框旁边的笑脸图标打开表情面板。点「添加」上传自己的图当表情，点一下直接发出去。看到别人发的图想收藏，长按那张图选「存为表情」。点「管理」可以删。</p>'
++'<p>表情是存在云端的，换手机还在。</p>'
++'<h4>收藏</h4>'
++'<p>帖子卡片右下角的书签图标，点一下收藏。收藏的东西在底栏「仓库」里。</p>'
++'<p>⚠️ 收藏只存在你当前这台设备上，换手机会丢。</p>'
++'<h4>其他</h4>'
++'<p>深色模式、字号大小在「设置 → 通用」。字号有四档，拖一下马上生效。</p>'
++'<p>图片点一下可以全屏看。帖子列表、频道列表、聊天室都能下拉刷新。</p>'
++'<p>有新版本时顶部会弹黑条，点「立即更新」。</p>'
++'<h4>注意</h4>'
++'<p>私信没有端到端加密，技术上管理员能查到，重要的个人信息请不要在站内传。</p>'
++'<p>本站是个人兴趣项目，不保证数据永久保存，重要的内容请自己留一份备份。</p>'
++'<p>发布内容前请看一下「设置 → 关于 → 免责声明」。</p>'
++'<p class="upd">有问题随时找小薄荷</p>';
 const DOC_DISC='<h4>一、关于本站</h4><p>Mint-Ds（以下简称「本站」）是一个由个人出于兴趣搭建并维护的非商业社区平台，仅供用户进行同人创作交流与兴趣分享，不以任何形式对外盈利。</p><h4>二、关于用户内容</h4><p>本站所有社区、频道、帖子、角色卡、回复、聊天与私信内容，均由用户自行创建并发布，不代表本站立场或观点。</p><p>用户应对自己发布的全部内容负责，并确保其拥有相应的权利或已获得授权。因用户发布内容引起的任何纠纷、索赔或法律责任，由该用户自行承担，本站不承担连带责任。</p><h4>三、版权与原创</h4><p>请尊重他人创作成果。未经原作者许可，请勿转载、搬运、二次分发他人作品。涉及二次创作时，请遵守原作品的版权与同人创作规范。</p><p>若您认为本站内容侵犯了您的合法权益，请通过站内联系管理员，我们会在核实后及时处理。</p><h4>四、禁止内容</h4><p>禁止发布以下内容：违反法律法规的信息；涉及违法犯罪、暴力恐怖、赌博毒品的内容；人身攻击、歧视、骚扰、恶意挑起冲突的言论；侵犯他人隐私或未经同意公开他人个人信息的内容；未经授权的商业广告与垃圾信息。</p><p>管理员有权在不事先通知的情况下，对违规内容进行隐藏、删除，或对违规账号采取限制措施。</p><h4>五、关于数据</h4><p>本站基于第三方云服务搭建。您的账号信息、发布内容与上传文件将保存在云端。密码经过加密处理存储，本站无法查看您的原始密码。</p><p>请注意：本站为个人项目，不对数据的永久保存与绝对安全作出承诺。请自行备份对您重要的内容。私信功能不具备端到端加密，请勿通过本站传输敏感或重要的个人信息。</p><h4>六、服务可用性</h4><p>本站可能因维护、第三方服务变动、资源额度限制等原因出现访问异常、功能调整或暂停服务，恕不另行通知。本站不对因服务中断造成的任何损失承担责任。</p><h4>七、未成年人</h4><p>建议未成年用户在监护人知晓的情况下使用本站。涉及成人向内容请自行使用剧透遮挡并作出标注，请勿向未成年人传播不适宜的内容。</p><h4>八、条款变更</h4><p>本声明可能随站点发展进行调整，调整后以站内最新版本为准。您继续使用本站，即视为接受当前版本的声明内容。</p><p class="upd">本声明自公布之日起生效</p>';
-function openDoc(title,html){$('docTitle').textContent=title;$('docBody').innerHTML=html;$('pageSettings').classList.remove('show');$('docPage').classList.add('show')}
+function openDoc(title,html){$('docTitle').textContent=title;$('docBody').innerHTML=html;$('docBody').scrollTop=0;$('pageSettings').classList.remove('show');$('docPage').classList.add('show')}
 
 function initApp(){
 if(!U)return;
@@ -334,6 +387,7 @@ actFetch([U.id]).then(myTier);
 $('btnMyId').addEventListener('click',()=>{if(U.uid5)alert('我的 ID：'+U.uid5+'\n把这串数字给朋友，他们就能加你好友')});
 $('btnCheckUpdate').addEventListener('click',async()=>{await checkVer();if($('updBar').classList.contains('show'))return;alert('已是最新版本 '+APP_VERSION)});
 $('btnAbout').addEventListener('click',()=>openDoc('关于 Mint-Ds',DOC_ABOUT));
+$('btnGuide').addEventListener('click',()=>openDoc('使用教程',DOC_GUIDE));
 $('btnDisclaimer').addEventListener('click',()=>openDoc('免责声明',DOC_DISC));
 $('btnBackFromDoc').addEventListener('click',()=>{$('docPage').classList.remove('show');$('pageSettings').classList.add('show')});
 document.querySelectorAll('.toggle').forEach((t,i)=>{if(i===0){if(darkMode)t.classList.add('on');t.addEventListener('click',()=>{darkMode=!darkMode;t.classList.toggle('on');LS.set('darkMode',darkMode);applyDark()})}else t.addEventListener('click',()=>t.classList.toggle('on'))});
@@ -667,7 +721,6 @@ $('rqtClose').addEventListener('click',()=>{roomQ=null;$('roomQuote').classList.
 $('roomPic').addEventListener('click',()=>$('roomFile').click());
 $('roomFile').addEventListener('change',async function(){const f=this.files[0];this.value='';if(!f)return;const ch=gC();if(!ch)return;
 try{const url=await uploadImg(f,1000);await db.collection('roomsg').add({channelId:ch._id,serverId:aS,user:U.name,userId:U.id,avatar:U.avatar||null,img:url,text:'',q:roomQ||null,createdAt:Date.now()});roomQ=null;$('roomQuote').classList.remove('show');await loadRoom()}catch(e){alert('发送失败:'+errText(e))}});
-/* 聊天室 @ 补全 */
 $('roomInput').addEventListener('input',e=>{const v=e.target.value;const mm=v.match(/@([^\s@]*)$/);const box=$('atRoom');
 if(!mm){box.classList.remove('show');return}
 const qq=(mm[1]||'').toLowerCase();const list=MEMB.filter(x=>!qq||(x.name||'').toLowerCase().includes(qq)).slice(0,8);
@@ -708,7 +761,13 @@ ucMark(ids,()=>{const p=gP();if(p&&vP===pid)renderDetail(p)});actMark(ids,()=>{c
 const p=gP();if(p&&vP===pid){p._rc=RE.length;renderDetail(p)}},onError:()=>{}})}catch(e){}}
 
 function rAn(){const a=$('announceArea');a.innerHTML='';if(!PO.length){a.innerHTML='<div class="empty-hint">暂无通告</div>';return}
-PO.slice().reverse().forEach(p=>{const d=document.createElement('div');d.className='ann-item';d.innerHTML='<div class="ann-time">'+Tm(p.createdAt)+' · '+esc(uName(p.userId,p.user))+'</div><div class="ann-title">'+esc(p.title)+'</div>'+(p.content?'<div class="ann-content">'+RICH(p.content)+'</div>':'');a.appendChild(d)})}
+PO.slice().reverse().forEach(p=>{const d=document.createElement('div');d.className='ann-item';d.innerHTML='<div class="ann-time">'+Tm(p.createdAt)+' · '+esc(uName(p.userId,p.user))+'</div><div class="ann-title">'+esc(p.title)+'</div>'+(p.content?'<div class="ann-content">'+RICH(p.content)+'</div>':'');
+bindLong(d,()=>{const own=p.userId===U.id,adm=isAdminOf(gS());if(!own&&!adm)return null;
+const items=[];
+if(own)items.push({label:'编辑',icon:ICO.pen,fn:()=>openEditor(p)});
+items.push({label:'删除',icon:ICO.trash,danger:true,fn:()=>delPost(p._id)});
+return{title:p.title,items}});
+a.appendChild(d)})}
 $('btnAnnPost').addEventListener('click',async()=>{const v=$('annInput').value.trim();if(!v)return;const ch=gC(),s=gS();if(!ch)return;const b=$('btnAnnPost');b.disabled=true;try{await db.collection('posts').add({serverId:s._id,channelId:ch._id,user:U.name,userId:U.id,avatar:U.avatar||null,title:v,content:'',images:[],createdAt:Date.now()});$('annInput').value='';await loadPosts()}catch(e){alert('发布失败:'+errText(e))}b.disabled=false});
 
 async function toggleLike(p,el){
@@ -862,7 +921,7 @@ const ep=$('emojiPicker');emos.forEach(e=>{const s=document.createElement('span'
 $('btnNpEmoji').addEventListener('click',()=>{$('stkPost').classList.remove('show');$('btnNpStk').classList.remove('on');ep.classList.toggle('show')});
 $('btnNpSpoiler').addEventListener('click',()=>{const ta=$('npContentInput'),s=ta.selectionStart,e=ta.selectionEnd,v=ta.value;if(s!==e)ta.value=v.slice(0,s)+'||'+v.slice(s,e)+'||'+v.slice(e);else{ta.value=v.slice(0,s)+'||||'+v.slice(s);ta.selectionStart=ta.selectionEnd=s+2}ta.focus();saveDraft()});
 $('btnSubmitPost').addEventListener('click',async()=>{
-const t=$('npTitleInput').value.trim(),c=$('npContentInput').value.trim();if(!t||!c)return;
+const t=$('npTitleInput').value.trim(),c=$('npContentInput').value.trim();if(!t)return;
 const ch=gC(),s=gS();if(!ch||!s)return;const b=$('btnSubmitPost');b.disabled=true;
 try{const urls=npKeep.slice();for(const f of npFiles){try{urls.push(await uploadImg(f,1000))}catch(e){}}
 if(editPid){const r=await db.collection('posts').doc(editPid).update({title:t,content:c,images:urls,editedAt:Date.now()});
@@ -912,6 +971,10 @@ const who=n.fromId?uName(n.fromId,n.fromName):n.fromName;
 const act=n.type==='mention'?' 提到了你':' 回复了你的帖子';
 el.innerHTML='<div class="n-top">'+esc(who)+act+'</div><div class="n-txt">'+esc(n.text||'')+'</div><div class="n-tm">'+Dy(n.createdAt)+'</div>';
 el.addEventListener('click',async()=>{if(!n.read){try{await db.collection('notifications').doc(n._id).update({read:true});n.read=true;el.classList.remove('unread');loadNoti()}catch(e){}}});
+bindLong(el,()=>({title:'通知',items:[{label:'删除',icon:ICO.trash,danger:true,fn:async()=>{
+try{const r=await db.collection('notifications').doc(n._id).remove();
+if(!okDel(r))return alert('删除失败：云端拒绝');
+NOTI=NOTI.filter(x=>x._id!==n._id);loadNoti();rNoti(f)}catch(e){alert('删除失败:'+errText(e))}}}]}));
 b.appendChild(el)});
 ucMark([...new Set(NOTI.map(n=>n.fromId))],()=>{if(clPane==='notice')rNoti(f)})}
 
